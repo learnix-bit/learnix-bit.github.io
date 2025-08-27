@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Learnix - Tierra y el Sistema Solar</title>
+  <style>
+    /* ======= ESTILOS BASE ======= */
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body {
+      background-color:#1e1e1e;
+      background-image: linear-gradient(135deg, #1e1e1e, #252525);
+      color:#e0e0e0; display:flex; flex-direction:column; min-height:100vh;
+    }
+    header {
+      background-color:#1e1e1e; display:flex; justify-content:space-between; align-items:center;
+      padding:15px 30px; position:sticky; top:0; z-index:100; border-bottom:2px solid #2e2e2e;
+    }
+    header .logo { display:flex; align-items:center; gap:10px; }
+    header .logo img { height:40px; }
+    header nav a {
+      margin-left:20px; font-weight:500; color:#bbb; text-decoration:none; transition:color .3s ease;
+    }
+    header nav a:hover, header nav a.active { color:#00bcd4; }
+
+    footer {
+      background-color:#1e1e1e; text-align:center; padding:15px; border-top:2px solid #2e2e2e; margin-top:auto;
+    }
+    .btn {
+      display:inline-block; background-color:#00bcd4; color:#fff; padding:10px 20px; border-radius:8px;
+      margin-top:10px; transition:background .3s ease; text-decoration:none;
+    }
+    .btn:hover { background-color:#008ba3; }
+
+    /* ======= CONTENIDO ======= */
+    .contenido {
+      padding:40px 20px; max-width:1000px; margin:auto; text-align:center;
+    }
+    .contenido h2 {
+      font-size:2.2rem; color:#00bcd4; margin-bottom:20px;
+    }
+    .contenido p {
+      font-size:1.1rem; color:#ccc; margin-bottom:30px;
+    }
+    .subtema {
+      background-color:#2a2a2a; padding:20px; border-radius:12px;
+      margin-bottom:18px; box-shadow:0 4px 12px rgba(0,0,0,.3);
+      text-align:left;
+    }
+    .subtema h3 {
+      color:#fff; font-size:1.2rem; margin-bottom:10px;
+    }
+    .subtema p { color:#bbb; font-size:1rem; margin-bottom:10px; }
+    .resultado {
+      margin-top:10px; color:#fff; font-weight:700;
+      background: rgba(0,0,0,0.25); padding:10px; border-radius:8px;
+    }
+    .quiz-question { margin-bottom:12px; color:#ddd; }
+    .feedback-item { padding:10px; border-radius:8px; margin-bottom:8px; }
+    .correct { background: rgba(0,128,0,0.12); border-left:4px solid #20c997; color:#c6ffd9; }
+    .wrong { background: rgba(255,0,0,0.08); border-left:4px solid #ff6b6b; color:#ffd9d9; }
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado -->
+  <header>
+    <div class="logo">
+      <img src="../../../img/logo/logo.svg" alt="Learnix Logo">
+      <h1>Learnix</h1>
+    </div>
+    <nav>
+      <a href="../../../index.html">Inicio</a>
+      <a href="../../../cursos.html" class="active">Cursos</a>
+      <a href="../../../perfil.html">Perfil</a>
+      <a href="../../../login.html">Login</a>
+      <a href="../../../favoritos.html">Favoritos</a>
+    </nav>
+  </header>
+
+  <!-- Contenido -->
+  <main class="contenido">
+    <h2>Tierra y el Sistema Solar</h2>
+    <p>Explora las características de la Tierra y su lugar en el Sistema Solar.</p>
+
+    <!-- Definición -->
+    <div class="subtema">
+      <h3>¿Qué es el Sistema Solar?</h3>
+      <p>El Sistema Solar es un conjunto de planetas, satélites, asteroides y cometas que orbitan alrededor del Sol, nuestra estrella principal.</p>
+    </div>
+
+    <!-- Propiedades -->
+    <div class="subtema">
+      <h3>Aspectos clave</h3>
+      <ul>
+        <li>La Tierra es el tercer planeta desde el Sol.</li>
+        <li>El Sistema Solar tiene 8 planetas principales.</li>
+        <li>El Sol es la fuente principal de energía para la vida en la Tierra.</li>
+      </ul>
+    </div>
+
+    <!-- Ejemplos -->
+    <div class="subtema">
+      <h3>Ejemplos resueltos</h3>
+      <p><strong>Ejemplo 1:</strong> La Tierra tiene una atmósfera rica en oxígeno que permite la vida.</p>
+      <p><strong>Pregunta:</strong> ¿Qué elemento es esencial para la vida en la atmósfera?</p>
+      <p><strong>Respuesta:</strong> Oxígeno.</p>
+
+      <p><strong>Ejemplo 2:</strong> Marte es conocido como el planeta rojo debido a su superficie rica en óxido de hierro.</p>
+      <p><strong>Pregunta:</strong> ¿Por qué Marte es rojo?</p>
+      <p><strong>Respuesta:</strong> Por el óxido de hierro en su superficie.</p>
+    </div>
+
+    <!-- Herramientas interactivas -->
+    <div class="subtema">
+      <h3>Herramientas interactivas</h3>
+      <p>Selecciona el planeta que es conocido como el "planeta azul":</p>
+      <select id="herramientaSistemaSolar">
+        <option value="">-- Selecciona --</option>
+        <option value="1">Marte</option>
+        <option value="2">Tierra</option>
+        <option value="3">Júpiter</option>
+      </select>
+      <button class="btn" onclick="verificarSistemaSolar()">Verificar</button>
+      <div id="resultadoSistemaSolar" class="resultado">—</div>
+    </div>
+
+    <!-- Mini Quiz -->
+    <div class="subtema">
+      <h3>Mini Quiz</h3>
+      <p>Responde las siguientes preguntas para evaluar tu comprensión:</p>
+      <div class="quiz-question">
+        <label>1) ¿Qué es el Sistema Solar?</label><br>
+        <label><input type="radio" name="q1" value="a"> Un conjunto de planetas y estrellas.</label><br>
+        <label><input type="radio" name="q1" value="b"> Un conjunto de cuerpos que orbitan el Sol.</label><br>
+        <label><input type="radio" name="q1" value="c"> Una galaxia.</label>
+      </div>
+      <div class="quiz-question">
+        <label>2) ¿Cuál es el tercer planeta desde el Sol?</label><br>
+        <label><input type="radio" name="q2" value="a"> Marte.</label><br>
+        <label><input type="radio" name="q2" value="b"> Tierra.</label><br>
+        <label><input type="radio" name="q2" value="c"> Venus.</label>
+      </div>
+      <div class="quiz-question">
+        <label>3) ¿Qué planeta es conocido como el "planeta rojo"?</label><br>
+        <label><input type="radio" name="q3" value="a"> Marte.</label><br>
+        <label><input type="radio" name="q3" value="b"> Júpiter.</label><br>
+        <label><input type="radio" name="q3" value="c"> Saturno.</label>
+      </div>
+      <div class="quiz-question">
+        <label>4) ¿Qué elemento es esencial para la vida en la Tierra?</label><br>
+        <label><input type="radio" name="q4" value="a"> Hidrógeno.</label><br>
+        <label><input type="radio" name="q4" value="b"> Oxígeno.</label><br>
+        <label><input type="radio" name="q4" value="c"> Nitrógeno.</label>
+      </div>
+      <div class="quiz-question">
+        <label>5) ¿Qué planeta tiene anillos visibles?</label><br>
+        <label><input type="radio" name="q5" value="a"> Saturno.</label><br>
+        <label><input type="radio" name="q5" value="b"> Urano.</label><br>
+        <label><input type="radio" name="q5" value="c"> Neptuno.</label>
+      </div>
+      <button class="btn" onclick="revisarQuizSistemaSolar()">Revisar</button>
+      <div id="resultadoQuizSistemaSolar" class="resultado">—</div>
+    </div>
+
+    <!-- Tip -->
+    <div class="subtema">
+      <h3>Tip de memotecnia</h3>
+      <p>Recuerda: "Mi Vieja Tía Marta Jamás Supo Usar Números" para los planetas.</p>
+    </div>
+  </main>
+
+  <script>
+    function verificarSistemaSolar() {
+      const seleccion = document.getElementById('herramientaSistemaSolar').value;
+      const resultado = document.getElementById('resultadoSistemaSolar');
+      if (seleccion === "2") {
+        resultado.textContent = "¡Correcto! La Tierra es conocida como el 'planeta azul'.";
+      } else {
+        resultado.textContent = "Incorrecto. La respuesta correcta es 'Tierra'.";
+      }
+    }
+
+    function revisarQuizSistemaSolar() {
+      const respuestasCorrectas = {
+        q1: "b",
+        q2: "b",
+        q3: "a",
+        q4: "b",
+        q5: "a"
+      };
+
+      let puntos = 0;
+      let totalPreguntas = 5;
+      let feedback = "";
+
+      for (let i = 1; i <= totalPreguntas; i++) {
+        const respuesta = document.querySelector(`input[name="q${i}"]:checked`);
+        if (respuesta) {
+          if (respuesta.value === respuestasCorrectas[`q${i}`]) {
+            puntos += 10;
+            feedback += `<div class='feedback-item correct'>Pregunta ${i}: ¡Correcto!</div>`;
+          } else {
+            feedback += `<div class='feedback-item wrong'>Pregunta ${i}: Incorrecto. La respuesta correcta es '${respuestasCorrectas[`q${i}`]}'.</div>`;
+          }
+        } else {
+          feedback += `<div class='feedback-item wrong'>Pregunta ${i}: No respondida.</div>`;
+        }
+      }
+
+      // Sumar puntos al total global
+      const puntosGlobales = parseInt(localStorage.getItem('learnix_points_globales')) || 0;
+      localStorage.setItem('learnix_points_globales', puntosGlobales + puntos);
+
+      document.getElementById('resultadoQuizSistemaSolar').innerHTML = `
+        <p>¡Quiz completado! Obtuviste ${puntos} puntos.</p>
+        ${feedback}
+      `;
+    }
+  </script>
+</body>
+</html>

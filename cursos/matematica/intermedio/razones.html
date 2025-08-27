@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learnix - Razones y Proporciones Avanzado</title>
+<style>
+/* ===== ESTILO BASE ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+body{background-color:#1e1e1e;background-image:linear-gradient(135deg,#1e1e1e,#252525);color:#e0e0e0;display:flex;flex-direction:column;min-height:100vh;}
+header{background-color:#1e1e1e;display:flex;justify-content:space-between;align-items:center;padding:15px 30px;position:sticky;top:0;z-index:100;border-bottom:2px solid #2e2e2e;}
+header .logo{display:flex;align-items:center;gap:10px;}
+header .logo img{height:40px;}
+header nav{display:flex;align-items:center;gap:8px;}
+header nav a{margin-left:20px;font-weight:500;color:#bbb;text-decoration:none;transition:color .3s ease;}
+header nav a:hover, header nav a.active{color:#00bcd4;}
+.header-right{display:flex;align-items:center;gap:14px;}
+.points{background-color:#2a2a2a;color:#ffd36e;padding:8px 12px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;font-weight:700;border:1px solid #333;}
+.points img{width:20px;height:20px;display:block;}
+.points.pulse{animation:pulse .36s ease-in-out;}
+@keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.08);}100%{transform:scale(1);}}
+footer{background-color:#1e1e1e;text-align:center;padding:15px;border-top:2px solid #2e2e2e;margin-top:auto;}
+.btn{display:inline-flex;align-items:center;gap:8px;background-color:#00bcd4;color:#fff;padding:10px 20px;border-radius:8px;margin-top:10px;transition:background .3s ease;text-decoration:none;cursor:pointer;border:none;}
+.btn:hover{background-color:#008ba3;}
+.btn img{width:20px;height:20px;}
+.contenido{padding:40px 20px;max-width:980px;margin:auto;text-align:center;}
+.contenido h2{font-size:2.2rem;color:#00bcd4;margin-bottom:12px;}
+.lead{font-size:1.05rem;color:#ccc;margin-bottom:20px;line-height:1.6;}
+.subtema{background-color:#2a2a2a;padding:20px;border-radius:12px;margin-bottom:18px;box-shadow:0 4px 12px rgba(0,0,0,.3);text-align:left;}
+.subtema h3{color:#fff;font-size:1.2rem;margin-bottom:10px;}
+.subtema p, .subtema ul, .subtema ol{color:#bbb;font-size:1rem;margin-bottom:10px;}
+.row{display:flex;gap:18px;flex-wrap:wrap;}
+.col{flex:1 1 280px;}
+input[type="number"], input[type="text"], select, .quiz button{padding:10px;border-radius:8px;border:1px solid #2e2e2e;background:#222;color:#e0e0e0;outline:none;}
+label{color:#ccc;}
+.resultado{margin-top:10px;color:#fff;font-weight:700;background: rgba(0,0,0,0.25);padding:10px;border-radius:8px;}
+.quiz-question{margin-bottom:12px;color:#ddd;}
+.small{font-size:.92rem;color:#9aa0a6;margin-top:6px;display:block;}
+.acciones{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:14px 0;}
+.feedback-list{margin-top:12px;color:#e0e0e0;text-align:left;}
+.feedback-item{padding:10px;border-radius:8px;margin-bottom:8px;}
+.correct{background: rgba(0,128,0,0.12);border-left:4px solid #20c997;color:#c6ffd9;}
+.wrong{background: rgba(255,0,0,0.08);border-left:4px solid #ff6b6b;color:#ffd9d9;}
+@media(max-width:640px){.contenido{padding:20px 12px;}.row{flex-direction:column;}header{padding:12px;}}
+.chloe-bot{position:fixed;bottom:20px;right:20px;background-color:#00bcd4;border-radius:50%;width:60px;height:60px;display:flex;justify-content:center;align-items:center;box-shadow:0 4px 8px rgba(0,0,0,.2);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="./../../../img/logo/logo.svg" alt="Learnix Logo">
+    <h1>Learnix</h1>
+  </div>
+  <nav>
+    <a href="../../../index.html">Inicio</a>
+    <a href="../../../cursos.html" class="active">Cursos</a>
+    <a href="../../../perfil.html">Perfil</a>
+    <a href="../../../login.html">Login</a>
+    <a href="../../../favoritos.html">Favoritos</a>
+  </nav>
+  <div class="header-right">
+    <div class="points" title="Puntos acumulados">
+      <img src="https://img.icons8.com/fluency/48/star.png" alt="star">
+      <span id="puntos">0</span>
+    </div>
+  </div>
+</header>
+
+<main class="contenido">
+<h2>Razones y Proporciones — Nivel Avanzado</h2>
+<p class="lead">Profundización en relaciones, proporciones complejas y problemas avanzados. Incluye ejemplos paso a paso, ejercicios autocorregibles y mini quiz interactivo.</p>
+
+<div class="subtema">
+<h3>1. Definición Detallada</h3>
+<p>Una <strong>razón</strong> compara dos cantidades del mismo tipo mediante división: a:b = a/b. Una <strong>proporción</strong> establece que dos razones son equivalentes: a:b = c:d, donde a·d = b·c. En nivel avanzado, se aplican razones compuestas, proporciones múltiples y problemas de regla de tres combinados.</p>
+</div>
+
+<div class="subtema">
+<h3>2. Propiedades y Fórmulas</h3>
+<ul>
+<li><strong>Proporción básica:</strong> a/b = c/d → a·d = b·c</li>
+<li><strong>Razón compuesta:</strong> (a1 + a2 + …)/(b1 + b2 + …)</li>
+<li><strong>Regla de tres simple:</strong> a : b = c : x → x = (b·c)/a</li>
+<li><strong>Regla de tres compuesta:</strong> Multiplica o divide varias razones para encontrar la incógnita</li>
+<li><strong>Proporciones múltiples:</strong> a:b = c:d = e:f → se pueden usar productos cruzados múltiples</li>
+</ul>
+<p class="small">Tip memotécnico: "Producto cruzado nunca miente: multiplica extremos y medios".</p>
+</div>
+
+<div class="subtema">
+<h3>3. Ejemplos Interactivos</h3>
+<div class="row">
+<div class="col">
+<h4>Regla de tres simple</h4>
+<div class="ejercicio">
+<label>A es a B:</label><input id="rtA" type="number" placeholder="ej. 4">
+<label>C es a X:</label><input id="rtB" type="number" placeholder="ej. 6">
+<label>C:</label><input id="rtC" type="number" placeholder="ej. 12">
+<button class="btn" onclick="calcReglaTres()"><img src="https://img.icons8.com/color/48/calculator.png"> Calcular X</button>
+</div>
+<div id="rtRes" class="resultado">—</div>
+</div>
+
+<div class="col">
+<h4>Proporción compuesta</h4>
+<div class="ejercicio">
+<label>Lado1:</label><input id="pc1" type="number" placeholder="ej. 5">
+<label>Lado2:</label><input id="pc2" type="number" placeholder="ej. 7">
+<label>Lado3:</label><input id="pc3" type="number" placeholder="ej. 3">
+<label>Lado4:</label><input id="pc4" type="number" placeholder="ej. 6">
+<button class="btn" onclick="calcProporcionCompuesta()"><img src="https://img.icons8.com/color/48/calculator.png"> Calcular</button>
+</div>
+<div id="pcRes" class="resultado">—</div>
+</div>
+</div>
+</div>
+
+<div class="subtema">
+<h3>4. Ejercicios Prácticos</h3>
+<ol>
+<li>Si 5 lápices cuestan 20 soles, ¿cuánto cuestan 8 lápices? <input id="ex1" type="text" placeholder="ej. 32"></li>
+<li>Proporción compuesta: 2/3 = 4/x → x = <input id="ex2" type="text" placeholder="ej. 6"></li>
+<li>Proporción múltiple: 3:4 = 6:8 = x:16 → x = <input id="ex3" type="text" placeholder="ej. 12"></li>
+</ol>
+<button class="btn" onclick="chequearEjercicios()"><img src="https://img.icons8.com/color/48/check.png"> Chequear respuestas</button>
+<div id="outEj" class="resultado">—</div>
+</div>
+
+<div class="subtema">
+<h3>5. Mini Quiz (5 preguntas, 10 puntos cada una)</h3>
+<div id="quiz"></div>
+<div id="quizResultado" class="resultado">—</div>
+</div>
+
+<div class="acciones">
+<a href="../intermedio.html" class="btn"><img src="https://img.icons8.com/color/48/home.png"> Nivel Intermedio</a>
+<a href="siguiente.html" class="btn"><img src="https://img.icons8.com/color/48/right.png"> Siguiente</a>
+<a href="cursos.html" class="btn" style="background:#444;"><img src="https://img.icons8.com/color/48/left.png"> Cursos</a>
+</div>
+</main>
+
+<a href="#chatbot-chloe" class="chloe-bot">
+<img src="img/chatbot/chloe-icon.svg" alt="Chatbot Chloe" style="width:38px;height:38px;">
+</a>
+
+<footer>
+<p>© 2025 Learnix - NeoStudio</p>
+</footer>
+
+<script>
+let puntosGlobales = parseInt(localStorage.getItem('puntosGlobales')) || 0;
+document.getElementById('puntos').textContent = puntosGlobales;
+
+// ===== EJEMPLOS INTERACTIVOS =====
+function calcReglaTres(){
+  const a=parseFloat(document.getElementById('rtA').value);
+  const b=parseFloat(document.getElementById('rtB').value);
+  const c=parseFloat(document.getElementById('rtC').value);
+  const out = document.getElementById('rtRes');
+  if([a,b,c].every(v=>!isNaN(v))){ out.textContent = `X = ${(b*c/a).toFixed(2)}`;}
+  else{out.textContent='Ingresa valores válidos';}
+}
+
+function calcProporcionCompuesta(){
+  const l1=parseFloat(document.getElementById('pc1').value);
+  const l2=parseFloat(document.getElementById('pc2').value);
+  const l3=parseFloat(document.getElementById('pc3').value);
+  const l4=parseFloat(document.getElementById('pc4').value);
+  const out = document.getElementById('pcRes');
+  if([l1,l2,l3,l4].every(v=>!isNaN(v))){ out.textContent = `Resultado: ${(l1*l4)/(l2*l3)}`;}
+  else{out.textContent='Ingresa valores válidos';}
+}
+
+// ===== EJERCICIOS AUTOCORREGIBLES =====
+function chequearEjercicios(){
+  const out = document.getElementById('outEj');
+  const r1 = document.getElementById('ex1').value.trim() === '32';
+  const r2 = document.getElementById('ex2').value.trim() === '6';
+  const r3 = document.getElementById('ex3').value.trim() === '12';
+  const correct = [r1,r2,r3].filter(v=>v).length;
+  let msg = `${correct}/3 correctas.`;
+  if(correct===3 && !localStorage.getItem('ejPuntosRazProp')){
+    puntosGlobales += 5;
+    localStorage.setItem('puntosGlobales', puntosGlobales);
+    localStorage.setItem('ejPuntosRazProp','true');
+    document.getElementById('puntos').textContent = puntosGlobales;
+    msg+=' ¡Puntos acumulados!';
+  }
+  out.textContent = msg;
+}
+
+// ===== MINI QUIZ =====
+const quizData = [
+  {q:'¿Qué indica una proporción?',options:['Que dos razones son equivalentes','Que dos números son iguales','Que dos cantidades suman lo mismo'],answer:0,explanation:'Una proporción establece que dos razones son equivalentes: a:b = c:d.'},
+  {q:'Regla de tres simple: 5→20, 8→X, ¿X=?',options:['30','32','28'],answer:1,explanation:'X = (8*20)/5 = 32'},
+  {q:'Proporción múltiple: 2:3 = 4:6 = X:12 → X=?',options:['8','6','9'],answer:0,explanation:'X = (2*12)/3 = 8'},
+  {q:'Razón compuesta se calcula:',options:['Sumando numeradores','Dividiendo sumas','Multiplicando extremos'],answer:1,explanation:'Se divide la suma de numeradores entre la suma de denominadores.'},
+  {q:'Proporción avanzada: a:b = c:d, si a=3,b=4,c=9 → d=?',options:['12','13','11'],answer:0,explanation:'Producto cruzado: 3*d=4*9 → d=12'}
+];
+
+function generarQuiz(){
+  const quizDiv = document.getElementById('quiz');
+  quizData.forEach((item,i)=>{
+    const div = document.createElement('div'); div.className='quiz-question';
+    div.innerHTML = `<p>${i+1}. ${item.q}</p>`+
+    item.options.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${o}</label><br>`).join('');
+    quizDiv.appendChild(div);
+  });
+  const btn = document.createElement('button');
+  btn.className='btn';
+  btn.innerHTML='<img src="https://img.icons8.com/color/48/check.png"> Enviar Quiz';
+  btn.onclick=evaluarQuiz;
+  quizDiv.appendChild(btn);
+}
+
+function evaluarQuiz(){
+  let puntos = 0; const feedback=[];
+  quizData.forEach((item,i)=>{
+    const sel = document.querySelector(`input[name="q${i}"]:checked`);
+    if(sel){
+      if(parseInt(sel.value)===item.answer){puntos+=10; feedback.push(`<div class="feedback-item correct">Pregunta ${i+1}: Correcto ✅</div>`);}
+      else{feedback.push(`<div class="feedback-item wrong">Pregunta ${i+1}: ❌ Incorrecto. ${item.explanation}</div>`);}
+    } else {feedback.push(`<div class="feedback-item wrong">Pregunta ${i+1}: ❌ No respondida. ${item.explanation}</div>`);}
+  });
+  if(!localStorage.getItem('quizPuntosRazProp')){puntosGlobales+=puntos; localStorage.setItem('puntosGlobales',puntosGlobales); document.getElementById('puntos').textContent=puntosGlobales; localStorage.setItem('quizPuntosRazProp','true');}
+  document.getElementById('quizResultado').innerHTML=`Total: ${puntos} puntos`+feedback.join('');
+}
+
+generarQuiz();
+</script>
+</body>
+</html>

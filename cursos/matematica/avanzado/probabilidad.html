@@ -1,0 +1,305 @@
+<!-- filepath: c:\Modelos de Learnix\Learnix Principal\cursos\matematica\avanzado\probabilidad.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learnix - Probabilidad</title>
+    <style>
+        /* ===== ESTILO BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #1e1e1e;
+            background-image: linear-gradient(135deg, #1e1e1e, #252525);
+            color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #1e1e1e;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid #2e2e2e;
+        }
+        header .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        header .logo img {
+            height: 40px;
+        }
+        header nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        header nav a {
+            margin-left: 20px;
+            font-weight: 500;
+            color: #bbb;
+            text-decoration: none;
+            transition: color .3s ease;
+        }
+        header nav a:hover, header nav a.active {
+            color: #00bcd4;
+        }
+        footer {
+            background-color: #1e1e1e;
+            text-align: center;
+            padding: 15px;
+            border-top: 2px solid #2e2e2e;
+            margin-top: auto;
+        }
+        .contenido {
+            padding: 40px 20px;
+            max-width: 980px;
+            margin: auto;
+            text-align: center;
+        }
+        .contenido h2 {
+            font-size: 2.2rem;
+            color: #00bcd4;
+            margin-bottom: 12px;
+        }
+        .lead {
+            font-size: 1.05rem;
+            color: #ccc;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .subtema {
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,.3);
+            text-align: left;
+        }
+        .acciones {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 14px 0;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #00bcd4;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-top: 10px;
+            transition: background .3s ease;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+        }
+        .btn:hover {
+            background-color: #008ba3;
+        }
+        /* ===== NUEVO ESTILO ===== */
+        .section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #2a2a2a;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,.3);
+        }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .input-group p {
+            margin-bottom: 8px;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+        .tip-box {
+            background-color: #333;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        .tip-box h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            color: #00bcd4;
+        }
+        .tip-box ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        .tip-box ul li {
+            margin-bottom: 8px;
+        }
+        .quiz-card {
+            background-color: #333;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .quiz-option {
+            background-color: #444;
+            padding: 10px;
+            border-radius: 6px;
+            margin: 8px 0;
+            cursor: pointer;
+            transition: background .3s ease;
+        }
+        .quiz-option:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <img src="../../../img/logo/logo.svg" alt="Learnix Logo">
+        <h1>Learnix</h1>
+    </div>
+    <nav>
+        <a href="../../../index.html">Inicio</a>
+        <a href="../../../cursos.html" class="active">Cursos</a>
+        <a href="../../../perfil.html">Perfil</a>
+        <a href="../../../login.html">Login</a>
+        <a href="../../../favoritos.html">Favoritos</a>
+    </nav>
+</header>
+
+<main class="contenido">
+    <h2>Probabilidad</h2>
+    <p class="lead">Explora los conceptos básicos de probabilidad y combinatoria.</p>
+
+    <div class="subtema">
+        <h3>1. Introducción a la Probabilidad</h3>
+        <p>La probabilidad es una medida de la certeza de que ocurra un evento. Se expresa como un número entre 0 y 1, donde 0 indica que el evento no ocurrirá y 1 indica que ocurrirá con certeza.</p>
+    </div>
+
+    <div class="subtema">
+        <h3>2. Eventos y Espacio Muestral</h3>
+        <p>Un evento es un resultado o conjunto de resultados de un experimento. El espacio muestral es el conjunto de todos los posibles resultados.</p>
+    </div>
+
+    <div class="subtema">
+        <h3>3. Cálculo de Probabilidades</h3>
+        <p>La probabilidad de un evento A se calcula como el número de resultados favorables dividido por el número total de resultados posibles.</p>
+    </div>
+
+    <!-- Ejercicios -->
+    <section class="section fade-in">
+        <h2>4. Ejercicios Prácticos</h2>
+        <div class="input-group">
+            <p>1. Si lanzas un dado, ¿cuál es la probabilidad de obtener un número par?</p>
+            <input type="text" id="ej1" placeholder="Escribe tu respuesta">
+            <button class="btn" onclick="verificarEjercicio(1)">Verificar</button>
+            <p id="resp1" class="feedback"></p>
+        </div>
+
+        <div class="input-group">
+            <p>2. En una baraja de 52 cartas, ¿cuál es la probabilidad de sacar un as?</p>
+            <input type="text" id="ej2" placeholder="Escribe tu respuesta">
+            <button class="btn" onclick="verificarEjercicio(2)">Verificar</button>
+            <p id="resp2" class="feedback"></p>
+        </div>
+    </section>
+
+    <!-- Quiz -->
+    <section class="section fade-in">
+        <h2>5. Mini Quiz</h2>
+        <div id="quiz-container"></div>
+    </section>
+
+    <!-- Tip -->
+    <div class="tip-box fade-in">
+        <h3>💡 Tips de Memotecnia</h3>
+        <ul>
+            <li>Recuerda: La probabilidad siempre está entre 0 y 1.</li>
+            <li>Para eventos mutuamente excluyentes, suma las probabilidades.</li>
+            <li>Para eventos independientes, multiplica las probabilidades.</li>
+        </ul>
+    </div>
+
+    <div class="acciones">
+        <a href="estadistica.html" class="btn">Siguiente: Estadística</a>
+        <a href="../intermedio.html" class="btn">Volver a Intermedio</a>
+    </div>
+</main>
+
+<footer>
+    <p>© 2025 Learnix - NeoStudio</p>
+</footer>
+
+<script>
+const quizData = [
+    {
+        pregunta: "¿Cuál es la probabilidad de obtener cara al lanzar una moneda justa?",
+        opciones: ["0.5", "1", "0.25"],
+        correcta: 0,
+        explicacion: "La probabilidad de obtener cara o cruz en una moneda justa es 0.5."
+    },
+    {
+        pregunta: "Si lanzas dos dados, ¿cuál es la probabilidad de obtener un total de 7?",
+        opciones: ["1/6", "1/36", "5/36"],
+        correcta: 2,
+        explicacion: "Hay 6 combinaciones que suman 7 de un total de 36 posibles, por lo que la probabilidad es 5/36."
+    },
+    {
+        pregunta: "¿Qué significa que dos eventos sean independientes?",
+        opciones: ["Que no pueden ocurrir juntos", "Que la ocurrencia de uno no afecta al otro", "Que tienen la misma probabilidad"],
+        correcta: 1,
+        explicacion: "Dos eventos son independientes si la ocurrencia de uno no afecta la probabilidad del otro."
+    }
+];
+
+function inicializarQuiz() {
+    const container = document.getElementById('quiz-container');
+    quizData.forEach((pregunta, index) => {
+        const quizCard = document.createElement('div');
+        quizCard.className = 'quiz-card';
+        quizCard.innerHTML = `
+            <p><strong>${index + 1}. ${pregunta.pregunta}</strong></p>
+            ${pregunta.opciones.map((opcion, i) => `
+                <div class="quiz-option" onclick="verificarRespuesta(${index}, ${i})">
+                    <span>${['A', 'B', 'C'][i]}</span> ${opcion}
+                </div>
+            `).join('')}
+            <p class="feedback" id="quiz-feedback-${index}"></p>
+        `;
+        container.appendChild(quizCard);
+    });
+}
+
+function verificarRespuesta(preguntaId, respuestaSeleccionada) {
+    const feedback = document.getElementById(`quiz-feedback-${preguntaId}`);
+    if (respuestaSeleccionada === quizData[preguntaId].correcta) {
+        feedback.innerHTML = `✅ ¡Correcto! ${quizData[preguntaId].explicacion}`;
+        feedback.style.color = '#4caf50';
+    } else {
+        feedback.innerHTML = `❌ Incorrecto. ${quizData[preguntaId].explicacion}`;
+        feedback.style.color = '#f44336';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', inicializarQuiz);
+</script>
+</body>
+</html>

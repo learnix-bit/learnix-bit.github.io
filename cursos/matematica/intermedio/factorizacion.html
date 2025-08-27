@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learnix - Factorización Básica</title>
+<style>
+/* ===== ESTILO BASE APROBADO ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+body{background-color:#1e1e1e;background-image:linear-gradient(135deg,#1e1e1e,#252525);color:#e0e0e0;display:flex;flex-direction:column;min-height:100vh;}
+header{background-color:#1e1e1e;display:flex;justify-content:space-between;align-items:center;padding:15px 30px;position:sticky;top:0;z-index:100;border-bottom:2px solid #2e2e2e;}
+header .logo{display:flex;align-items:center;gap:10px;}
+header .logo img{height:40px;}
+header nav{display:flex;align-items:center;gap:8px;}
+header nav a{margin-left:20px;font-weight:500;color:#bbb;text-decoration:none;transition:color .3s ease;}
+header nav a:hover, header nav a.active{color:#00bcd4;}
+.header-right{display:flex;align-items:center;gap:14px;}
+.points{background-color:#2a2a2a;color:#ffd36e;padding:8px 12px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;font-weight:700;border:1px solid #333;}
+.points img{width:20px;height:20px;display:block;}
+.points.pulse{animation:pulse .36s ease-in-out;}
+@keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.08);}100%{transform:scale(1);}}
+footer{background-color:#1e1e1e;text-align:center;padding:15px;border-top:2px solid #2e2e2e;margin-top:auto;}
+.btn{display:inline-flex;align-items:center;gap:8px;background-color:#00bcd4;color:#fff;padding:10px 20px;border-radius:8px;margin-top:10px;transition:background .3s ease;text-decoration:none;cursor:pointer;border:none;}
+.btn:hover{background-color:#008ba3;}
+.btn img{width:20px;height:20px;}
+.contenido{padding:40px 20px;max-width:980px;margin:auto;text-align:center;}
+.contenido h2{font-size:2.2rem;color:#00bcd4;margin-bottom:12px;}
+.lead{font-size:1.05rem;color:#ccc;margin-bottom:20px;line-height:1.6;}
+.subtema{background-color:#2a2a2a;padding:20px;border-radius:12px;margin-bottom:18px;box-shadow:0 4px 12px rgba(0,0,0,.3);text-align:left;}
+.subtema h3{color:#fff;font-size:1.2rem;margin-bottom:10px;}
+.subtema p, .subtema ul, .subtema ol{color:#bbb;font-size:1rem;margin-bottom:10px;}
+.row{display:flex;gap:18px;flex-wrap:wrap;}
+.col{flex:1 1 280px;}
+pre.code{background:#212121;padding:12px;border-radius:8px;color:#dcdcdc;overflow:auto;font-size:.95rem;}
+.ejercicio{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+input[type="number"], input[type="text"], select, .quiz button{padding:10px;border-radius:8px;border:1px solid #2e2e2e;background:#222;color:#e0e0e0;outline:none;}
+label{color:#ccc;}
+.resultado{margin-top:10px;color:#fff;font-weight:700;background: rgba(0,0,0,0.25);padding:10px;border-radius:8px;}
+.quiz-question{margin-bottom:12px;color:#ddd;}
+.small{font-size:.92rem;color:#9aa0a6;margin-top:6px;display:block;}
+.acciones{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:14px 0;}
+.feedback-list{margin-top:12px;color:#e0e0e0;text-align:left;}
+.feedback-item{padding:10px;border-radius:8px;margin-bottom:8px;}
+.correct{background: rgba(0,128,0,0.12);border-left:4px solid #20c997;color:#c6ffd9;}
+.wrong{background: rgba(255,0,0,0.08);border-left:4px solid #ff6b6b;color:#ffd9d9;}
+@media(max-width:640px){.contenido{padding:20px 12px;}.row{flex-direction:column;}header{padding:12px;}}
+.chloe-bot{position:fixed;bottom:20px;right:20px;background-color:#00bcd4;border-radius:50%;width:60px;height:60px;display:flex;justify-content:center;align-items:center;box-shadow:0 4px 8px rgba(0,0,0,.2);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="../../../img/logo/logo.svg" alt="Learnix Logo">
+    <h1>Learnix</h1>
+  </div>
+  <nav>
+    <a href="../../../index.html">Inicio</a>
+    <a href="../../../cursos.html" class="active">Cursos</a>
+    <a href="../../../perfil.html">Perfil</a>
+    <a href="../../../login.html">Login</a>
+    <a href="../../../favoritos.html">Favoritos</a>
+  </nav>
+  <div class="header-right">
+    <div class="points" title="Puntos acumulados">
+      <img src="https://img.icons8.com/fluency/48/star.png" alt="star">
+      <span id="puntos">0</span>
+    </div>
+  </div>
+</header>
+
+<main class="contenido">
+<h2>Factorización Básica — Profundización</h2>
+<p class="lead">Definición detallada, propiedades, fórmulas, ejemplos interactivos, ejercicios autocorregibles y mini quiz con puntos globales.</p>
+
+<div class="subtema">
+<h3>1. Definición Detallada</h3>
+<p>La <strong>factorización</strong> consiste en descomponer una expresión algebraica en un producto de factores más simples. Permite simplificar cálculos y resolver ecuaciones. Ejemplo: x² + 5x = x(x + 5).</p>
+</div>
+
+<div class="subtema">
+<h3>2. Propiedades y Fórmulas</h3>
+<ul>
+<li><strong>Factor común:</strong> a·x + a·y = a(x+y)</li>
+<li><strong>Diferencia de cuadrados:</strong> a² - b² = (a-b)(a+b)</li>
+<li><strong>Trinomio cuadrado perfecto:</strong> a² + 2ab + b² = (a+b)²</li>
+<li><strong>Trinomio simple:</strong> x² + (a+b)x + ab = (x+a)(x+b)</li>
+</ul>
+</div>
+
+<div class="subtema">
+<h3>3. Ejemplos Interactivos</h3>
+<div class="row">
+<div class="col">
+<h4>Factor común</h4>
+<div class="ejercicio">
+<input id="fcInput" type="text" placeholder="ej. 6x + 12">
+<button class="btn" onclick="factorComun()"><img src="https://img.icons8.com/color/48/calculator.png" alt="calc"> Factorizar</button>
+</div>
+<div id="fcOut" class="resultado">—</div>
+</div>
+
+<div class="col">
+<h4>Diferencia de cuadrados</h4>
+<div class="ejercicio">
+<input id="dcInput" type="text" placeholder="ej. x^2 - 9">
+<button class="btn" onclick="diffCuadrados()"><img src="https://img.icons8.com/color/48/calculator.png" alt="calc"> Factorizar</button>
+</div>
+<div id="dcOut" class="resultado">—</div>
+</div>
+</div>
+</div>
+
+<div class="subtema">
+<h3>4. Ejercicios Prácticos</h3>
+<ol>
+<li>Factor común: 12x + 18 = <input id="ex1" type="text" placeholder="ej. 6(x+3)"></li>
+<li>Diferencia de cuadrados: x² - 16 = <input id="ex2" type="text" placeholder="ej. (x-4)(x+4)"></li>
+<li>Trinomio cuadrado perfecto: x² + 10x + 25 = <input id="ex3" type="text" placeholder="ej. (x+5)^2"></li>
+</ol>
+<button class="btn" onclick="chequearEjercicios()"><img src="https://img.icons8.com/color/48/check.png" alt="check"> Chequear respuestas</button>
+<div id="outEj" class="resultado">—</div>
+</div>
+
+<div class="subtema">
+<h3>5. Mini Quiz (5 preguntas, 10 puntos cada una)</h3>
+<div id="quiz"></div>
+<div id="quizResultado" class="resultado">—</div>
+</div>
+
+<div class="subtema">
+<h3>6. Tip de Memotecnia</h3>
+<p>Para recordar factor común: “Busca lo que se repite, sácalo y multiplica el resto”.</p>
+</div>
+
+<div class="acciones">
+<a href="../basico.html" class="btn"><img src="https://img.icons8.com/color/48/home.png" alt="home"> Nivel Básico</a>
+<a href="siguiente.html" class="btn"><img src="https://img.icons8.com/color/48/right.png" alt="next"> Siguiente</a>
+<a href="cursos.html" class="btn" style="background:#444;"><img src="https://img.icons8.com/color/48/left.png" alt="volver"> Cursos</a>
+</div>
+</main>
+
+<a href="#chatbot-chloe" class="chloe-bot">
+<img src="img/chatbot/chloe-icon.svg" alt="Chatbot Chloe" style="width:38px;height:38px;">
+</a>
+
+<footer>
+<p>© 2025 Learnix - NeoStudio</p>
+</footer>
+
+<script>
+let puntosGlobales = parseInt(localStorage.getItem('puntosGlobales')) || 0;
+document.getElementById('puntos').textContent = puntosGlobales;
+
+// ===== FACTORIZACION =====
+function factorComun(){
+  const input = document.getElementById('fcInput').value.replace(/\s+/g,'');
+  const match = input.match(/^(\d*)x\+(\d*)$/);
+  if(match){
+    const a=Math.min(match[1]?parseInt(match[1]):1,match[2]?parseInt(match[2]):1);
+    document.getElementById('fcOut').textContent=`Factor común: ${a}(x+${match[2]/a})`;
+  } else document.getElementById('fcOut').textContent='Formato no reconocido';
+}
+
+function diffCuadrados(){
+  const input = document.getElementById('dcInput').value.replace(/\s+/g,'');
+  const match = input.match(/^x\^2-(\d+)$/);
+  if(match){
+    const b=Math.sqrt(parseInt(match[1]));
+    document.getElementById('dcOut').textContent=`Factorización: (x-${b})(x+${b})`;
+  } else document.getElementById('dcOut').textContent='Formato no reconocido';
+}
+
+// ===== EJERCICIOS AUTOCORREGIBLES =====
+function chequearEjercicios(){
+  const out = document.getElementById('outEj');
+  const r1 = document.getElementById('ex1').value.trim() === '6(x+3)';
+  const r2 = document.getElementById('ex2').value.trim() === '(x-4)(x+4)';
+  const r3 = document.getElementById('ex3').value.trim() === '(x+5)^2';
+  const correct = [r1,r2,r3].filter(v=>v).length;
+  let msg = `${correct}/3 correctas.`;
+  if(correct===3 && !localStorage.getItem('ejPuntos')){
+    puntosGlobales += 5;
+    localStorage.setItem('puntosGlobales', puntosGlobales);
+    localStorage.setItem('ejPuntos','true');
+    document.getElementById('puntos').textContent = puntosGlobales;
+    msg+=' ¡Puntos acumulados!';
+  }
+  out.textContent = msg;
+}
+
+// ===== MINI QUIZ =====
+const quizData = [
+  {q:'Factor común en 8x + 12 es:',options:['4(x+3)','2(x+6)','8(x+12)'],answer:0,explanation:'El máximo común divisor es 4, entonces 4(x+3).'},
+  {q:'x² - 25 =',options:['(x-5)(x+5)','(x-25)(x+1)','x(x-25)'],answer:0,explanation:'Diferencia de cuadrados: a²-b²=(a-b)(a+b)'},
+  {q:'x² + 6x + 9 =',options:['(x+3)²','(x+9)(x-1)','(x+1)(x+9)'],answer:0,explanation:'Trinomio cuadrado perfecto: (x+3)²'},
+  {q:'Factorizar x² + 5x + 6 =',options:['(x+2)(x+3)','(x+1)(x+6)','(x+3)(x+5)'],answer:0,explanation:'Trinomio simple: (x+a)(x+b) con a+b=5 y a*b=6'},
+  {q:'Factor común en 15y + 25 =',options:['5(y+5)','10(y+2.5)','15(y+1)'],answer:0,explanation:'El factor común es 5, entonces 5(y+5)'}
+];
+
+function generarQuiz(){
+  const quizDiv = document.getElementById('quiz');
+  quizData.forEach((item,i)=>{
+    const div = document.createElement('div'); div.className='quiz-question';
+    div.innerHTML = `<p>${i+1}. ${item.q}</p>`+
+    item.options.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${o}</label><br>`).join('');
+    quizDiv.appendChild(div);
+  });
+  const btn = document.createElement('button');
+  btn.className='btn';
+  btn.innerHTML='<img src="https://img.icons8.com/color/48/check.png" alt="check"> Enviar Quiz';
+  btn.onclick=evaluarQuiz;
+  quizDiv.appendChild(btn);
+}
+
+function evaluarQuiz(){
+  let puntos = 0; const feedback=[];
+  quizData.forEach((item,i)=>{
+    const sel = document.querySelector(`input[name="q${i}"]:checked`);
+    if(sel){
+      if(parseInt(sel.value)===item.answer){puntos+=10; feedback.push(`<div class="feedback-item correct">Pregunta ${i+1}: Correcto ✅</div>`);}
+      else{feedback.push(`<div class="feedback-item wrong">Pregunta ${i+1}: ❌ Incorrecto. ${item.explanation}</div>`);}
+    } else {feedback.push(`<div class="feedback-item wrong">Pregunta ${i+1}: ❌ No respondida. ${item.explanation}</div>`);}
+  });
+  if(!localStorage.getItem('quizPuntos')){puntosGlobales+=puntos; localStorage.setItem('puntosGlobales',puntosGlobales); document.getElementById('puntos').textContent=puntosGlobales; localStorage.setItem('quizPuntos','true');}
+  document.getElementById('quizResultado').innerHTML=`Total: ${puntos} puntos`+feedback.join('');
+}
+
+generarQuiz();
+</script>
+</body>
+</html>

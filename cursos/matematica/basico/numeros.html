@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Learnix - Números (Naturales)</title>
+  <style>
+    /* ======= MISMO ESTILO QUE APROBASTE ======= */
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body {
+      background-color:#1e1e1e;
+      background-image: linear-gradient(135deg, #1e1e1e, #252525);
+      color:#e0e0e0; display:flex; flex-direction:column; min-height:100vh;
+    }
+    header {
+      background-color:#1e1e1e; display:flex; justify-content:space-between; align-items:center;
+      padding:15px 30px; position:sticky; top:0; z-index:100; border-bottom:2px solid #2e2e2e;
+    }
+    header .logo { display:flex; align-items:center; gap:10px; }
+    header .logo img { height:40px; }
+    header nav { display:flex; align-items:center; gap:8px; }
+    header nav a {
+      margin-left:20px; font-weight:500; color:#bbb; text-decoration:none; transition:color .3s ease;
+    }
+    header nav a:hover, header nav a.active { color:#00bcd4; }
+
+    /* Points badge (in header) */
+    .header-right { display:flex; align-items:center; gap:14px; }
+    .points {
+      background-color:#2a2a2a;
+      color:#ffd36e;
+      padding:8px 12px;
+      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-weight:700;
+      border:1px solid #333;
+    }
+    .points img { width:20px; height:20px; display:block; }
+
+    .points.pulse { animation: pulse .36s ease-in-out; }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    footer {
+      background-color:#1e1e1e; text-align:center; padding:15px; border-top:2px solid #2e2e2e; margin-top:auto;
+    }
+    .btn {
+      display:inline-flex; align-items:center; gap:8px;
+      background-color:#00bcd4; color:#fff; padding:10px 20px; border-radius:8px;
+      margin-top:10px; transition:background .3s ease; text-decoration:none; cursor:pointer;
+      border:none;
+    }
+    .btn:hover { background-color:#008ba3; }
+    .btn img { width:20px; height:20px; }
+
+    /* ======= CONTENIDO NÚMEROS (profundizado) ======= */
+    .contenido {
+      padding:40px 20px; max-width:980px; margin:auto; text-align:center;
+    }
+    .contenido h2 {
+      font-size:2.2rem; color:#00bcd4; margin-bottom:12px;
+    }
+    .lead { font-size:1.05rem; color:#ccc; margin-bottom:20px; line-height:1.6; }
+
+    .subtema {
+      background-color:#2a2a2a; padding:20px; border-radius:12px;
+      margin-bottom:18px; box-shadow:0 4px 12px rgba(0,0,0,.3);
+      text-align:left;
+    }
+    .subtema h3 {
+      color:#fff; font-size:1.2rem; margin-bottom:10px;
+    }
+    .subtema p { color:#bbb; font-size:1rem; margin-bottom:10px; }
+
+    .row { display:flex; gap:18px; flex-wrap:wrap; }
+    .col { flex:1 1 280px; }
+
+    pre.code {
+      background:#212121; padding:12px; border-radius:8px; color:#dcdcdc; overflow:auto; font-size:.95rem;
+    }
+
+    .ejercicio { margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+    input[type="number"], input[type="text"], select, .quiz button {
+      padding:10px; border-radius:8px; border:1px solid #2e2e2e; background:#222; color:#e0e0e0; outline:none;
+    }
+    label { color:#ccc; }
+
+    .resultado {
+      margin-top:10px; color:#fff; font-weight:700;
+      background: rgba(0,0,0,0.25); padding:10px; border-radius:8px;
+    }
+
+    .quiz-question { margin-bottom:12px; color:#ddd; }
+    .small { font-size:.92rem; color:#9aa0a6; margin-top:6px; display:block; }
+
+    .acciones { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:14px 0; }
+
+    /* Feedback styling */
+    .feedback-list { margin-top:12px; color:#e0e0e0; text-align:left; }
+    .feedback-item { padding:10px; border-radius:8px; margin-bottom:8px; }
+    .correct { background: rgba(0,128,0,0.12); border-left:4px solid #20c997; color:#c6ffd9; }
+    .wrong { background: rgba(255,0,0,0.08); border-left:4px solid #ff6b6b; color:#ffd9d9; }
+
+    /* responsive tweaks */
+    @media (max-width:640px){
+      .contenido { padding:20px 12px; }
+      .row { flex-direction:column; }
+      header { padding:12px; }
+    }
+
+    /* Bot flotante Chloe */
+    .chloe-bot {
+      position:fixed; bottom:20px; right:20px; background-color:#00bcd4; border-radius:50%;
+      width:60px; height:60px; display:flex; justify-content:center; align-items:center;
+      box-shadow:0 4px 8px rgba(0,0,0,.2);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado (idéntico) + contador de puntos a la derecha -->
+  <header>
+    <div class="logo">
+      <img src="../../../img/logo/logo.svg" alt="Learnix Logo">
+      <h1>Learnix</h1>
+    </div>
+
+    <nav>
+      <a href="../../../index.html">Inicio</a>
+      <a href="../../../cursos.html" class="active">Cursos</a>
+      <a href="../../../perfil.html">Perfil</a>
+      <a href="../../../login.html">Login</a>
+      <a href="../../../favoritos.html">Favoritos</a>
+    </nav>
+
+    <div class="header-right">
+      <div class="points" title="Puntos acumulados">
+        <img src="https://img.icons8.com/fluency/48/star.png" alt="star">
+        <span id="puntos">0</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido profundizado de Números naturales -->
+  <main class="contenido" id="contenido">
+    <h2>Números — Profundización en <span style="color:#ffd36e;">Números naturales</span></h2>
+    <p class="lead">Definición, propiedades, ejemplos resueltos, ejercicios autocorregibles y un quiz que suma puntos al terminar (una sola vez).</p>
+
+    <div class="subtema">
+      <h3>¿Qué son los Números naturales?</h3>
+      <p>Se representan como <strong>N = {1, 2, 3, ...}</strong>. Son los números de conteo. En Learnix usamos la convención N = {1,2,...} (si algún ejercicio incluye 0, lo indicaremos).</p>
+      <p class="small">Propiedades: cerrados bajo suma y multiplicación; no siempre cerrados bajo resta o división.</p>
+    </div>
+
+    <div class="subtema">
+      <h3>Ejemplos resueltos</h3>
+      <p><strong>1)</strong> ¿Es 0 natural? — En esta lección no; 0 NO es natural según la convención usada.</p>
+      <p><strong>2)</strong> Suma primeros 8 naturales: S = n(n+1)/2 = 8×9/2 = 36.</p>
+    </div>
+
+    <div class="subtema">
+      <h3>Herramientas interactivas</h3>
+      <div class="row">
+        <div class="col">
+          <h4>Clasificar número</h4>
+          <div class="ejercicio">
+            <input id="inClas" type="text" placeholder="ej. 5  o  -2  o  3.5">
+            <button class="btn" onclick="clasificar()"><img src="https://img.icons8.com/color/48/search.png" alt="buscar"> Clasificar</button>
+          </div>
+          <div id="outClas" class="resultado" aria-live="polite">—</div>
+        </div>
+
+        <div class="col">
+          <h4>Suma de primeros n</h4>
+          <div class="ejercicio">
+            <input id="inSumN" type="number" placeholder="ej. 10" min="1">
+            <button class="btn" onclick="sumPrimeros()"><img src="https://img.icons8.com/color/48/calculator.png" alt="calc"> Calcular</button>
+          </div>
+          <div id="outSum" class="resultado">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subtema">
+      <h3>Ejercicios prácticos (autocorregibles)</h3>
+      <ol style="color:#ccc; margin-left:18px;">
+        <li>¿Es natural el número <strong>0</strong>? 
+          <select id="ex1">
+            <option value="">-- selecciona --</option>
+            <option value="si">Sí</option>
+            <option value="no">No</option>
+          </select>
+        </li>
+        <li style="margin-top:10px;">Escribe los 3 números naturales siguientes a <strong>17</strong> (separados por comas):<br>
+          <input id="ex2" type="text" placeholder="ej. 18,19,20"></li>
+        <li style="margin-top:10px;">Calcula la suma de los primeros <strong>7</strong> naturales:<br>
+          <input id="ex3" type="number" placeholder="resultado"></li>
+      </ol>
+
+      <div style="margin-top:12px;">
+        <button class="btn" onclick="chequearEjercicios()"><img src="https://img.icons8.com/color/48/check.png" alt="check"> Chequear respuestas</button>
+        <div id="outEj" class="resultado" style="margin-top:10px">—</div>
+      </div>
+    </div>
+
+    <!-- MINI-QUIZ -->
+    <div class="subtema">
+      <h3>Mini-quiz (5 preguntas) — cada acierto = 10 puntos</h3>
+      <div id="quiz">
+        <div class="quiz-question">
+          <label>1) ¿Cuál de estos NO es un número natural según N={1,2,...}?</label><br>
+          <label><input type="radio" name="q1" value="a"> 0</label><br>
+          <label><input type="radio" name="q1" value="b"> 1</label><br>
+          <label><input type="radio" name="q1" value="c"> 5</label>
+        </div>
+
+        <div class="quiz-question">
+          <label>2) ¿La suma de dos naturales es siempre natural?</label><br>
+          <label><input type="radio" name="q2" value="a"> Sí</label><br>
+          <label><input type="radio" name="q2" value="b"> No</label>
+        </div>
+
+        <div class="quiz-question">
+          <label>3) ¿Cuál es la suma de los primeros 4 naturales?</label><br>
+          <label><input type="radio" name="q3" value="a"> 8</label><br>
+          <label><input type="radio" name="q3" value="b"> 10</label><br>
+          <label><input type="radio" name="q3" value="c"> 6</label>
+        </div>
+
+        <div class="quiz-question">
+          <label>4) Si n es natural, el sucesor de n es:</label><br>
+          <label><input type="radio" name="q4" value="a"> n − 1</label><br>
+          <label><input type="radio" name="q4" value="b"> n + 1</label><br>
+          <label><input type="radio" name="q4" value="c"> n × 1</label>
+        </div>
+
+        <div class="quiz-question">
+          <label>5) ¿Los números naturales forman un conjunto finito o infinito?</label><br>
+          <label><input type="radio" name="q5" value="a"> Finito</label><br>
+          <label><input type="radio" name="q5" value="b"> Infinito</label>
+        </div>
+
+        <div style="margin-top:10px;">
+          <button id="btnRevisar" class="btn" onclick="chequearQuiz()"><img src="https://img.icons8.com/color/48/quiz.png" alt="quiz"> Revisar quiz</button>
+          <div id="outQuiz" class="resultado" style="margin-top:8px">—</div>
+        </div>
+
+        <div id="feedback" class="feedback-list" aria-live="polite"></div>
+      </div>
+
+      <p class="small" style="margin-top:8px;">Nota: solo se añadirán puntos al obtener al menos 1 acierto; al sumar puntos por primera vez el quiz se marca como completado y no podrás obtener más puntos por esta misma prueba (pero podrás ver el feedback siempre).</p>
+    </div>
+
+    <!-- NAVEGACIÓN -->
+    <div class="acciones">
+      <a href="../basico.html" class="btn" title="Volver al nivel básico"><img src="https://img.icons8.com/color/48/home.png" alt="home"> Nivel Básico</a>
+      <a href="operaciones.html" class="btn" title="Siguiente: operaciones"><img src="https://img.icons8.com/color/48/right.png" alt="next"> Siguiente: Operaciones</a>
+      <a href="../../../cursos.html" class="btn" title="Volver a cursos" style="background:#444;"><img src="https://img.icons8.com/color/48/left.png" alt="volver"> Cursos</a>
+    </div>
+
+  </main>
+
+  <!-- Bot flotante Chloe -->
+  <a href="#chatbot-chloe" class="chloe-bot" title="Chloe">
+    <img src="img/chatbot/chloe-icon.svg" alt="Chatbot Chloe" style="width:38px;height:38px;">
+  </a>
+
+  <!-- Footer (idéntico) -->
+  <footer>
+    <p>© 2025 Learnix - NeoStudio</p>
+  </footer>
+
+  <!-- JS: lógicas interactivas + puntos globales y único premio por quiz -->
+  <script>
+    // Keys
+    const POINTS_KEY = 'learnix_points';
+    const QUIZ_FLAG_KEY = 'learnix_quiz_numeros_naturales_completed';
+    const ANSWERS_KEY = 'learnix_quiz_numeros_naturales_answers';
+
+    // Questions data for feedback display
+    const QUESTIONS = [
+      { id:'q1', text:'¿Cuál de estos NO es un número natural según N={1,2,...}?', options:{ a:'0', b:'1', c:'5' }, correct:'a' },
+      { id:'q2', text:'¿La suma de dos naturales es siempre natural?', options:{ a:'Sí', b:'No' }, correct:'a' },
+      { id:'q3', text:'¿Cuál es la suma de los primeros 4 naturales?', options:{ a:'8', b:'10', c:'6' }, correct:'b' },
+      { id:'q4', text:'Si n es natural, el sucesor de n es:', options:{ a:'n − 1', b:'n + 1', c:'n × 1' }, correct:'b' },
+      { id:'q5', text:'¿Los números naturales forman un conjunto finito o infinito?', options:{ a:'Finito', b:'Infinito' }, correct:'b' }
+    ];
+
+    // Helpers
+    function getPoints(){ return parseInt(localStorage.getItem(POINTS_KEY)) || 0; }
+    function setPoints(n){ localStorage.setItem(POINTS_KEY, n); updatePointsBadge(); }
+    function updatePointsBadge(){ const el = document.getElementById('puntos'); if (el) el.textContent = getPoints(); }
+
+    function saveAnswers(obj){
+      localStorage.setItem(ANSWERS_KEY, JSON.stringify(obj));
+    }
+    function loadSavedAnswers(){
+      const raw = localStorage.getItem(ANSWERS_KEY);
+      return raw ? JSON.parse(raw) : null;
+    }
+
+    // Award points only once per quiz (only when points > 0)
+    function awardPointsOnceIfNeeded(points, userAnswers){
+      if (localStorage.getItem(QUIZ_FLAG_KEY) === 'true') {
+        return { awarded: false, reason: 'completed_before' };
+      }
+      if (points <= 0) {
+        // Save last attempt (but don't mark completed)
+        localStorage.setItem(ANSWERS_KEY, JSON.stringify(userAnswers || {}));
+        return { awarded: false, reason: 'no_points' };
+      }
+      const current = getPoints();
+      setPoints(current + points);
+      localStorage.setItem(QUIZ_FLAG_KEY, 'true');
+      // Save answers of the successful attempt
+      saveAnswers(userAnswers || {});
+      return { awarded: true, newTotal: getPoints() };
+    }
+
+    // Show feedback (what user answered and correct answer)
+    function renderFeedback(userAnswers){
+      const container = document.getElementById('feedback');
+      container.innerHTML = '';
+      QUESTIONS.forEach((q, idx) => {
+        const userVal = (userAnswers && userAnswers[q.id]) ? userAnswers[q.id] : null;
+        const correctVal = q.correct;
+        const isCorrect = userVal === correctVal;
+        const div = document.createElement('div');
+        div.className = 'feedback-item ' + (isCorrect ? 'correct' : 'wrong');
+        let html = `<strong>${idx+1}) ${q.text}</strong><br>`;
+        if (userVal) {
+          html += `Tu respuesta: <em>${q.options[userVal] || userVal}</em> — `;
+          html += isCorrect ? `<span style="color:#bff6d1;">Correcta</span>` : `<span style="color:#ffd6d6;">Incorrecta</span>`;
+        } else {
+          html += `Tu respuesta: <em>Sin responder</em> — <span style="color:#ffd6d6;">Incorrecta</span>`;
+        }
+        html += `<br>Respuesta correcta: <strong>${q.options[correctVal]}</strong>`;
+        div.innerHTML = html;
+        container.appendChild(div);
+      });
+    }
+
+    // Init UI on load
+    function init(){
+      updatePointsBadge();
+      // If quiz already completed, disable button and show saved feedback
+      if (localStorage.getItem(QUIZ_FLAG_KEY) === 'true'){
+        const btn = document.getElementById('btnRevisar');
+        if (btn) {
+          btn.disabled = true;
+          btn.style.opacity = 0.7;
+          btn.textContent = 'Quiz completado';
+        }
+        const saved = loadSavedAnswers();
+        if (saved) {
+          document.getElementById('outQuiz').textContent = 'Ya completaste este quiz. Puntos fueron añadidos anteriormente.';
+          renderFeedback(saved);
+        }
+      } else {
+        // If there's a saved last attempt (but not completed), show it as last attempt so student sees mistakes
+        const lastAttempt = loadSavedAnswers();
+        if (lastAttempt && Object.keys(lastAttempt).length) {
+          document.getElementById('outQuiz').textContent = 'Último intento (sin completar aún). Revisa errores y vuelve a intentar para ganar puntos.';
+          renderFeedback(lastAttempt);
+        }
+      }
+    }
+
+    // Read user answers from DOM
+    function collectUserAnswers(){
+      const user = {};
+      QUESTIONS.forEach(q => {
+        const el = document.querySelector(`input[name="${q.id}"]:checked`);
+        if (el) user[q.id] = el.value;
+      });
+      return user;
+    }
+
+    // Main quiz checker
+    function chequearQuiz(){
+      // If already completed, show saved feedback and block awarding
+      if (localStorage.getItem(QUIZ_FLAG_KEY) === 'true') {
+        const out = document.getElementById('outQuiz');
+        out.textContent = 'Ya completaste este quiz anteriormente. No se pueden añadir más puntos.';
+        const saved = loadSavedAnswers();
+        if (saved) renderFeedback(saved);
+        const btn = document.getElementById('btnRevisar'); if (btn){ btn.disabled = true; btn.style.opacity = 0.7; btn.textContent = 'Quiz completado'; }
+        return;
+      }
+
+      const userAnswers = collectUserAnswers();
+      // evaluate
+      let score = 0;
+      QUESTIONS.forEach(q => {
+        if (userAnswers[q.id] === q.correct) score++;
+      });
+
+      const pointsAwarded = score * 10;
+      const out = document.getElementById('outQuiz');
+
+      // Try to award
+      const res = awardPointsOnceIfNeeded(pointsAwarded, userAnswers);
+
+      if (res.awarded){
+        out.textContent = `Resultado: ${score} / ${QUESTIONS.length}. +${pointsAwarded} puntos añadidos.`;
+        // Visual pulse
+        const pEl = document.querySelector('.points');
+        if (pEl){ pEl.classList.add('pulse'); setTimeout(()=>pEl.classList.remove('pulse'), 400); }
+        // disable button
+        const btn = document.getElementById('btnRevisar'); if (btn){ btn.disabled = true; btn.style.opacity = 0.7; btn.textContent = 'Quiz completado'; }
+      } else {
+        if (res.reason === 'completed_before') {
+          out.textContent = 'Ya completaste este quiz anteriormente. No se añaden puntos.';
+        } else if (res.reason === 'no_points') {
+          out.textContent = `Resultado: ${score} / ${QUESTIONS.length}. No obtuviste puntos (necesitas al menos 1 acierto). Intenta de nuevo.`;
+          // save last attempt so student can review mistakes
+          saveAnswers(userAnswers);
+        } else {
+          out.textContent = `Resultado: ${score} / ${QUESTIONS.length}.`;
+        }
+      }
+
+      // Show detailed feedback (always show what failed)
+      renderFeedback(userAnswers);
+    }
+
+    // Other helpers (existing tools)
+    function clasificar(){
+      const raw = document.getElementById('inClas').value.trim();
+      const out = document.getElementById('outClas');
+      if (raw === '') { out.textContent = 'Escribe un número para clasificar.'; return; }
+      const n = Number(raw.replace(',', '.'));
+      if (isNaN(n)) { out.textContent = 'Eso no parece un número válido.'; return; }
+
+      const isInteger = Number.isInteger(n);
+      let parts = [];
+      if (isInteger) {
+        if (n >= 1) { parts.push('Número natural (según convención N={1,2,...})'); }
+        if (n === 0) { parts.push('Cero (entero) — según convención puede o no pertenecer a N'); }
+        if (n < 0) { parts.push('Entero negativo'); }
+        if (n > 0) { parts.push('Entero positivo'); }
+      } else {
+        parts.push('Decimal (no entero)');
+      }
+      if (isInteger && Math.abs(n) > 1) {
+        parts.push(n % 2 === 0 ? 'Par' : 'Impar');
+      }
+      out.innerHTML = parts.join(' · ');
+    }
+
+    function sumPrimeros(){
+      const n = Number(document.getElementById('inSumN').value);
+      const out = document.getElementById('outSum');
+      if (!Number.isInteger(n) || n < 1){ out.textContent = 'Ingresa un entero natural (≥1).'; return; }
+      const sum = n * (n + 1) / 2;
+      out.innerHTML = `S = n(n+1)/2 = ${n}·(${n}+1)/2 = ${sum}`;
+    }
+
+    function chequearEjercicios(){
+      const res = [];
+      const ex1 = document.getElementById('ex1').value;
+      res.push(ex1 === 'no');
+
+      const ex2raw = (document.getElementById('ex2')||{value:''}).value.replace(/\s/g,'');
+      const arr2 = ex2raw ? ex2raw.split(',').map(s => Number(s)) : [];
+      const ok2 = arr2.length === 3 && arr2[0] === 18 && arr2[1] === 19 && arr2[2] === 20;
+      res.push(ok2);
+
+      const ex3 = Number((document.getElementById('ex3')||{value:NaN}).value);
+      res.push(ex3 === 28);
+
+      const out = document.getElementById('outEj');
+      const correct = res.filter(r => r).length;
+      let msg = `${correct} / ${res.length} correctas.`;
+      if (correct !== res.length) {
+        let details = '';
+        if (!res[0]) details += '1) Convención: 0 NO es natural aquí. ';
+        if (!res[1]) details += '2) Siguientes de 17 → 18,19,20. ';
+        if (!res[2]) details += '3) Suma primeros 7 = 28. ';
+        msg += ' — ' + details;
+      } else msg += ' ¡Perfecto!';
+      out.innerHTML = msg;
+    }
+
+    // Attach Enter key behaviours
+    function attachEnter(id, fn){
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('keydown', function(e){ if (e.key === 'Enter') fn(); });
+    }
+
+    // Init on load
+    window.addEventListener('DOMContentLoaded', () => {
+      init();
+      attachEnter('inClas', clasificar);
+      attachEnter('inSumN', sumPrimeros);
+    });
+  </script>
+</body>
+</html>

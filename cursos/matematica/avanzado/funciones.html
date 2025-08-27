@@ -1,0 +1,514 @@
+<!-- filepath: c:\Modelos de Learnix\Learnix Principal\cursos\matematica\avanzado\funciones.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learnix - Funciones Lineales y Cuadráticas</title>
+<style>
+/* ===== RESET & BASE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: #1e1e1e;
+  background-image: linear-gradient(135deg, #1e1e1e, #252525);
+  color: #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* ===== HEADER & NAVIGATION ===== */
+header {
+  background: #1e1e1e;
+  border-bottom: 2px solid #2e2e2e;
+  padding: 15px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+}
+
+nav a {
+  color: #bbb;
+  text-decoration: none;
+  margin-left: 20px;
+  transition: color 0.3s;
+}
+
+nav a:hover, nav a.active {
+  color: #00bcd4;
+}
+
+/* ===== BUSCADOR ===== */
+.buscador { 
+  padding: 16px 30px; 
+  border-bottom: 2px solid #2e2e2e; 
+  background: #1e1e1e; 
+}
+
+.buscador input {
+  width: 100%; 
+  max-width: 520px; 
+  padding: 12px 16px; 
+  border-radius: 10px; 
+  border: 1px solid #2e2e2e;
+  background: #222; 
+  color: #e0e0e0; 
+  outline: none;
+}
+
+.buscador input::placeholder { 
+  color: #999; 
+}
+
+.buscador-center { 
+  max-width: 520px; 
+  margin: 0 auto; 
+}
+
+/* ===== MAIN CONTENT ===== */
+.contenido {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.title {
+  color: #00bcd4;
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.lead {
+  color: #ccc;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+/* ===== SECTIONS & CARDS ===== */
+.section {
+  background: #2a2a2a;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.section h2 {
+  color: #00bcd4;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.section h3 {
+  color: #fff;
+  margin: 1.5rem 0 1rem;
+  font-size: 1.2rem;
+}
+
+/* ===== INTERACTIVE ELEMENTS ===== */
+.input-group {
+  background: #00000040;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 10px 0;
+}
+
+input[type="text"],
+input[type="number"] {
+  background: #1e1e1e;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.btn {
+  background: #00bcd4;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  background: #008ba3;
+  transform: translateY(-2px);
+}
+
+/* ===== QUIZ STYLES ===== */
+.quiz-card {
+  background: #252525;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px 0;
+  border: 1px solid #333;
+}
+
+.quiz-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  margin: 5px 0;
+  background: #2e2e2e;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.quiz-option:hover {
+  background: #363636;
+}
+
+/* ===== TIPS & MEMOTECNIA ===== */
+.tip-box {
+  background: linear-gradient(45deg, #00695c, #004d40);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.tip-box::before {
+  content: "💡";
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 2rem;
+  opacity: 0.5;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes correct {
+  0% { background: #004d40; }
+  100% { background: #2a2a2a; }
+}
+
+.correct-answer {
+  animation: correct 1s ease;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .contenido {
+    padding: 20px 15px;
+  }
+  
+  .section {
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+  }
+  
+  nav a {
+    margin-left: 15px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 10px 15px;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  nav a {
+    margin: 0;
+  }
+  
+  .section {
+    padding: 15px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="../../../img/logo/logo.svg" alt="Learnix Logo">
+    <h1>Learnix</h1>
+  </div>
+  <nav>
+    <a href="../../../index.html">Inicio</a>
+    <a href="../../../cursos.html">Cursos</a>
+    <a href="../../../perfil.html">Perfil</a>
+    <a href="../../../login.html">Login</a>
+    <a href="../../../favoritos.html">Favoritos</a>
+  </nav>
+</header>
+
+<section class="buscador">
+  <div class="buscador-center">
+    <input type="text" id="buscarCurso" placeholder="Buscar curso...">
+  </div>
+</section>
+
+<main class="contenido">
+  <h1 class="title">Funciones Lineales y Cuadráticas</h1>
+  <p class="lead">Comprende y domina las funciones matemáticas fundamentales para el análisis y modelado de situaciones reales</p>
+
+  <!-- Definición -->
+  <section class="section fade-in">
+    <h2>1. ¿Qué son las Funciones?</h2>
+    <p>Una función es una relación entre dos conjuntos donde cada elemento del dominio se relaciona con exactamente un elemento del codominio. Podemos pensarla como una máquina que transforma números en otros números siguiendo una regla específica.</p>
+
+    <h3>1.1 Función Lineal</h3>
+    <p>Una función lineal tiene la forma: <strong>f(x) = mx + b</strong></p>
+    <ul>
+      <li>m = pendiente (inclinación de la recta)</li>
+      <li>b = intercepto con el eje Y (punto donde la recta corta al eje Y)</li>
+    </ul>
+
+    <h3>1.2 Función Cuadrática</h3>
+    <p>Una función cuadrática tiene la forma: <strong>f(x) = ax² + bx + c</strong></p>
+    <ul>
+      <li>a ≠ 0 determina la abertura y dirección de la parábola</li>
+      <li>b y c determinan la posición del vértice</li>
+    </ul>
+  </section>
+
+  <!-- Propiedades -->
+  <section class="section fade-in">
+    <h2>2. Propiedades Fundamentales</h2>
+    
+    <h3>2.1 Función Lineal</h3>
+    <div class="formula-box">
+      <ul>
+        <li>Pendiente (m) = Δy/Δx = (y₂-y₁)/(x₂-x₁)</li>
+        <li>Punto de corte con Y: cuando x = 0</li>
+        <li>Creciente si m > 0, Decreciente si m < 0</li>
+      </ul>
+    </div>
+
+    <h3>2.2 Función Cuadrática</h3>
+    <div class="formula-box">
+      <ul>
+        <li>Vértice: x = -b/(2a)</li>
+        <li>Eje de simetría: x = -b/(2a)</li>
+        <li>Discriminante: Δ = b² - 4ac</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Ejemplos -->
+  <section class="section fade-in">
+    <h2>3. Ejemplos Paso a Paso</h2>
+    
+    <div class="example-box">
+      <h3>Ejemplo 1: Función Lineal</h3>
+      <p>Encontrar la pendiente y el intercepto de y = 2x + 3</p>
+      <ol>
+        <li>Pendiente (m) = 2</li>
+        <li>Intercepto (b) = 3</li>
+        <li>La recta sube 2 unidades por cada unidad horizontal</li>
+        <li>Corta al eje Y en el punto (0,3)</li>
+      </ol>
+    </div>
+
+    <div class="example-box">
+      <h3>Ejemplo 2: Función Cuadrática</h3>
+      <p>Analizar f(x) = x² - 4x + 3</p>
+      <ol>
+        <li>a = 1, b = -4, c = 3</li>
+        <li>Vértice: x = -(-4)/(2·1) = 2</li>
+        <li>y del vértice = 2² - 4(2) + 3 = -1</li>
+        <li>Vértice en (2,-1)</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Ejercicios -->
+  <section class="section fade-in">
+    <h2>4. Ejercicios Prácticos</h2>
+    
+    <div class="input-group">
+      <p>1. Encuentra la pendiente de la recta que pasa por (0,2) y (3,8)</p>
+      <input type="number" id="ej1" placeholder="Escribe tu respuesta">
+      <button class="btn" onclick="verificarEjercicio(1)">Verificar</button>
+      <p id="resp1" class="feedback"></p>
+    </div>
+
+    <div class="input-group">
+      <p>2. ¿Cuál es el vértice de y = x² - 6x + 5?</p>
+      <input type="text" id="ej2" placeholder="Formato: (x,y)">
+      <button class="btn" onclick="verificarEjercicio(2)">Verificar</button>
+      <p id="resp2" class="feedback"></p>
+    </div>
+  </section>
+
+  <!-- Quiz -->
+  <section class="section fade-in">
+    <h2>5. Mini Quiz</h2>
+    <div id="quiz-container"></div>
+  </section>
+
+  <!-- Tip -->
+  <div class="tip-box fade-in">
+    <h3>💡 Tips de Memotecnia</h3>
+    <ul>
+      <li>Para la función lineal (mx + b): "M de Montaña" - la pendiente indica qué tan empinada es la subida</li>
+      <li>Para la parábola: "a Arriba" - si a > 0, la parábola sonríe (∪); si a < 0, la parábola está triste (∩)</li>
+    </ul>
+  </div>
+</main>
+
+<footer>
+  <p>© 2025 Learnix - NeoStudio</p>
+</footer>
+
+<script>
+const quizData = [
+  {
+    pregunta: "¿Qué tipo de gráfica representa una función lineal?",
+    opciones: ["Una recta", "Una parábola", "Una circunferencia"],
+    correcta: 0,
+    explicacion: "Una función lineal siempre se representa como una línea recta en el plano cartesiano."
+  },
+  {
+    pregunta: "Si la pendiente de una recta es negativa, la función es:",
+    opciones: ["Creciente", "Decreciente", "Constante"],
+    correcta: 1,
+    explicacion: "Una pendiente negativa indica que la función decrece: mientras x aumenta, y disminuye."
+  },
+  {
+    pregunta: "¿Qué valor de 'a' hace que la parábola abra hacia abajo?",
+    opciones: ["a > 0", "a < 0", "a = 0"],
+    correcta: 1,
+    explicacion: "Cuando a < 0, la parábola abre hacia abajo formando una '∩'."
+  },
+  {
+    pregunta: "El vértice de una parábola es:",
+    opciones: ["El punto más alto o más bajo", "El punto de corte con Y", "El punto de corte con X"],
+    correcta: 0,
+    explicacion: "El vértice es el punto máximo o mínimo de la parábola, dependiendo de si abre hacia abajo o arriba."
+  },
+  {
+    pregunta: "¿Qué representa 'b' en f(x) = mx + b?",
+    opciones: ["La pendiente", "El intercepto con Y", "El intercepto con X"],
+    correcta: 1,
+    explicacion: "b es el punto donde la recta corta al eje Y, también llamado intercepto en Y."
+  }
+];
+
+let puntosGlobales = parseInt(localStorage.getItem('puntosGlobales')) || 0;
+
+function inicializarQuiz() {
+  const container = document.getElementById('quiz-container');
+  quizData.forEach((pregunta, index) => {
+    const quizCard = document.createElement('div');
+    quizCard.className = 'quiz-card';
+    quizCard.innerHTML = `
+      <p><strong>${index + 1}. ${pregunta.pregunta}</strong></p>
+      ${pregunta.opciones.map((opcion, i) => `
+        <div class="quiz-option" onclick="verificarRespuesta(${index}, ${i})">
+          <span>${['A', 'B', 'C'][i]}</span> ${opcion}
+        </div>
+      `).join('')}
+      <p class="feedback" id="quiz-feedback-${index}"></p>
+    `;
+    container.appendChild(quizCard);
+  });
+}
+
+function verificarRespuesta(preguntaId, respuestaSeleccionada) {
+  const feedback = document.getElementById(`quiz-feedback-${preguntaId}`);
+  if (respuestaSeleccionada === quizData[preguntaId].correcta) {
+    feedback.innerHTML = `✅ ¡Correcto! ${quizData[preguntaId].explicacion}`;
+    feedback.style.color = '#4caf50';
+    actualizarPuntos(10);
+  } else {
+    feedback.innerHTML = `❌ Incorrecto. ${quizData[preguntaId].explicacion}`;
+    feedback.style.color = '#f44336';
+  }
+}
+
+function verificarEjercicio(numero) {
+  const input = document.getElementById(`ej${numero}`);
+  const feedback = document.getElementById(`resp${numero}`);
+  
+  if (numero === 1) {
+    const respuesta = parseFloat(input.value);
+    if (respuesta === 2) {
+      feedback.textContent = "¡Correcto! La pendiente es 2 (sube 6 unidades en 3 unidades horizontales)";
+      feedback.style.color = '#4caf50';
+      actualizarPuntos(15);
+    } else {
+      feedback.textContent = "Incorrecto. Recuerda: pendiente = (y₂-y₁)/(x₂-x₁) = (8-2)/(3-0) = 6/3 = 2";
+      feedback.style.color = '#f44336';
+    }
+  } else if (numero === 2) {
+    const respuesta = input.value.replace(/\s/g, '').toLowerCase();
+    if (respuesta === "(3,-4)" || respuesta === "3,-4") {
+      feedback.textContent = "¡Correcto! x = -(-6)/(2·1) = 3, y = 3² - 6(3) + 5 = -4";
+      feedback.style.color = '#4caf50';
+      actualizarPuntos(15);
+    } else {
+      feedback.textContent = "Incorrecto. El vértice es (3,-4). Recuerda: x = -b/(2a)";
+      feedback.style.color = '#f44336';
+    }
+  }
+}
+
+function actualizarPuntos(puntos) {
+  puntosGlobales += puntos;
+  localStorage.setItem('puntosGlobales', puntosGlobales);
+  const pointsElement = document.querySelector('.points span');
+  if (pointsElement) {
+    pointsElement.textContent = puntosGlobales;
+    pointsElement.parentElement.classList.add('pulse');
+    setTimeout(() => pointsElement.parentElement.classList.remove('pulse'), 300);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', inicializarQuiz);
+</script>
+</body>
+</html>

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Learnix - Prueba Diagnóstica (Básico • Intermedio • Avanzado)</title>
+<style>
+/* ========= ESTILO BASE APROBADO ========= */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif}
+body{background:#1e1e1e;background-image:linear-gradient(135deg,#1e1e1e,#252525);color:#e0e0e0;display:flex;flex-direction:column;min-height:100vh}
+header{background:#1e1e1e;display:flex;justify-content:space-between;align-items:center;padding:15px 30px;position:sticky;top:0;z-index:100;border-bottom:2px solid #2e2e2e}
+header .logo{display:flex;align-items:center;gap:10px}
+header .logo img{height:40px}
+header nav{display:flex;align-items:center;gap:8px}
+header nav a{margin-left:20px;font-weight:500;color:#bbb;text-decoration:none;transition:color .3s ease}
+header nav a:hover, header nav a.active{color:#00bcd4}
+.header-right{display:flex;align-items:center;gap:14px}
+.points{background:#2a2a2a;color:#ffd36e;padding:8px 12px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;font-weight:700;border:1px solid #333}
+.points img{width:20px;height:20px;display:block}
+.points.pulse{animation:pulse .36s ease-in-out}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.08)}100%{transform:scale(1)}}
+footer{background:#1e1e1e;text-align:center;padding:15px;border-top:2px solid #2e2e2e;margin-top:auto}
+.btn{display:inline-flex;align-items:center;gap:8px;background:#00bcd4;color:#fff;padding:10px 20px;border-radius:8px;margin-top:10px;transition:transform .2s ease, background .3s ease;text-decoration:none;cursor:pointer;border:none}
+.btn:hover{background:#008ba3;transform:translateY(-1px)}
+.btn img{width:20px;height:20px}
+.contenido{padding:34px 20px;max-width:1000px;margin:auto}
+h2.title{font-size:2.2rem;color:#00bcd4;margin-bottom:6px;text-align:center}
+.lead{text-align:center;color:#ccc;margin-bottom:20px}
+.grid-info{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:12px 0}
+.card{background:#2a2a2a;border-radius:14px;padding:18px;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.card h3{color:#fff;font-size:1.15rem;margin-bottom:8px}
+.card p,.card li{color:#bbb}
+.accordion{margin:18px 0}
+.acc-item{border:1px solid #333;border-radius:12px;overflow:hidden;margin-bottom:12px;background:#252525}
+.acc-head{width:100%;text-align:left;background:#2b2b2b;color:#e0e0e0;padding:14px 16px;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:700}
+.acc-head span{opacity:.9}
+.acc-body{display:none;padding:16px 16px 18px 16px;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+
+/* Inputs oscuros modernos */
+input[type="number"], input[type="text"], select, textarea {
+  padding:10px;border-radius:10px;border:1px solid #2e2e2e;background:#00000040;
+  color:#e0e0e0;outline:none;backdrop-filter:blur(2px)
+}
+input::placeholder, textarea::placeholder{color:#9aa0a6}
+
+/* Resultado / feedback */
+.resultado{margin-top:10px;color:#fff;font-weight:700;background:rgba(0,0,0,.25);padding:10px;border-radius:10px}
+.quiz-question{margin-bottom:12px;color:#ddd}
+.feedback-item{padding:10px;border-radius:10px;margin-bottom:8px}
+.correct{background:rgba(0,128,0,.12);border-left:4px solid #20c997;color:#c6ffd9}
+.wrong{background:rgba(255,0,0,.08);border-left:4px solid #ff6b6b;color:#ffd9d9}
+.small{font-size:.92rem;color:#9aa0a6;margin-top:6px;display:block}
+.acciones{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:16px 0}
+
+/* Chips y etiquetas */
+.badge{display:inline-block;padding:4px 10px;border-radius:999px;background:#14252a;color:#7ad8e8;border:1px solid #1e3a40;font-size:.8rem;margin-right:8px}
+
+/* Responsive */
+@media (max-width:640px){
+  .contenido{padding:20px 12px}
+  header{padding:12px}
+}
+
+/* Micro-animación para aciertos */
+@keyframes pop{0%{transform:scale(.96)}60%{transform:scale(1.04)}100%{transform:scale(1)}}
+.pop{animation:pop .22s ease-out}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="img/logo/logo.svg" alt="Learnix Logo">
+    <h1>Learnix</h1>
+  </div>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="cursos.html" class="active">Cursos</a>
+    <a href="perfil.html">Perfil</a>
+    <a href="login.html">Login</a>
+    <a href="favoritos.html">Favoritos</a>
+  </nav>
+  <div class="header-right">
+    <div class="points" title="Puntos acumulados">
+      <img src="https://img.icons8.com/fluency/48/star.png" alt="star">
+      <span id="puntos">0</span>
+    </div>
+  </div>
+</header>
+
+<main class="contenido">
+  <h2 class="title">Prueba Diagnóstica – Matemática</h2>
+  <p class="lead">Evalúa tu nivel en <strong>Básico</strong>, <strong>Intermedio</strong> y <strong>Avanzado</strong>. Cada bloque incluye breve teoría, herramientas y un mini-quiz de 5 preguntas (10 pts c/u). <span class="badge">Puntos globales</span> <span class="badge">Solo una vez por bloque</span></p>
+
+  <!-- INFO GENERAL -->
+  <div class="grid-info">
+    <div class="card">
+      <h3>¿Cómo funciona?</h3>
+      <ul style="margin-left:18px;list-style:disc">
+        <li>Lee el resumen teórico y fórmulas.</li>
+        <li>Usa las herramientas interactivas si lo necesitas.</li>
+        <li>Responde el mini-quiz (5 preguntas).</li>
+        <li>Obtienes hasta 50 pts por bloque (una sola vez).</li>
+      </ul>
+      <span class="small">Tip: si no estás seguro, intenta estimar o descartar opciones.</span>
+    </div>
+    <div class="card">
+      <h3>Memotecnia global</h3>
+      <p><strong>“PEFRA-GEPRE-FETI”</strong>: <em>PE</em>raciones, <em>FRA</em>cciones, <em>GE</em>ometría, <em>PRE</em>sentaciones (áreas, perímetros), <em>FE</em>ctores (factorización), <em>TI</em>rigonometría. Un ancla para recordar familias de temas.</p>
+    </div>
+  </div>
+
+  <!-- ============ ACORDEÓN DE NIVELES ============ -->
+  <section class="accordion">
+
+    <!-- ======== NIVEL BÁSICO ======== -->
+    <div class="acc-item" id="nivel-basico">
+      <button class="acc-head" onclick="toggleAcc(this)">
+        <span>🔹 Nivel Básico (fundamentos esenciales)</span><span>▼</span>
+      </button>
+      <div class="acc-body">
+        <!-- Teoría -->
+        <div class="card">
+          <h3>Teoría esencial, propiedades y fórmulas</h3>
+          <ul style="margin-left:18px;list-style:disc">
+            <li><strong>Números:</strong> naturales (0,1,2,…), enteros (…−2,−1,0,1,…), decimales (base 10).</li>
+            <li><strong>Operaciones:</strong> conmutativa (a+b=b+a), asociativa, distributiva a(b+c)=ab+ac.</li>
+            <li><strong>Fracciones:</strong> a/b; suma distinta base: a/b + c/d = (ad+bc)/bd.</li>
+            <li><strong>MCM & MCD:</strong> por descomposición o por primos comunes/mínimos.</li>
+            <li><strong>Porcentajes:</strong> p% de N = (p/100)·N; regla de tres simple.</li>
+            <li><strong>Figuras:</strong> triángulo, cuadrado, círculo (π≈3.1416).</li>
+            <li><strong>Perímetro/Área:</strong> P=suma de lados; A: cuadrado s², rectángulo b·h, círculo πr².</li>
+          </ul>
+          <div class="grid-info">
+            <div class="card">
+              <h3>Ejemplo paso a paso</h3>
+              <p><strong>Ej.</strong> ¿Cuánto es el 15% de 240?</p>
+              <ol style="margin-left:18px">
+                <li>Convierte: 15% = 0.15</li>
+                <li>Multiplica: 0.15 × 240 = 36</li>
+                <li><strong>Respuesta:</strong> 36</li>
+              </ol>
+            </div>
+            <div class="card">
+              <h3>Herramientas</h3>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+                <!-- Fracción a decimal -->
+                <input id="b-frac" type="text" placeholder="fracción ej. 3/4">
+                <button class="btn" onclick="fracADec('b-frac','b-out1')">F → D</button>
+                <div id="b-out1" class="resultado">—</div>
+                <!-- MCM/MCD -->
+                <input id="b-mcm1" type="number" placeholder="a">
+                <input id="b-mcm2" type="number" placeholder="b">
+                <button class="btn" onclick="calcMcmMcd('b-mcm1','b-mcm2','b-out2')">MCM/MCD</button>
+                <div id="b-out2" class="resultado">—</div>
+              </div>
+              <span class="small">Truco: “% → ÷100” y “de → ×”.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- MINI QUIZ BÁSICO (5 preguntas) -->
+        <div class="card">
+          <h3>Mini-Quiz Básico (5 preguntas, 10 pts c/u)</h3>
+          <div id="quizBasico"></div>
+          <button class="btn" onclick="evaluarQuiz('Basico')"><img src="https://img.icons8.com/color/48/check.png" alt="">Enviar Quiz</button>
+          <div id="quizBasicoResultado" class="resultado">—</div>
+          <span class="small">Puntos del bloque se suman <strong>una sola vez</strong>.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======== NIVEL INTERMEDIO ======== -->
+    <div class="acc-item" id="nivel-intermedio">
+      <button class="acc-head" onclick="toggleAcc(this)">
+        <span>🔹 Nivel Intermedio (aplicación y razonamiento)</span><span>▼</span>
+      </button>
+      <div class="acc-body">
+        <!-- Teoría -->
+        <div class="card">
+          <h3>Teoría esencial, propiedades y fórmulas</h3>
+          <ul style="margin-left:18px;list-style:disc">
+            <li><strong>Potencias/Raíces:</strong> a^m·a^n=a^{m+n}; (a^m)^n=a^{mn}; √a = a^{1/2}.</li>
+            <li><strong>Ecuaciones 1er grado:</strong> ax+b=c ⇒ x=(c−b)/a.</li>
+            <li><strong>Sistemas 2×2:</strong> sustitución/igualación/eliminación.</li>
+            <li><strong>Álgebra (literales):</strong> leyes: distributiva, factor común, identidades notables.</li>
+            <li><strong>Factorización básica:</strong> común, trinomio cuadrado perfecto, diferencia de cuadrados a²−b²=(a−b)(a+b).</li>
+            <li><strong>Pitágoras:</strong> a²+b²=c² (triángulo rectángulo).</li>
+            <li><strong>Razones y proporciones:</strong> a/b = c/d ⇒ ad=bc; regla de tres compuesta (múltiples razones).</li>
+            <li><strong>Porcentajes aplicados:</strong> interés simple I=Pin/100.</li>
+            <li><strong>Estadística básica:</strong> media, mediana, moda.</li>
+          </ul>
+          <div class="grid-info">
+            <div class="card">
+              <h3>Ejemplo paso a paso</h3>
+              <p><strong>Ej.</strong> Resuelve 3x−5=16.</p>
+              <ol style="margin-left:18px">
+                <li>3x = 16+5 = 21</li>
+                <li>x = 21/3 = <strong>7</strong></li>
+              </ol>
+            </div>
+            <div class="card">
+              <h3>Herramientas</h3>
+              <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+                <!-- Potencia / raíz -->
+                <input id="i-base" type="number" placeholder="base a">
+                <input id="i-exp" type="number" placeholder="exponente n">
+                <button class="btn" onclick="calcPotRaiz('i-base','i-exp','i-out1')">a^n / n√a</button>
+                <div id="i-out1" class="resultado">—</div>
+                <!-- Ecuación ax+b=c -->
+                <input id="i-a" type="number" placeholder="a">
+                <input id="i-b" type="number" placeholder="b">
+                <input id="i-c" type="number" placeholder="c">
+                <button class="btn" onclick="solveLinear('i-a','i-b','i-c','i-out2')">Resolver ax+b=c</button>
+                <div id="i-out2" class="resultado">—</div>
+              </div>
+              <span class="small">Truco: en 3x−5=16 pasa “−5” sumando y divide entre coeficiente.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- MINI QUIZ INTERMEDIO (5 preguntas) -->
+        <div class="card">
+          <h3>Mini-Quiz Intermedio (5 preguntas, 10 pts c/u)</h3>
+          <div id="quizIntermedio"></div>
+          <button class="btn" onclick="evaluarQuiz('Intermedio')"><img src="https://img.icons8.com/color/48/check.png" alt="">Enviar Quiz</button>
+          <div id="quizIntermedioResultado" class="resultado">—</div>
+          <span class="small">Puntos del bloque se suman <strong>una sola vez</strong>.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======== NIVEL AVANZADO ======== -->
+    <div class="acc-item" id="nivel-avanzado">
+      <button class="acc-head" onclick="toggleAcc(this)">
+        <span>🔹 Nivel Avanzado (resolución de problemas complejos)</span><span>▼</span>
+      </button>
+      <div class="acc-body">
+        <!-- Teoría -->
+        <div class="card">
+          <h3>Teoría esencial, propiedades y fórmulas</h3>
+          <ul style="margin-left:18px;list-style:disc">
+            <li><strong>Funciones:</strong> lineal y=mx+b; cuadrática y=ax²+bx+c (vértice x=−b/2a).</li>
+            <li><strong>Ecuación cuadrática:</strong> ax²+bx+c=0 ⇒ x = [−b ± √(b²−4ac)]/(2a).</li>
+            <li><strong>Inecuaciones:</strong> mover términos y considerar cambio de signo al multiplicar por número negativo.</li>
+            <li><strong>Sistemas 2×2/3×3:</strong> eliminación, sustitución, matrices.</li>
+            <li><strong>Analítica:</strong> recta (pendiente m=Δy/Δx), circunferencia (x−h)²+(y−k)²=r².</li>
+            <li><strong>Trigonometría:</strong> seno, coseno, tangente en triángulos rectángulos (SOH-CAH-TOA).</li>
+            <li><strong>Probabilidad y combinatoria:</strong> P(E)=favorables/total; nCr=n!/(r!(n−r)!).</li>
+            <li><strong>Estadística intermedia:</strong> varianza σ²=Σ(x−x̄)²/n; desviación σ=√σ².</li>
+            <li><strong>Cálculo (intro):</strong> límite (tendencia), derivada como razón de cambio.</li>
+          </ul>
+          <div class="grid-info">
+            <div class="card">
+              <h3>Ejemplo paso a paso</h3>
+              <p><strong>Ej.</strong> Resuelve x²−5x+6=0.</p>
+              <ol style="margin-left:18px">
+                <li>a=1, b=−5, c=6 ⇒ Δ=b²−4ac=25−24=1</li>
+                <li>x=(5 ± √1)/2 = (5±1)/2 ⇒ x=3 o x=2</li>
+              </ol>
+            </div>
+            <div class="card">
+              <h3>Herramientas</h3>
+              <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+                <!-- Cuadrática -->
+                <input id="a-a" type="number" placeholder="a">
+                <input id="a-b" type="number" placeholder="b">
+                <input id="a-c" type="number" placeholder="c">
+                <button class="btn" onclick="solveQuad('a-a','a-b','a-c','a-out1')">Resolver ax²+bx+c=0</button>
+                <div id="a-out1" class="resultado">—</div>
+                <!-- Probabilidad simple -->
+                <input id="a-fav" type="number" placeholder="favorables">
+                <input id="a-tot" type="number" placeholder="total">
+                <button class="btn" onclick="probSimple('a-fav','a-tot','a-out2')">P(E)</button>
+                <div id="a-out2" class="resultado">—</div>
+              </div>
+              <span class="small">Truco: memoriza el discriminante: Δ &gt; 0 → 2 soluciones reales; Δ = 0 → 1; Δ &lt; 0 → complejas.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- MINI QUIZ AVANZADO (5 preguntas) -->
+        <div class="card">
+          <h3>Mini-Quiz Avanzado (5 preguntas, 10 pts c/u)</h3>
+          <div id="quizAvanzado"></div>
+          <button class="btn" onclick="evaluarQuiz('Avanzado')"><img src="https://img.icons8.com/color/48/check.png" alt="">Enviar Quiz</button>
+          <div id="quizAvanzadoResultado" class="resultado">—</div>
+          <span class="small">Puntos del bloque se suman <strong>una sola vez</strong>.</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="acciones">
+    <a href="intermedio/intermedio.html" class="btn"><img src="https://img.icons8.com/color/48/home.png" alt=""> Niveles</a>
+    <a href="cursos.html" class="btn" style="background:#444;"><img src="https://img.icons8.com/color/48/left.png" alt=""> Cursos</a>
+  </div>
+</main>
+
+<footer>
+  <p>© 2025 Learnix - NeoStudio</p>
+</footer>
+
+<script>
+/* ====== PUNTOS GLOBALES ====== */
+let puntosGlobales = parseInt(localStorage.getItem('puntosGlobales')) || 0;
+document.getElementById('puntos').textContent = puntosGlobales;
+function addPuntosOnce(key, puntos){
+  if(!localStorage.getItem(key)){
+    puntosGlobales += puntos;
+    localStorage.setItem('puntosGlobales', puntosGlobales);
+    localStorage.setItem(key,'true');
+    const p = document.getElementById('puntos');
+    p.textContent = puntosGlobales;
+    p.parentElement.classList.add('pulse');
+    setTimeout(()=>p.parentElement.classList.remove('pulse'),400);
+  }
+}
+
+/* ====== ACORDEÓN ====== */
+function toggleAcc(btn){
+  const body = btn.nextElementSibling;
+  const open = body.style.display === 'block';
+  body.style.display = open ? 'none' : 'block';
+}
+
+/* ====== HERRAMIENTAS BÁSICO ====== */
+function fracADec(inId,outId){
+  const val = document.getElementById(inId).value.trim();
+  const out = document.getElementById(outId);
+  if(!val.includes('/')){out.textContent='Formato esperado a/b'; return;}
+  const [a,b]=val.split('/').map(Number);
+  if(isNaN(a)||isNaN(b)||b===0){out.textContent='Valores inválidos';return;}
+  out.textContent = `${a}/${b} = ${a/b}`;
+  out.classList.add('pop'); setTimeout(()=>out.classList.remove('pop'),220);
+}
+function mcd(a,b){return b?mcd(b,a%b):Math.abs(a)}
+function mcm(a,b){return Math.abs(a*b)/mcd(a,b)}
+function calcMcmMcd(id1,id2,outId){
+  const a=parseInt(document.getElementById(id1).value), b=parseInt(document.getElementById(id2).value);
+  const out=document.getElementById(outId);
+  if(isNaN(a)||isNaN(b)){out.textContent='Ingresa a y b'; return;}
+  out.innerHTML = `MCD(${a},${b})=${mcd(a,b)} • MCM(${a},${b})=${mcm(a,b)}`;
+  out.classList.add('pop'); setTimeout(()=>out.classList.remove('pop'),220);
+}
+
+/* ====== HERRAMIENTAS INTERMEDIO ====== */
+function calcPotRaiz(idA,idN,outId){
+  const a=parseFloat(document.getElementById(idA).value);
+  const n=parseFloat(document.getElementById(idN).value);
+  const out=document.getElementById(outId);
+  if(isNaN(a)||isNaN(n)){out.textContent='Ingresa base y exponente/índice'; return;}
+  const pot = Math.pow(a,n);
+  const raiz = n!==0 ? Math.pow(a,1/n) : '—';
+  out.innerHTML = `a^n = ${pot} &nbsp; | &nbsp; n√a = ${raiz}`;
+  out.classList.add('pop'); setTimeout(()=>out.classList.remove('pop'),220);
+}
+function solveLinear(idA,idB,idC,outId){
+  const a=parseFloat(document.getElementById(idA).value);
+  const b=parseFloat(document.getElementById(idB).value);
+  const c=parseFloat(document.getElementById(idC).value);
+  const out=document.getElementById(outId);
+  if(isNaN(a)||a===0||isNaN(b)||isNaN(c)){out.textContent='a≠0 y números válidos';return;}
+  const x=(c-b)/a;
+  out.textContent=`x = ${(x)}`;
+  out.classList.add('pop'); setTimeout(()=>out.classList.remove('pop'),220);
+}
+
+/* ====== HERRAMIENTAS AVANZADO ====== */
+function solveQuad(idA,idB,idC,outId){
+  const a=parseFloat(document.getElementById(idA).value);
+  const b=parseFloat(document.getElementById(idB).value);
+  const c=parseFloat(document.getElementById(idC).value);
+  const out=document.getElementById(outId);
+  if(isNaN(a)||a===0||isNaN(b)||isNaN(c)){out.textContent='a≠0 y números válidos';return;}
+  const d=b*b-4*a*c;
+  if(d<0){out.textContent='Δ<0 → sin raíces reales';return;}
+  const x1=(-b+Math.sqrt(d))/(2*a), x2=(-b-Math.sqrt(d))/(2*a);
+  out.innerHTML=`x₁=${x1} • x₂=${x2}`;
+  out.classList.add('pop'); setTimeout(()=>out.classList.remove('pop'),220);
+}
+function probSimple(idFav,idTot,outId){
+  const f=parseInt(document.getElementById(idFav).value);
+  const t=parseInt(document.getElementById(idTot).value);
+  const out=document.getElementById(outId);
+  if(isNaN(f)||isNaN(t)||t<=0||f<0||f>t){out.textContent='Valores inválidos';return;}
+  out.textContent=`P(E)=${(f/t).toFixed(4)} (${f}/${t})`;
+  out.classList.add('pop'); setTimeout(()=>out.classList.remove('pop'),220);
+}
+
+/* ====== QUIZ DATA (5 por bloque) ====== */
+const quizBasicoData = [
+  {q:'¿Cuál es el resultado de 72 ÷ 8?', opts:['9','8','6'], ans:0, exp:'72/8=9.'},
+  {q:'3/5 + 1/10 =', opts:['7/10','2/3','3/10'], ans:0, exp:'3/5=6/10 → 6/10+1/10=7/10.'},
+  {q:'MCD(18,24) =', opts:['6','12','3'], ans:0, exp:'Divisores comunes: 1,2,3,6; el mayor es 6.'},
+  {q:'El 20% de 150 es…', opts:['25','30','35'], ans:1, exp:'0.20×150=30.'},
+  {q:'Área de un círculo de r=3', opts:['9π','6π','3π'], ans:0, exp:'A=πr²=π·9=9π.'},
+];
+
+const quizIntermedioData = [
+  {q:'2^3 · 2^4 =', opts:['2^7','2^12','2^1'], ans:0, exp:'Suma de exponentes con la misma base: 2^{3+4}=2^7.'},
+  {q:'Resuelve 4x−8=12', opts:['x=3','x=4','x=5'], ans:0, exp:'4x=20 → x=5 (¡ojo!) Corrección: 4x=12+8=20 ⇒ x=5. (La correcta es x=5)', fix:true},
+  {q:'En un 2×2, ¿qué método iguala expresiones de x o y?', opts:['Sustitución','Eliminación','Cramer'], ans:0, exp:'Sustitución iguala/expresa una variable en función de la otra.'},
+  {q:'(a+b)^2 =', opts:['a^2+2ab+b^2','a^2−b^2','a^2+b^2'], ans:0, exp:'Identidad notable: (a+b)^2=a^2+2ab+b^2.'},
+  {q:'En triángulo rectángulo, c^2 = a^2 + b^2 es…', opts:['Pitágoras','Seno','Ley de cosenos'], ans:0, exp:'Teorema de Pitágoras.'},
+];
+
+const quizAvanzadoData = [
+  {q:'Vértice de y= x^2 − 4x + 1', opts:['(2,−3)','(−2,5)','(2,3)'], ans:0, exp:'x_v=−b/2a=2; y(2)=4−8+1=−3.'},
+  {q:'Soluciones de x^2−5x+6=0', opts:['x=2,3','x=−2,−3','x=1,6'], ans:0, exp:'Factoriza (x−2)(x−3)=0 → x=2,3.'},
+  {q:'Si multiplicas una inecuación por −1 debes…', opts:['Cambiar el signo','No hacer nada','Sumar 1'], ans:0, exp:'El signo de la desigualdad se invierte.'},
+  {q:'P(sacar rey de una baraja estándar 52)', opts:['4/52','13/52','1/52'], ans:0, exp:'Hay 4 reyes → 4/52=1/13.'},
+  {q:'Varianza poblacional σ² es…', opts:['Promedio de (x−x̄)²','Raíz de Σ(x−x̄)²','Σ(x)/n'], ans:0, exp:'σ² = Σ(x−x̄)² / n.'},
+];
+
+/* ====== RENDER DE QUIZ ====== */
+function renderQuiz(containerId, data){
+  const cont=document.getElementById(containerId);
+  cont.innerHTML='';
+  data.forEach((item,i)=>{
+    const div=document.createElement('div');
+    div.className='quiz-question';
+    div.innerHTML = `<p>${i+1}. ${item.q}</p>` +
+      item.opts.map((o,j)=>`<label style="display:block;margin:4px 0">
+        <input type="radio" name="${containerId}-q${i}" value="${j}"> ${o}
+      </label>`).join('');
+    cont.appendChild(div);
+  });
+}
+renderQuiz('quizBasico', quizBasicoData);
+renderQuiz('quizIntermedio', quizIntermedioData);
+renderQuiz('quizAvanzado', quizAvanzadoData);
+
+/* ====== TEMAS RELACIONADOS ====== */
+const temasMatematica = {
+  'Basico': [
+    { pregunta: 1, tema: "División", link: "./basico/operaciones.html" },
+    { pregunta: 2, tema: "Fracciones", link: "./basico/fracciones.html" },
+    { pregunta: 3, tema: "MCM y MCD", link: "./basico/mcm-mcd.html" },
+    { pregunta: 4, tema: "Porcentajes", link: "./basico/porcentajes.html" },
+    { pregunta: 5, tema: "Figuras geométricas", link: "./basico/figuras.html" }
+  ],
+  'Intermedio': [
+    { pregunta: 1, tema: "Potencias y raíces", link: "./intermedio/potencias-raices.html" },
+    { pregunta: 2, tema: "Ecuaciones", link: "./intermedio/ecuaciones.html" },
+    { pregunta: 3, tema: "Sistemas de ecuaciones", link: "./intermedio/sistemas.html" },
+    { pregunta: 4, tema: "Álgebra", link: "./intermedio/factorizacion.html" },
+    { pregunta: 5, tema: "Teorema de Pitágoras", link: "./intermedio/geometria.html" }
+  ],
+  'Avanzado': [
+    { pregunta: 1, tema: "Funciones", link: "./avanzado/funciones.html" },
+    { pregunta: 2, tema: "Ecuaciones cuadráticas", link: "./avanzado/ecuaciones-cuadraticas.html" },
+    { pregunta: 3, tema: "Inecuaciones", link: "./avanzado/inecuaciones.html" },
+    { pregunta: 4, tema: "Probabilidad", link: "./avanzado/probabilidad.html" },
+    { pregunta: 5, tema: "Estadística", link: "./avanzado/estadistica.html" }
+  ]
+};
+
+/* ====== EVALUAR QUIZ CON TEMAS ====== */
+function evaluarQuizConTemas(nivel) {
+  const map = {
+    'Basico': { data: quizBasicoData, cont: 'quizBasico', out: 'quizBasicoResultado', key: 'diagBasico', temas: temasMatematica.Basico },
+    'Intermedio': { data: quizIntermedioData, cont: 'quizIntermedio', out: 'quizIntermedioResultado', key: 'diagIntermedio', temas: temasMatematica.Intermedio },
+    'Avanzado': { data: quizAvanzadoData, cont: 'quizAvanzado', out: 'quizAvanzadoResultado', key: 'diagAvanzado', temas: temasMatematica.Avanzado }
+  };
+  const cfg = map[nivel];
+  const data = cfg.data;
+  let puntos = 0;
+  const feedback = [];
+  data.forEach((item, i) => {
+    const sel = document.querySelector(`input[name="${cfg.cont}-q${i}"]:checked`);
+    if (sel) {
+      if (parseInt(sel.value) === item.ans) {
+        puntos += 10;
+        feedback.push(`<div class="feedback-item correct">Pregunta ${i + 1}: ✅ Correcto</div>`);
+      } else {
+        const tema = cfg.temas.find(t => t.pregunta === i + 1);
+        feedback.push(`<div class="feedback-item wrong">Pregunta ${i + 1}: ❌ Incorrecto. ${item.exp} Tema recomendado: <a href="${tema.link}" style="color:#00bcd4;">${tema.tema}</a></div>`);
+      }
+    } else {
+      const tema = cfg.temas.find(t => t.pregunta === i + 1);
+      feedback.push(`<div class="feedback-item wrong">Pregunta ${i + 1}: ❌ No respondida. ${item.exp} Tema recomendado: <a href="${tema.link}" style="color:#00bcd4;">${tema.tema}</a></div>`);
+    }
+  });
+  addPuntosOnce(cfg.key, puntos);
+  const out = document.getElementById(cfg.out);
+  out.innerHTML = `Total: ${puntos} puntos` + feedback.join('');
+  out.classList.add('pop'); setTimeout(() => out.classList.remove('pop'), 220);
+}
+
+// Reemplazar las llamadas a evaluarQuiz por evaluarQuizConTemas
+document.querySelectorAll("button[onclick^='evaluarQuiz']").forEach(btn => {
+  btn.setAttribute("onclick", btn.getAttribute("onclick").replace("evaluarQuiz", "evaluarQuizConTemas"));
+});
+</script>
+</body>
+</html>

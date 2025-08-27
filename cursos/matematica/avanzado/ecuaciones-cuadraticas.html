@@ -1,0 +1,478 @@
+<!-- filepath: c:\Modelos de Learnix\Learnix Principal\cursos\matematica\avanzado\ecuaciones-cuadraticas.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learnix - Ecuaciones Cuadráticas</title>
+<style>
+/* ===== RESET & BASE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: #1e1e1e;
+  background-image: linear-gradient(135deg, #1e1e1e, #252525);
+  color: #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* ===== HEADER & NAVIGATION ===== */
+header {
+  background: #1e1e1e;
+  border-bottom: 2px solid #2e2e2e;
+  padding: 15px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+}
+
+nav a {
+  color: #bbb;
+  text-decoration: none;
+  margin-left: 20px;
+  transition: color 0.3s;
+}
+
+nav a:hover, nav a.active {
+  color: #00bcd4;
+}
+
+/* ===== BUSCADOR ===== */
+.buscador { 
+  padding: 16px 30px; 
+  border-bottom: 2px solid #2e2e2e; 
+  background: #1e1e1e; 
+}
+
+.buscador input {
+  width: 100%; 
+  max-width: 520px; 
+  padding: 12px 16px; 
+  border-radius: 10px; 
+  border: 1px solid #2e2e2e;
+  background: #222; 
+  color: #e0e0e0; 
+  outline: none;
+}
+
+.buscador input::placeholder { 
+  color: #999; 
+}
+
+.buscador-center { 
+  max-width: 520px; 
+  margin: 0 auto; 
+}
+
+/* ===== MAIN CONTENT ===== */
+.contenido {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.title {
+  color: #00bcd4;
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.lead {
+  color: #ccc;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+/* ===== SECTIONS & CARDS ===== */
+.section {
+  background: #2a2a2a;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.section h2 {
+  color: #00bcd4;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.section h3 {
+  color: #fff;
+  margin: 1.5rem 0 1rem;
+  font-size: 1.2rem;
+}
+
+/* ===== FORMULA BOX ===== */
+.formula-box {
+  background: #00000040;
+  border-left: 4px solid #00bcd4;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 8px;
+}
+
+/* ===== INTERACTIVE ELEMENTS ===== */
+.input-group {
+  background: #00000040;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 10px 0;
+}
+
+input[type="text"],
+input[type="number"] {
+  background: #1e1e1e;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.btn {
+  background: #00bcd4;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  background: #008ba3;
+  transform: translateY(-2px);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+/* ===== QUIZ STYLES ===== */
+.quiz-card {
+  background: #252525;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px 0;
+  border: 1px solid #333;
+}
+
+.quiz-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  margin: 5px 0;
+  background: #2e2e2e;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.quiz-option:hover {
+  background: #363636;
+}
+
+/* ===== TIPS & MEMOTECNIA ===== */
+.tip-box {
+  background: linear-gradient(45deg, #00695c, #004d40);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+  position: relative;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .contenido { padding: 20px 15px; }
+  .section { padding: 20px; }
+  .title { font-size: 1.8rem; }
+  nav a { margin-left: 15px; font-size: 0.9rem; }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 10px 15px;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  nav a { margin: 0; }
+  .section { padding: 15px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="../../../img/logo/logo.svg" alt="Learnix Logo">
+    <h1>Learnix</h1>
+  </div>
+  <nav>
+    <a href="../../../index.html">Inicio</a>
+    <a href="../../../cursos.html">Cursos</a>
+    <a href="../../../perfil.html">Perfil</a>
+    <a href="../../../login.html">Login</a>
+    <a href="../../../favoritos.html">Favoritos</a>
+  </nav>
+</header>
+
+<section class="buscador">
+  <div class="buscador-center">
+    <input type="text" id="buscarCurso" placeholder="Buscar tema...">
+  </div>
+</section>
+
+<main class="contenido">
+  <h1 class="title">Ecuaciones Cuadráticas</h1>
+  <p class="lead">Aprende a resolver ecuaciones de segundo grado y sus aplicaciones en problemas reales</p>
+
+  <!-- Definición -->
+  <section class="section fade-in">
+    <h2>1. ¿Qué es una Ecuación Cuadrática?</h2>
+    <p>Una ecuación cuadrática o de segundo grado es una ecuación polinómica donde la variable de mayor grado es 2. Su forma general es:</p>
+    
+    <div class="formula-box">
+      <p>ax² + bx + c = 0, donde a ≠ 0</p>
+      <ul>
+        <li>a: coeficiente del término cuadrático</li>
+        <li>b: coeficiente del término lineal</li>
+        <li>c: término independiente</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Métodos de Resolución -->
+  <section class="section fade-in">
+    <h2>2. Métodos de Resolución</h2>
+    
+    <h3>2.1 Fórmula General</h3>
+    <div class="formula-box">
+      <p>x = [-b ± √(b² - 4ac)] / 2a</p>
+    </div>
+
+    <h3>2.2 Factorización</h3>
+    <p>Si la ecuación puede factorizarse:</p>
+    <div class="formula-box">
+      <p>(x + p)(x + q) = 0</p>
+      <p>x = -p o x = -q</p>
+    </div>
+  </section>
+
+  <!-- Ejemplos -->
+  <section class="section fade-in">
+    <h2>3. Ejemplos Resueltos</h2>
+    
+    <div class="example-box">
+      <h3>Ejemplo 1: Usando la Fórmula General</h3>
+      <p>Resolver: x² + 5x + 6 = 0</p>
+      <ol>
+        <li>Identificar: a=1, b=5, c=6</li>
+        <li>Aplicar fórmula: x = [-5 ± √(25 - 24)] / 2</li>
+        <li>Simplificar: x = [-5 ± 1] / 2</li>
+        <li>Soluciones: x = -3 o x = -2</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Ejercicios -->
+  <section class="section fade-in">
+    <h2>4. Ejercicios Prácticos</h2>
+    
+    <div class="input-group">
+      <p>1. Resuelve: x² - 7x + 12 = 0</p>
+      <input type="text" id="ej1" placeholder="x₁,x₂ (menor,mayor)">
+      <button class="btn" onclick="verificarEjercicio(1)">Verificar</button>
+      <p id="resp1" class="feedback"></p>
+    </div>
+
+    <div class="input-group">
+      <p>2. ¿Cuál es el discriminante de x² + 2x + 1 = 0?</p>
+      <input type="number" id="ej2" placeholder="Escribe el valor">
+      <button class="btn" onclick="verificarEjercicio(2)">Verificar</button>
+      <p id="resp2" class="feedback"></p>
+    </div>
+  </section>
+
+  <!-- Quiz -->
+  <section class="section fade-in">
+    <h2>5. Mini Quiz</h2>
+    <div id="quiz-container"></div>
+  </section>
+
+  <!-- Tip -->
+  <div class="tip-box fade-in">
+    <h3>💡 Tips de Memotecnia</h3>
+    <ul>
+      <li>"Menos b más menos raíz": Para recordar el inicio de la fórmula general</li>
+      <li>"ABC": Para recordar el orden de los coeficientes (ax² + bx + c)</li>
+      <li>"D de Doble": El discriminante (b² - 4ac) determina si hay 2, 1 o 0 soluciones</li>
+    </ul>
+  </div>
+</main>
+
+<footer>
+  <p>© 2025 Learnix - NeoStudio</p>
+</footer>
+
+<script>
+const quizData = [
+  {
+    pregunta: "¿Qué indica un discriminante negativo?",
+    opciones: [
+      "No hay soluciones reales",
+      "Hay una solución real",
+      "Hay dos soluciones reales"
+    ],
+    correcta: 0,
+    explicacion: "Un discriminante negativo indica que las soluciones son números complejos, no reales."
+  },
+  {
+    pregunta: "Si a = 1, b = -5, c = 6, las soluciones son:",
+    opciones: ["2 y 3", "1 y 4", "-2 y -3"],
+    correcta: 0,
+    explicacion: "Usando la fórmula general o factorizando (x-2)(x-3)=0, obtenemos x=2 o x=3."
+  },
+  {
+    pregunta: "Una ecuación cuadrática siempre tiene:",
+    opciones: [
+      "El término x² con a≠0",
+      "Dos soluciones reales",
+      "Un término independiente"
+    ],
+    correcta: 0,
+    explicacion: "La única condición necesaria es que el coeficiente 'a' del término x² sea diferente de cero."
+  },
+  {
+    pregunta: "El discriminante es igual a cero. Esto significa:",
+    opciones: [
+      "Una solución repetida",
+      "Dos soluciones diferentes",
+      "No hay solución"
+    ],
+    correcta: 0,
+    explicacion: "Cuando el discriminante es cero, hay una única solución (raíz doble o repetida)."
+  },
+  {
+    pregunta: "La suma de las raíces es igual a:",
+    opciones: ["-b/a", "c/a", "-c/a"],
+    correcta: 0,
+    explicacion: "Por las relaciones de Vieta, la suma de las raíces es -b/a."
+  }
+];
+
+function verificarEjercicio(numero) {
+  const input = document.getElementById(`ej${numero}`);
+  const feedback = document.getElementById(`resp${numero}`);
+  
+  if (numero === 1) {
+    const respuesta = input.value.replace(/\s/g, '').toLowerCase();
+    if (respuesta === "3,4" || respuesta === "3,4") {
+      feedback.textContent = "¡Correcto! Las raíces son x₁=3 y x₂=4";
+      feedback.style.color = '#4caf50';
+      actualizarPuntos(15);
+    } else {
+      feedback.textContent = "Incorrecto. Factoriza: (x-3)(x-4)=0";
+      feedback.style.color = '#f44336';
+    }
+  } else if (numero === 2) {
+    const respuesta = parseFloat(input.value);
+    if (respuesta === 0) {
+      feedback.textContent = "¡Correcto! b²-4ac = 4-4(1)(1) = 0";
+      feedback.style.color = '#4caf50';
+      actualizarPuntos(15);
+    } else {
+      feedback.textContent = "Incorrecto. Calcula: b²-4ac = 2²-4(1)(1)";
+      feedback.style.color = '#f44336';
+    }
+  }
+}
+
+function inicializarQuiz() {
+  const container = document.getElementById('quiz-container');
+  quizData.forEach((pregunta, index) => {
+    const quizCard = document.createElement('div');
+    quizCard.className = 'quiz-card fade-in';
+    quizCard.innerHTML = `
+      <p><strong>${index + 1}. ${pregunta.pregunta}</strong></p>
+      ${pregunta.opciones.map((opcion, i) => `
+        <div class="quiz-option" onclick="verificarRespuesta(${index}, ${i})">
+          <span>${['A', 'B', 'C'][i]}</span> ${opcion}
+        </div>
+      `).join('')}
+      <p class="feedback" id="quiz-feedback-${index}"></p>
+    `;
+    container.appendChild(quizCard);
+  });
+}
+
+function verificarRespuesta(preguntaId, respuestaSeleccionada) {
+  const feedback = document.getElementById(`quiz-feedback-${preguntaId}`);
+  if (respuestaSeleccionada === quizData[preguntaId].correcta) {
+    feedback.innerHTML = `✅ ¡Correcto! ${quizData[preguntaId].explicacion}`;
+    feedback.style.color = '#4caf50';
+    actualizarPuntos(10);
+  } else {
+    feedback.innerHTML = `❌ Incorrecto. ${quizData[preguntaId].explicacion}`;
+    feedback.style.color = '#f44336';
+  }
+}
+
+function actualizarPuntos(puntos) {
+  let puntosGlobales = parseInt(localStorage.getItem('puntosGlobales')) || 0;
+  puntosGlobales += puntos;
+  localStorage.setItem('puntosGlobales', puntosGlobales);
+  
+  const pointsElement = document.querySelector('.points span');
+  if (pointsElement) {
+    pointsElement.textContent = puntosGlobales;
+    pointsElement.parentElement.classList.add('pulse');
+    setTimeout(() => pointsElement.parentElement.classList.remove('pulse'), 300);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', inicializarQuiz);
+</script>
+</body>
+</html>

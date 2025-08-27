@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Learnix - Inicio</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <style>
+    /* ======= MISMO ESTILO QUE APROBASTE ======= */
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body {
+      background-color:#1e1e1e;
+      background-image: linear-gradient(135deg, #1e1e1e, #252525);
+      color:#e0e0e0; display:flex; flex-direction:column; min-height:100vh;
+    }
+    header {
+      background-color:#1e1e1e; display:flex; justify-content:space-between; align-items:center;
+      padding:15px 30px; position:sticky; top:0; z-index:100; border-bottom:2px solid #2e2e2e;
+    }
+    header .logo { display:flex; align-items:center; gap:10px; }
+    header .logo img { height:40px; }
+    header nav a {
+      margin-left:20px; font-weight:500; color:#bbb; text-decoration:none; transition:color .3s ease;
+    }
+    header nav a:hover, header nav a.active { color:#00bcd4; }
+
+    footer {
+      background-color:#1e1e1e; text-align:center; padding:15px; border-top:2px solid #2e2e2e; margin-top:auto;
+    }
+    .btn {
+      display:inline-block; background-color:#00bcd4; color:#fff; padding:10px 20px; border-radius:8px;
+      margin-top:10px; transition:background .3s ease; text-decoration:none;
+    }
+    .btn:hover { background-color:#008ba3; }
+
+    .btn-fav {
+      background-color:#ff9800; color:#fff; padding:6px 12px; border-radius:8px; transition:background .3s ease;
+      border:none; cursor:pointer;
+    }
+    .btn-fav:hover { background-color:#cc7a00; }
+
+    /* ======= BUSCADOR (igual formato) ======= */
+    .buscador { padding:16px 30px; border-bottom:2px solid #2e2e2e; background:#1e1e1e; }
+    .buscador input {
+      width:100%; max-width:520px; padding:12px 16px; border-radius:10px; border:1px solid #2e2e2e;
+      background:#222; color:#e0e0e0; outline:none;
+    }
+    .buscador input::placeholder { color:#999; }
+
+    /* ======= HERO / BIENVENIDA ======= */
+    .bienvenida { text-align:center; padding:70px 20px; }
+    .bienvenida h2 { font-size:2.8rem; color:#00bcd4; margin-bottom:15px; }
+    .bienvenida p { font-size:1.1rem; color:#ccc; max-width:780px; margin:0 auto 20px; }
+    .acciones { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:10px; }
+
+    /* Tarjetas destacadas (opcional) usando tu mismo estilo de cards */
+    .contenedor-destacados { padding:30px 20px; max-width:1200px; margin:auto; }
+    .titulo-seccion { text-align:center; font-size:1.8rem; color:#00bcd4; margin:10px 0 24px; }
+    .grid-cursos {
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:25px;
+    }
+    .curso-card {
+      background-color:#2a2a2a; padding:20px; border-radius:12px; text-align:center;
+      box-shadow:0 4px 12px rgba(0,0,0,.3); position:relative;
+      transition:transform .3s ease, box-shadow .3s ease;
+    }
+    .curso-card:hover { transform:translateY(-8px); box-shadow:0 6px 16px rgba(0,0,0,.4); }
+    .curso-card img { width:100px; height:100px; margin-bottom:15px; }
+    .curso-card h3 { font-size:1.3rem; margin-bottom:10px; color:#fff; }
+    .curso-card p { font-size:.95rem; color:#bbb; margin-bottom:15px; }
+
+    /* Bot flotante Chloe (igual que usaste) */
+    /* Bot flotante Chloe (ajustado para mayor visibilidad y clic completo) */
+    .chloe-bot {
+      position:fixed; bottom:20px; right:20px; background-color:#00bcd4; border-radius:50%;
+      width:70px; height:70px; display:flex; justify-content:center; align-items:center;
+      box-shadow:0 4px 8px rgba(0,0,0,.2); transition:transform .3s ease, box-shadow .3s ease;
+    }
+    .chloe-bot:hover {
+      transform:scale(1.1); box-shadow:0 6px 12px rgba(0,0,0,.3);
+    }
+    .chloe-bot img {
+      width:50%; height:50%; object-fit:contain;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado (idéntico) -->
+  <header>
+    <div class="logo">
+      <img src="./img/logo/logo.svg" alt="Learnix Logo">
+      <h1>Learnix</h1>
+    </div>
+    <nav>
+      <a href="./index.html" class="active">Inicio</a>
+      <a href="./cursos.html">Cursos</a>
+      <a href="./perfil.html">Perfil</a>
+      <a href="./login.html">Login</a>
+      <a href="./favoritos.html">Favoritos</a>
+    </nav>
+  </header>
+
+  <!-- Buscador (mismo bloque) -->
+  <section class="buscador">
+    <input type="text" id="buscarCurso" placeholder="Buscar curso...">
+  </section>
+
+  <!-- Hero / bienvenida con CTA a cursos -->
+  <main>
+    <section class="bienvenida">
+      <h2>Learnix</h2>
+      <p>
+        Estudia a tu ritmo, sin complicaciones y desde cualquier lugar. 
+        Encuentra cursos de Matemática, Comunicación, Ciencia y más, 
+        con rutas por niveles y ejercicios interactivos.
+      </p>
+      <div class="acciones">
+        <a href="cursos.html" class="btn">Empezar</a>
+        <a href="favoritos.html" class="btn" style="background:#444;">Favoritos</a>
+      </div>
+    </section>
+
+    <!-- (Opcional) Cursos destacados reutilizando tus cards -->
+    <section class="contenedor-destacados">
+      <h3 class="titulo-seccion">Cursos destacados</h3>
+      <div class="grid-cursos">
+        <div class="curso-card">
+          <img src="https://img.icons8.com/color/96/calculator.png" alt="Matemática">
+          <h3>Matemática</h3>
+          <p>Álgebra, geometría y razonamiento matemático.</p>
+          <a href="cursos/matematica/index.html" class="btn">Ver curso</a>
+          <button class="btn-fav">★</button>
+        </div>
+        <div class="curso-card">
+          <img src="https://img.icons8.com/color/96/book.png" alt="Comunicación">
+          <h3>Comunicación</h3>
+          <p>Comprensión lectora y escritura efectiva.</p>
+          <a href="cursos/comunicacion/index.html" class="btn">Ver curso</a>
+          <button class="btn-fav">★</button>
+        </div>
+        <div class="curso-card">
+          <img src="https://img.icons8.com/color/96/microscope.png" alt="Ciencia y Tecnología">
+          <h3>Ciencia y Tecnología</h3>
+          <p>Conceptos clave de física, química y biología.</p>
+          <a href="cursos/cyt/index.html" class="btn">Ver curso</a>
+          <button class="btn-fav">★</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bot flotante Chloe -->
+  <a href="https://wa.me/51962153019?text=%23menu" class="chloe-bot">
+    <img src="img/logo/logo-chloebot.png" alt="Chatbot Chloe">
+  </a>
+
+  <!-- Footer (idéntico) -->
+  <footer>
+    <p>© 2025 Learnix - NeoStudio</p>
+  </footer>
+
+  <!-- JS opcional para futura lógica del buscador -->
+  <!-- <script src="js/index.js"></script> -->
+  <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('buscarCurso');
+        const resultsContainer = document.createElement('div');
+        resultsContainer.id = 'search-results';
+        resultsContainer.style.marginTop = '10px';
+        resultsContainer.style.color = '#e0e0e0';
+        searchInput.parentNode.appendChild(resultsContainer);
+
+        const courseTopics = {
+          'Matemática': [
+            { name: 'Álgebra', link: 'cursos/matematica/algebra/index.html' },
+            { name: 'Geometría', link: 'cursos/matematica/geometria/index.html' },
+            { name: 'Razonamiento Matemático', link: 'cursos/matematica/razonamiento/index.html' }
+          ],
+          'Comunicación': [
+            { name: 'Comprensión Lectora', link: 'cursos/comunicacion/compresion/index.html' },
+            { name: 'Escritura Efectiva', link: 'cursos/comunicacion/escritura/index.html' }
+          ],
+          'Ciencia y Tecnología': [
+            { name: 'Física', link: 'cursos/cyt/fisica/index.html' },
+            { name: 'Química', link: 'cursos/cyt/quimica/index.html' },
+            { name: 'Biología', link: 'cursos/cyt/biologia/index.html' }
+          ]
+        };
+
+        const synonyms = {
+          'Matemática': ['Aritmética', 'Cálculo'],
+          'Comunicación': ['Lenguaje', 'Literatura'],
+          'Ciencia y Tecnología': ['Física', 'Química', 'Biología']
+        };
+
+        const searchHistory = [];
+
+        function normalizeText(text) {
+          return text.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
+        }
+
+        function getSuggestions(term) {
+          const suggestions = new Set();
+          Object.keys(courseTopics).forEach(course => {
+            if (normalizeText(course).includes(term)) {
+              suggestions.add(course);
+            }
+            courseTopics[course].forEach(topic => {
+              if (normalizeText(topic.name).includes(term)) {
+                suggestions.add(topic.name);
+              }
+            });
+          });
+          return Array.from(suggestions);
+        }
+
+        function getResults(term) {
+          const results = [];
+          Object.keys(courseTopics).forEach(course => {
+            const courseSynonyms = synonyms[course] || [];
+            const isCourseMatch = normalizeText(course).includes(term) || courseSynonyms.some(syn => normalizeText(syn).includes(term));
+
+            if (isCourseMatch) {
+              results.push({ name: course, link: `cursos/${normalizeText(course)}/index.html`, relevance: 1 });
+            }
+
+            courseTopics[course].forEach(topic => {
+              const normalizedTopicName = normalizeText(topic.name);
+              if (normalizedTopicName.includes(term)) {
+                results.push({ name: `${course} - ${topic.name}`, link: topic.link, relevance: 2 });
+              }
+            });
+          });
+
+          return results.sort((a, b) => b.relevance - a.relevance);
+        }
+
+        function updateSuggestions(term) {
+          resultsContainer.innerHTML = '';
+          const suggestions = getSuggestions(term);
+          suggestions.forEach(suggestion => {
+            const suggestionItem = document.createElement('div');
+            suggestionItem.textContent = suggestion;
+            suggestionItem.style.cursor = 'pointer';
+            suggestionItem.style.color = '#00bcd4';
+            suggestionItem.addEventListener('click', () => {
+              searchInput.value = suggestion;
+              searchInput.dispatchEvent(new Event('input'));
+            });
+            resultsContainer.appendChild(suggestionItem);
+          });
+        }
+
+        function updateSearchHistory(term) {
+          if (!searchHistory.includes(term)) {
+            searchHistory.push(term);
+          }
+        }
+
+        searchInput.addEventListener('input', () => {
+          const searchTerm = normalizeText(searchInput.value);
+          resultsContainer.innerHTML = '';
+          updateSuggestions(searchTerm);
+
+          const results = getResults(searchTerm);
+          results.forEach(result => {
+            const resultItem = document.createElement('a');
+            resultItem.href = result.link;
+            resultItem.textContent = result.name;
+            resultItem.style.display = 'block';
+            resultItem.style.color = '#00bcd4';
+            resultItem.style.margin = '5px 0';
+            resultsContainer.appendChild(resultItem);
+          });
+
+          updateSearchHistory(searchInput.value);
+        });
+      });
+  </script>
+</body>
+</html>

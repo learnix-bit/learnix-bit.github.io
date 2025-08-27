@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prueba Diagnóstica - Ciencia y Tecnología</title>
+  <style>
+    /* ======= ESTILOS BASE ======= */
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body {
+      background-color:#1e1e1e;
+      background-image: linear-gradient(135deg, #1e1e1e, #252525);
+      color:#e0e0e0; display:flex; flex-direction:column; min-height:100vh;
+    }
+    header {
+      background-color:#1e1e1e; display:flex; justify-content:space-between; align-items:center;
+      padding:15px 30px; position:sticky; top:0; z-index:100; border-bottom:2px solid #2e2e2e;
+    }
+    header .logo { display:flex; align-items:center; gap:10px; }
+    header .logo img { height:40px; }
+    header nav a {
+      margin-left:20px; font-weight:500; color:#bbb; text-decoration:none; transition:color .3s ease;
+    }
+    header nav a:hover, header nav a.active { color:#00bcd4; }
+
+    footer {
+      background-color:#1e1e1e; text-align:center; padding:15px; border-top:2px solid #2e2e2e; margin-top:auto;
+    }
+    .btn {
+      display:inline-block; background-color:#00bcd4; color:#fff; padding:10px 20px; border-radius:8px;
+      margin-top:10px; transition:background .3s ease; text-decoration:none;
+    }
+    .btn:hover { background-color:#008ba3; }
+
+    /* ======= CONTENIDO ======= */
+    .contenido {
+      padding:40px 20px; max-width:1000px; margin:auto; text-align:center;
+    }
+    .contenido h2 {
+      font-size:2.2rem; color:#00bcd4; margin-bottom:20px;
+    }
+    .contenido p {
+      font-size:1.1rem; color:#ccc; margin-bottom:30px;
+    }
+    .subtema {
+      background-color:#2a2a2a; padding:20px; border-radius:12px;
+      margin-bottom:18px; box-shadow:0 4px 12px rgba(0,0,0,.3);
+      text-align:left;
+    }
+    .subtema h3 {
+      color:#fff; font-size:1.2rem; margin-bottom:10px;
+    }
+    .subtema p { color:#bbb; font-size:1rem; margin-bottom:10px; }
+    .resultado {
+      margin-top:10px; color:#fff; font-weight:700;
+      background: rgba(0,0,0,0.25); padding:10px; border-radius:8px;
+    }
+    .quiz-question { margin-bottom:12px; color:#ddd; }
+    .feedback-item { padding:10px; border-radius:8px; margin-bottom:8px; }
+    .correct { background: rgba(0,128,0,0.12); border-left:4px solid #20c997; color:#c6ffd9; }
+    .wrong { background: rgba(255,0,0,0.08); border-left:4px solid #ff6b6b; color:#ffd9d9; }
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado -->
+  <header>
+    <div class="logo">
+      <img src="../../img/logo/logo.svg" alt="Learnix Logo">
+      <h1>Learnix</h1>
+    </div>
+    <nav>
+      <a href="../../index.html">Inicio</a>
+      <a href="../../cursos.html">Cursos</a>
+      <a href="../../perfil.html">Perfil</a>
+      <a href="../../login.html">Login</a>
+      <a href="../../favoritos.html">Favoritos</a>
+    </nav>
+  </header>
+
+  <!-- Contenido -->
+  <main class="contenido">
+    <h2>Prueba Diagnóstica - Ciencia y Tecnología</h2>
+    <p>Responde las siguientes preguntas para identificar los temas que necesitas reforzar. Al finalizar, recibirás recomendaciones personalizadas.</p>
+
+    <!-- Preguntas por nivel -->
+    <form id="diagnosticoForm">
+      <!-- Nivel Básico -->
+      <div class="subtema">
+        <h3>Nivel Básico</h3>
+        <div class="quiz-question">
+          <label>1) ¿Qué es un ser vivo?</label><br>
+          <label><input type="radio" name="q1" value="a"> Un organismo que realiza funciones vitales.</label><br>
+          <label><input type="radio" name="q1" value="b"> Un objeto inanimado.</label>
+        </div>
+        <div class="quiz-question">
+          <label>2) ¿Qué describe el estado sólido de la materia?</label><br>
+          <label><input type="radio" name="q2" value="a"> Tiene forma y volumen definidos.</label><br>
+          <label><input type="radio" name="q2" value="b"> No tiene forma definida.</label>
+        </div>
+        <div class="quiz-question">
+          <label>3) ¿Qué es la energía?</label><br>
+          <label><input type="radio" name="q3" value="a"> La capacidad de realizar trabajo.</label><br>
+          <label><input type="radio" name="q3" value="b"> Un objeto físico.</label>
+        </div>
+        <div class="quiz-question">
+          <label>4) ¿Qué es el sistema solar?</label><br>
+          <label><input type="radio" name="q4" value="a"> Un conjunto de planetas que orbitan alrededor del Sol.</label><br>
+          <label><input type="radio" name="q4" value="b"> Una galaxia.</label>
+        </div>
+      </div>
+
+      <!-- Nivel Intermedio -->
+      <div class="subtema">
+        <h3>Nivel Intermedio</h3>
+        <div class="quiz-question">
+          <label>5) ¿Qué es un ecosistema?</label><br>
+          <label><input type="radio" name="q5" value="a"> Una comunidad de organismos y su entorno.</label><br>
+          <label><input type="radio" name="q5" value="b"> Un solo organismo.</label>
+        </div>
+        <div class="quiz-question">
+          <label>6) ¿Qué describe la cohesión en la materia?</label><br>
+          <label><input type="radio" name="q6" value="a"> La fuerza que mantiene unidas las moléculas.</label><br>
+          <label><input type="radio" name="q6" value="b"> La separación de moléculas.</label>
+        </div>
+        <div class="quiz-question">
+          <label>7) ¿Qué son las energías renovables?</label><br>
+          <label><input type="radio" name="q7" value="a"> Fuentes de energía que se regeneran naturalmente.</label><br>
+          <label><input type="radio" name="q7" value="b"> Fuentes de energía no renovables.</label>
+        </div>
+        <div class="quiz-question">
+          <label>8) ¿Qué es la célula?</label><br>
+          <label><input type="radio" name="q8" value="a"> La unidad básica de la vida.</label><br>
+          <label><input type="radio" name="q8" value="b"> Un organismo multicelular.</label>
+        </div>
+      </div>
+
+      <!-- Nivel Avanzado -->
+      <div class="subtema">
+        <h3>Nivel Avanzado</h3>
+        <div class="quiz-question">
+          <label>9) ¿Qué describe la Ley de la Inercia?</label><br>
+          <label><input type="radio" name="q9" value="a"> Un objeto permanece en reposo o en movimiento uniforme si no actúa una fuerza externa.</label><br>
+          <label><input type="radio" name="q9" value="b"> La relación entre fuerza y aceleración.</label>
+        </div>
+        <div class="quiz-question">
+          <label>10) ¿Qué es una reacción química?</label><br>
+          <label><input type="radio" name="q10" value="a"> Un proceso donde las sustancias cambian químicamente.</label><br>
+          <label><input type="radio" name="q10" value="b"> Un cambio físico en las sustancias.</label>
+        </div>
+        <div class="quiz-question">
+          <label>11) ¿Qué es la tecnología aplicada?</label><br>
+          <label><input type="radio" name="q11" value="a"> El uso práctico de conocimientos científicos para resolver problemas.</label><br>
+          <label><input type="radio" name="q11" value="b"> El estudio teórico de fenómenos naturales.</label>
+        </div>
+        <div class="quiz-question">
+          <label>12) ¿Qué es la genética?</label><br>
+          <label><input type="radio" name="q12" value="a"> El estudio de los genes y la herencia.</label><br>
+          <label><input type="radio" name="q12" value="b"> El estudio de los ecosistemas.</label>
+        </div>
+      </div>
+
+      <button class="btn" type="button" onclick="evaluarDiagnostico()">Evaluar</button>
+    </form>
+
+    <div id="resultadoDiagnostico" class="resultado">—</div>
+  </main>
+
+  <script>
+    function evaluarDiagnostico() {
+      const respuestasCorrectas = {
+        q1: "a", q2: "a", q3: "a", q4: "a", q5: "a", q6: "a", q7: "a", q8: "a", q9: "a", q10: "a", q11: "a", q12: "a"
+      };
+
+      const temas = {
+        q1: { nivel: "Básico", tema: "Seres Vivos", link: "./basico/seres-vivos.html" },
+        q2: { nivel: "Básico", tema: "Estados de la Materia", link: "./basico/estados-materia.html" },
+        q3: { nivel: "Básico", tema: "Energía", link: "./basico/energia.html" },
+        q4: { nivel: "Básico", tema: "Sistema Solar", link: "./basico/tierra-sistema-solar.html" },
+        q5: { nivel: "Intermedio", tema: "Ecosistemas", link: "./intermedio/ecosistemas.html" },
+        q6: { nivel: "Intermedio", tema: "Propiedades de la Materia", link: "./intermedio/propiedades-materia.html" },
+        q7: { nivel: "Intermedio", tema: "Energías Renovables", link: "./intermedio/energias-renovables.html" },
+        q8: { nivel: "Intermedio", tema: "Célula", link: "./intermedio/celula.html" },
+        q9: { nivel: "Avanzado", tema: "Leyes de Newton", link: "./avanzado/leyes-newton.html" },
+        q10: { nivel: "Avanzado", tema: "Reacciones Químicas", link: "./avanzado/reacciones-quimicas.html" },
+        q11: { nivel: "Avanzado", tema: "Tecnología Aplicada", link: "./avanzado/tecnologia-aplicada.html" },
+        q12: { nivel: "Avanzado", tema: "Genética", link: "./avanzado/genetica.html" }
+      };
+
+      let puntaje = 0;
+      let totalPreguntas = Object.keys(respuestasCorrectas).length;
+      let detalles = "";
+
+      for (const [pregunta, respuesta] of Object.entries(respuestasCorrectas)) {
+        const seleccion = document.querySelector(`input[name="${pregunta}"]:checked`);
+        if (seleccion && seleccion.value === respuesta) {
+          puntaje++;
+        } else {
+          if (temas[pregunta]) {
+            detalles += `<div>Fallas en el tema: <a href="${temas[pregunta].link}" target="_blank">${temas[pregunta].tema}</a> (${temas[pregunta].nivel})</div>`;
+          }
+        }
+      }
+
+      const porcentaje = (puntaje / totalPreguntas) * 100;
+      let mensaje = `Tu puntaje es ${puntaje} de ${totalPreguntas} preguntas correctas (${porcentaje.toFixed(2)}%).`;
+
+      if (porcentaje === 100) {
+        mensaje += " ¡Excelente trabajo! No necesitas reforzar ningún tema.";
+      } else {
+        mensaje += " Es recomendable que refuerces los siguientes temas:<br>" + detalles;
+      }
+
+      document.getElementById("resultadoDiagnostico").innerHTML = mensaje;
+    }
+  </script>
+</body>
+</html>

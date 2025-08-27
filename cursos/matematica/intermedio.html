@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Learnix - Matemática Nivel Intermedio</title>
+  <style>
+    /* ======= ESTILO CONSISTENTE ======= */
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body {
+      background-color:#1e1e1e;
+      background-image: linear-gradient(135deg, #1e1e1e, #252525);
+      color:#e0e0e0; display:flex; flex-direction:column; min-height:100vh;
+    }
+    header {
+      background-color:#1e1e1e; display:flex; justify-content:space-between; align-items:center;
+      padding:15px 30px; position:sticky; top:0; z-index:100; border-bottom:2px solid #2e2e2e;
+    }
+    header .logo { display:flex; align-items:center; gap:10px; }
+    header .logo img { height:40px; }
+    header nav a {
+      margin-left:20px; font-weight:500; color:#bbb; text-decoration:none; transition:color .3s ease;
+    }
+    header nav a:hover, header nav a.active { color:#00bcd4; }
+
+    footer {
+      background-color:#1e1e1e; text-align:center; padding:15px; border-top:2px solid #2e2e2e; margin-top:auto;
+    }
+    .btn {
+      display:inline-block; background-color:#00bcd4; color:#fff; padding:10px 20px; border-radius:8px;
+      margin-top:10px; transition:background .3s ease; text-decoration:none;
+    }
+    .btn:hover { background-color:#008ba3; }
+
+    /* ======= CONTENIDO MATEMÁTICA ======= */
+    .contenido {
+      padding:40px 20px; max-width:1000px; margin:auto; text-align:center;
+    }
+    .contenido h2 {
+      font-size:2.2rem; color:#00bcd4; margin-bottom:20px;
+    }
+    .contenido p {
+      font-size:1.1rem; color:#ccc; margin-bottom:30px;
+    }
+    .grid-temas {
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:20px;
+    }
+    .tema-card {
+      background-color:#2a2a2a; padding:20px; border-radius:12px; text-align:center;
+      box-shadow:0 4px 12px rgba(0,0,0,.3); transition:transform .3s ease, box-shadow .3s ease;
+    }
+    .tema-card:hover { transform:translateY(-6px); box-shadow:0 6px 16px rgba(0,0,0,.4); }
+    .tema-card h3 {
+      font-size:1.2rem; margin-bottom:10px; color:#fff;
+    }
+    .tema-card p {
+      font-size:.95rem; color:#bbb; margin-bottom:15px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado -->
+  <header>
+    <div class="logo">
+      <img src="../../img/logo/logo.svg" alt="Learnix Logo">
+      <h1>Learnix</h1>
+    </div>
+    <nav>
+      <a href="../../index.html">Inicio</a>
+      <a href="../../cursos.html" class="active">Cursos</a>
+      <a href="../../perfil.html">Perfil</a>
+      <a href="../../login.html">Login</a>
+      <a href="../../favoritos.html">Favoritos</a>
+    </nav>
+  </header>
+
+  <!-- Contenido Matemática Nivel Intermedio -->
+  <main class="contenido">
+    <h2>Matemática - Nivel Intermedio</h2>
+    <p>Aplica tus conocimientos con nuevos desafíos que requieren razonamiento y práctica.</p>
+
+    <div class="grid-temas">
+      <div class="tema-card">
+        <h3>Potencias y raíces</h3>
+        <p>Potencias, propiedades y raíces cuadradas.</p>
+        <a href="intermedio/potencias-raices.html" class="btn">Ver tema</a>
+      </div>
+      <div class="tema-card">
+        <h3>Ecuaciones de primer grado</h3>
+        <p>Resolviendo ecuaciones lineales con una incógnita.</p>
+        <a href="intermedio/ecuaciones.html" class="btn">Ver tema</a>
+      </div>
+      <div class="tema-card">
+        <h3>Sistemas de ecuaciones</h3>
+        <p>Métodos para resolver sistemas simples de dos ecuaciones.</p>
+        <a href="intermedio/sistemas.html" class="btn">Ver tema</a>
+      </div>
+      <div class="tema-card">
+        <h3>Introducción al álgebra</h3>
+        <p>Uso de literales y expresiones algebraicas.</p>
+        <a href="intermedio/algebra.html" class="btn">Ver tema</a>
+      </div>
+      <div class="tema-card">
+        <h3>Factorización básica</h3>
+        <p>Técnicas básicas para factorizar expresiones.</p>
+        <a href="intermedio/factorizacion.html" class="btn">Ver tema</a>
+      </div>
+      <div class="tema-card">
+        <h3>Geometría</h3>
+        <p>Polígonos, circunferencia y teorema de Pitágoras.</p>
+        <a href="intermedio/geometria.html" class="btn">Ver tema</a>
+      </div>
+      <div class="tema-card">
+        <h3>Razones y proporciones</h3>
+        <p>Casos avanzados de proporciones.</p>
+        <a href="intermedio/razones.html" class="btn">Ver tema</a>
+      </div>
+      <div class="tema-card">
+        <h3>Regla de tres compuesta</h3>
+        <p>Resolver problemas con varias magnitudes relacionadas.</p>
+        <a href="intermedio/regla-compuesta.html" class="btn">Ver tema</a>
+      </div>
+      <div class="tema-card">
+        <h3>Porcentajes aplicados</h3>
+        <p>Intereses simples, descuentos y ganancias.</p>
+        <a href="intermedio/porcentajes.html" class="btn">Ver tema</a>
+      </div>
+      <div class="tema-card">
+        <h3>Estadística básica</h3>
+        <p>Media, moda y mediana.</p>
+        <a href="intermedio/estadistica.html" class="btn">Ver tema</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Learnix - NeoStudio</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learnix - Fracciones y Decimales</title>
+<style>
+/* ===== ESTILO BASE APROBADO ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+body{background-color:#1e1e1e;background-image:linear-gradient(135deg,#1e1e1e,#252525);color:#e0e0e0;display:flex;flex-direction:column;min-height:100vh;}
+header{background-color:#1e1e1e;display:flex;justify-content:space-between;align-items:center;padding:15px 30px;position:sticky;top:0;z-index:100;border-bottom:2px solid #2e2e2e;}
+header .logo{display:flex;align-items:center;gap:10px;}
+header .logo img{height:40px;}
+header nav{display:flex;align-items:center;gap:8px;}
+header nav a{margin-left:20px;font-weight:500;color:#bbb;text-decoration:none;transition:color .3s ease;}
+header nav a:hover, header nav a.active{color:#00bcd4;}
+.header-right{display:flex;align-items:center;gap:14px;}
+.points{background-color:#2a2a2a;color:#ffd36e;padding:8px 12px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;font-weight:700;border:1px solid #333;}
+.points img{width:20px;height:20px;display:block;}
+.points.pulse{animation:pulse .36s ease-in-out;}
+@keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.08);}100%{transform:scale(1);}}
+footer{background-color:#1e1e1e;text-align:center;padding:15px;border-top:2px solid #2e2e2e;margin-top:auto;}
+.btn{display:inline-flex;align-items:center;gap:8px;background-color:#00bcd4;color:#fff;padding:10px 20px;border-radius:8px;margin-top:10px;transition:background .3s ease;text-decoration:none;cursor:pointer;border:none;}
+.btn:hover{background-color:#008ba3;}
+.btn img{width:20px;height:20px;}
+.contenido{padding:40px 20px;max-width:980px;margin:auto;text-align:center;}
+.contenido h2{font-size:2.2rem;color:#00bcd4;margin-bottom:12px;}
+.lead{font-size:1.05rem;color:#ccc;margin-bottom:20px;line-height:1.6;}
+.subtema{background-color:#2a2a2a;padding:20px;border-radius:12px;margin-bottom:18px;box-shadow:0 4px 12px rgba(0,0,0,.3);text-align:left;}
+.subtema h3{color:#fff;font-size:1.2rem;margin-bottom:10px;}
+.subtema p{color:#bbb;font-size:1rem;margin-bottom:10px;}
+.row{display:flex;gap:18px;flex-wrap:wrap;}
+.col{flex:1 1 280px;}
+pre.code{background:#212121;padding:12px;border-radius:8px;color:#dcdcdc;overflow:auto;font-size:.95rem;}
+.ejercicio{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+input[type="number"], input[type="text"], select, .quiz button{padding:10px;border-radius:8px;border:1px solid #2e2e2e;background:#222;color:#e0e0e0;outline:none;}
+label{color:#ccc;}
+.resultado{margin-top:10px;color:#fff;font-weight:700;background: rgba(0,0,0,0.25);padding:10px;border-radius:8px;}
+.quiz-question{margin-bottom:12px;color:#ddd;}
+.small{font-size:.92rem;color:#9aa0a6;margin-top:6px;display:block;}
+.acciones{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:14px 0;}
+.feedback-list{margin-top:12px;color:#e0e0e0;text-align:left;}
+.feedback-item{padding:10px;border-radius:8px;margin-bottom:8px;}
+.correct{background: rgba(0,128,0,0.12);border-left:4px solid #20c997;color:#c6ffd9;}
+.wrong{background: rgba(255,0,0,0.08);border-left:4px solid #ff6b6b;color:#ffd9d9;}
+@media(max-width:640px){.contenido{padding:20px 12px;}.row{flex-direction:column;}header{padding:12px;}}
+.chloe-bot{position:fixed;bottom:20px;right:20px;background-color:#00bcd4;border-radius:50%;width:60px;height:60px;display:flex;justify-content:center;align-items:center;box-shadow:0 4px 8px rgba(0,0,0,.2);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="../../../img/logo/logo.svg" alt="Learnix Logo">
+    <h1>Learnix</h1>
+  </div>
+  <nav>
+    <a href="../../../index.html">Inicio</a>
+    <a href="../../../cursos.html" class="active">Cursos</a>
+    <a href="../../../perfil.html">Perfil</a>
+    <a href="../../../login.html">Login</a>
+    <a href="../../../favoritos.html">Favoritos</a>
+  </nav>
+  <div class="header-right">
+    <div class="points" title="Puntos acumulados">
+      <img src="https://img.icons8.com/fluency/48/star.png" alt="star">
+      <span id="puntos">0</span>
+    </div>
+  </div>
+</header>
+
+<main class="contenido">
+<h2>Fracciones y Decimales — Profundización</h2>
+<p class="lead">Definición detallada, propiedades, fórmulas, ejemplos, ejercicios autocorregibles y mini quiz interactivo con puntos globales.</p>
+
+<div class="subtema">
+<h3>1. Definición Detallada</h3>
+<p>Una <strong>fracción</strong> representa una parte de un todo. Se escribe como <strong>a/b</strong> donde <em>a</em> es el numerador y <em>b</em> el denominador (b≠0). Los <strong>decimales</strong> son otra forma de expresar fracciones con base 10. Por ejemplo, 3/4 = 0.75.</p>
+</div>
+
+<div class="subtema">
+<h3>2. Propiedades y Fórmulas</h3>
+<ul style="color:#ccc;">
+<li><strong>Equivalencia:</strong> Multiplicar/dividir numerador y denominador por mismo número ≠0: a/b = (a·k)/(b·k)</li>
+<li><strong>Suma:</strong> (a/b)+(c/b)=(a+c)/b; si distinto denominador: (a/b)+(c/d)=(ad+bc)/(bd)</li>
+<li><strong>Resta:</strong> (a/b)-(c/b)=(a-c)/b</li>
+<li><strong>Multiplicación:</strong> (a/b)·(c/d)=(a·c)/(b·d)</li>
+<li><strong>División:</strong> (a/b) ÷ (c/d)=(a/b)·(d/c)</li>
+<li><strong>Decimal → Fracción:</strong> Contar decimales: 0.125 = 125/1000 = 1/8</li>
+<li><strong>Fracción → Decimal:</strong> dividir numerador entre denominador: 3/4 = 0.75</li>
+</ul>
+<p class="small">Tip memotécnico: Para convertir decimal a fracción, cuenta los decimales y coloca como denominador 1 seguido de tantos ceros como decimales; luego simplifica.</p>
+</div>
+
+<div class="subtema">
+<h3>3. Ejemplos y Herramientas Interactivas</h3>
+<div class="row">
+<div class="col">
+<h4>Fracción → Decimal</h4>
+<div class="ejercicio">
+<input id="inFrac" type="text" placeholder="ej. 3/4">
+<button class="btn" onclick="fracADec()"><img src="https://img.icons8.com/color/48/calculator.png" alt="calc"> Convertir</button>
+</div>
+<div id="outFrac" class="resultado">—</div>
+</div>
+
+<div class="col">
+<h4>Decimal → Fracción</h4>
+<div class="ejercicio">
+<input id="inDec" type="number" step="0.01" placeholder="ej. 0.75">
+<button class="btn" onclick="decAFrac()"><img src="https://img.icons8.com/color/48/calculator.png" alt="calc"> Convertir</button>
+</div>
+<div id="outDec" class="resultado">—</div>
+</div>
+</div>
+</div>
+
+<div class="subtema">
+<h3>4. Ejercicios Prácticos</h3>
+<ol style="color:#ccc; margin-left:18px;">
+<li>Convierte 5/8 a decimal: <input id="ex1" type="text" placeholder="ej. 0.625"></li>
+<li>Convierte 0.2 a fracción: <input id="ex2" type="text" placeholder="ej. 1/5"></li>
+<li>Suma: 1/4 + 3/4 = <input id="ex3" type="text" placeholder="ej. 1"></li>
+</ol>
+<button class="btn" onclick="chequearEjercicios()"><img src="https://img.icons8.com/color/48/check.png" alt="check"> Chequear respuestas</button>
+<div id="outEj" class="resultado" style="margin-top:10px">—</div>
+</div>
+
+<div class="subtema">
+<h3>5. Mini Quiz (5 preguntas, 10 puntos cada una)</h3>
+<div id="quiz"></div>
+<div id="quizResultado" class="resultado">—</div>
+</div>
+
+<div class="acciones">
+<a href="../basico.html" class="btn" title="Volver a operaciones"><img src="https://img.icons8.com/color/48/home.png" alt="home"> Nivel Basico</a>
+<a href="mcm-mcd.html" class="btn" title="Siguiente: operaciones"><img src="https://img.icons8.com/color/48/right.png" alt="next"> Siguiente: MCM y MCD</a>
+<a href="cursos.html" class="btn" title="Volver a cursos" style="background:#444;"><img src="https://img.icons8.com/color/48/left.png" alt="volver"> Cursos</a>
+</div>
+</main>
+
+<a href="#chatbot-chloe" class="chloe-bot" title="Chloe">
+<img src="img/chatbot/chloe-icon.svg" alt="Chatbot Chloe" style="width:38px;height:38px;">
+</a>
+
+<footer>
+<p>© 2025 Learnix - NeoStudio</p>
+</footer>
+
+<script>
+let puntosGlobales = parseInt(localStorage.getItem('puntosGlobales')) || 0;
+document.getElementById('puntos').textContent = puntosGlobales;
+
+// ===== CONVERSIÓN =====
+function fracADec(){
+  const input = document.getElementById('inFrac').value.trim();
+  const out = document.getElementById('outFrac');
+  if(!input.includes('/')){ out.textContent='Formato incorrecto'; return; }
+  const [num, den] = input.split('/').map(Number);
+  if(isNaN(num)||isNaN(den)||den===0){ out.textContent='Número inválido'; return; }
+  const res = num/den;
+  out.textContent = `${num}/${den} = ${res}`;
+}
+
+function decAFrac(){
+  const val = parseFloat(document.getElementById('inDec').value);
+  const out = document.getElementById('outDec');
+  if(isNaN(val)){ out.textContent='Número inválido'; return; }
+  const precision = 1000000;
+  const gcd = (a,b)=>b?gcd(b,a%b):a;
+  let denom = precision;
+  let num = Math.round(val*precision);
+  const divisor = gcd(num,denom);
+  num/=divisor; denom/=divisor;
+  out.textContent = `${val} = ${num}/${denom}`;
+}
+
+// ===== EJERCICIOS AUTOCORREGIBLES =====
+function chequearEjercicios(){
+  const out = document.getElementById('outEj');
+  const r1 = document.getElementById('ex1').value.trim() === '0.625';
+  const r2 = document.getElementById('ex2').value.trim() === '1/5';
+  const r3 = document.getElementById('ex3').value.trim() === '1';
+  const correct = [r1,r2,r3].filter(v=>v).length;
+  let msg = `${correct}/3 correctas.`;
+  if(correct===3 && !localStorage.getItem('ejPuntos')){
+    puntosGlobales += 5;
+    localStorage.setItem('puntosGlobales', puntosGlobales);
+    localStorage.setItem('ejPuntos','true');
+    document.getElementById('puntos').textContent = puntosGlobales;
+    msg+=' ¡Puntos acumulados!';
+  }
+  out.textContent = msg;
+}
+
+// ===== MINI QUIZ =====
+const quizData = [
+  {q:'¿Qué representa el numerador en una fracción?',options:['Parte total','Parte seleccionada','Denominador'],answer:1,explanation:'El numerador indica cuántas partes del todo se toman.'},
+  {q:'¿Cómo se convierte 3/4 a decimal?',options:['0.34','0.75','0.43'],answer:1,explanation:'Divide numerador entre denominador: 3÷4=0.75.'},
+  {q:'Decimal 0.2 es igual a:',options:['1/5','2/10','2/5'],answer:0,explanation:'0.2=2/10=1/5 simplificado.'},
+  {q:'Fracción impropia se define como:',options:['Numerador<Denominador','Numerador≥Denominador','Numerador=Denominador'],answer:1,explanation:'El numerador es mayor o igual al denominador.'},
+  {q:'Suma de fracciones con distinto denominador se hace:',options:['Suma simple','Usando denominador común','Multiplicando numeradores'],answer:1,explanation:'Se usa denominador común: a/b+c/d=(ad+bc)/bd.'},
+];
+
+function generarQuiz(){
+  const quizDiv = document.getElementById('quiz');
+  quizData.forEach((item,i)=>{
+    const div = document.createElement('div'); div.className='quiz-question';
+    div.innerHTML = `<p>${i+1}. ${item.q}</p>`+
+    item.options.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${o}</label><br>`).join('');
+    quizDiv.appendChild(div);
+  });
+  const btn = document.createElement('button');
+  btn.className='btn';
+  btn.innerHTML='<img src="https://img.icons8.com/color/48/check.png" alt="check"> Enviar Quiz';
+  btn.onclick=evaluarQuiz;
+  quizDiv.appendChild(btn);
+}
+
+function evaluarQuiz(){
+  let puntos = 0; const feedback=[];
+  quizData.forEach((item,i)=>{
+    const sel = document.querySelector(`input[name="q${i}"]:checked`);
+    if(sel){
+      if(parseInt(sel.value)===item.answer){puntos+=10; feedback.push(`<div class="feedback-item correct">Pregunta ${i+1}: Correcto ✅</div>`);}
+      else{feedback.push(`<div class="feedback-item wrong">Pregunta ${i+1}: ❌ Incorrecto. ${item.explanation}</div>`);}
+    } else {feedback.push(`<div class="feedback-item wrong">Pregunta ${i+1}: ❌ No respondida. ${item.explanation}</div>`);}
+  });
+  if(!localStorage.getItem('quizPuntos')){puntosGlobales+=puntos; localStorage.setItem('puntosGlobales',puntosGlobales); document.getElementById('puntos').textContent=puntosGlobales; localStorage.setItem('quizPuntos','true');}
+  document.getElementById('quizResultado').innerHTML=`Total: ${puntos} puntos`+feedback.join('');
+}
+
+generarQuiz();
+</script>
+</body>
+</html>

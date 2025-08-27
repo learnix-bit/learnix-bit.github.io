@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learnix - Conectores y Cohesión</title>
+  <style>
+    /* ======= ESTILOS BASE ======= */
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body {
+      background-color:#1e1e1e;
+      background-image: linear-gradient(135deg, #1e1e1e, #252525);
+      color:#e0e0e0; display:flex; flex-direction:column; min-height:100vh;
+    }
+    header {
+      background-color:#1e1e1e; display:flex; justify-content:space-between; align-items:center;
+      padding:15px 30px; position:sticky; top:0; z-index:100; border-bottom:2px solid #2e2e2e;
+    }
+    header .logo { display:flex; align-items:center; gap:10px; }
+    header .logo img { height:40px; }
+    header nav a {
+      margin-left:20px; font-weight:500; color:#bbb; text-decoration:none; transition:color .3s ease;
+    }
+    header nav a:hover, header nav a.active { color:#00bcd4; }
+
+    footer {
+      background-color:#1e1e1e; text-align:center; padding:15px; border-top:2px solid #2e2e2e; margin-top:auto;
+    }
+    .btn {
+      display:inline-block; background-color:#00bcd4; color:#fff; padding:10px 20px; border-radius:8px;
+      margin-top:10px; transition:background .3s ease; text-decoration:none;
+    }
+    .btn:hover { background-color:#008ba3; }
+
+    /* ======= CONTENIDO ======= */
+    .contenido {
+      padding:40px 20px; max-width:1000px; margin:auto; text-align:center;
+    }
+    .contenido h2 {
+      font-size:2.2rem; color:#00bcd4; margin-bottom:20px;
+    }
+    .contenido p {
+      font-size:1.1rem; color:#ccc; margin-bottom:30px;
+    }
+    .subtema {
+      background-color:#2a2a2a; padding:20px; border-radius:12px;
+      margin-bottom:18px; box-shadow:0 4px 12px rgba(0,0,0,.3);
+      text-align:left;
+    }
+    .subtema h3 {
+      color:#fff; font-size:1.2rem; margin-bottom:10px;
+    }
+    .subtema p { color:#bbb; font-size:1rem; margin-bottom:10px; }
+    .resultado {
+      margin-top:10px; color:#fff; font-weight:700;
+      background: rgba(0,0,0,0.25); padding:10px; border-radius:8px;
+    }
+    .quiz-question { margin-bottom:12px; color:#ddd; }
+    .feedback-item { padding:10px; border-radius:8px; margin-bottom:8px; }
+    .correct { background: rgba(0,128,0,0.12); border-left:4px solid #20c997; color:#c6ffd9; }
+    .wrong { background: rgba(255,0,0,0.08); border-left:4px solid #ff6b6b; color:#ffd9d9; }
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado -->
+  <header>
+    <div class="logo">
+      <img src="../../../img/logo/logo.svg" alt="Learnix Logo">
+      <h1>Learnix</h1>
+    </div>
+    <nav>
+      <a href="../../../index.html">Inicio</a>
+      <a href="../../../cursos.html" class="active">Cursos</a>
+      <a href="../../../perfil.html">Perfil</a>
+      <a href="../../../login.html">Login</a>
+      <a href="../../../favoritos.html">Favoritos</a>
+    </nav>
+  </header>
+
+  <!-- Contenido -->
+  <main class="contenido">
+    <h2>Conectores y Cohesión Textual</h2>
+    <p>Aprende a utilizar conectores y técnicas de cohesión textual para mejorar la claridad y fluidez de tus escritos.</p>
+
+    <!-- Definición -->
+    <div class="subtema">
+      <h3>¿Qué son los conectores y la cohesión textual?</h3>
+      <p>Los conectores son palabras o frases que enlazan ideas dentro de un texto, mientras que la cohesión textual se refiere a la forma en que las partes de un texto se relacionan entre sí para formar un todo coherente.</p>
+    </div>
+
+    <!-- Propiedades -->
+    <div class="subtema">
+      <h3>Tipos de conectores</h3>
+      <ul>
+        <li><strong>Adición:</strong> Además, también, incluso.</li>
+        <li><strong>Contraste:</strong> Sin embargo, aunque, no obstante.</li>
+        <li><strong>Causa y efecto:</strong> Porque, por lo tanto, debido a.</li>
+        <li><strong>Secuencia:</strong> Primero, luego, finalmente.</li>
+      </ul>
+    </div>
+
+    <!-- Ejemplos -->
+    <div class="subtema">
+      <h3>Ejemplos resueltos</h3>
+      <p><strong>Ejemplo 1:</strong> "Me gusta el chocolate; sin embargo, prefiero el helado."</p>
+      <p><strong>Ejemplo 2:</strong> "Primero, corta las verduras; luego, calienta el sartén."</p>
+    </div>
+
+    <!-- Herramientas interactivas -->
+    <div class="subtema">
+      <h3>Herramientas interactivas</h3>
+      <p>Selecciona el conector adecuado para completar la oración:</p>
+      <p><strong>Texto:</strong> "No fui a la fiesta, ______ estaba cansado."</p>
+      <select id="herramientaConectores">
+        <option value="">-- Selecciona --</option>
+        <option value="1">porque</option>
+        <option value="2">sin embargo</option>
+        <option value="3">además</option>
+      </select>
+      <button class="btn" onclick="verificarConectores()">Verificar</button>
+      <div id="resultadoConectores" class="resultado">—</div>
+    </div>
+
+    <!-- Mini Quiz -->
+    <div class="subtema">
+      <h3>Mini Quiz</h3>
+      <p>Responde las siguientes preguntas para evaluar tu comprensión:</p>
+      <div class="quiz-question">
+        <label>1) ¿Qué es un conector de adición?</label><br>
+        <label><input type="radio" name="q1" value="a"> Un conector que indica causa.</label><br>
+        <label><input type="radio" name="q1" value="b"> Un conector que añade información.</label>
+      </div>
+      <div class="quiz-question">
+        <label>2) ¿Qué es un conector de contraste?</label><br>
+        <label><input type="radio" name="q2" value="a"> Un conector que enlaza ideas opuestas.</label><br>
+        <label><input type="radio" name="q2" value="b"> Un conector que indica secuencia.</label>
+      </div>
+      <div class="quiz-question">
+        <label>3) ¿Qué tipo de conector es "porque"?</label><br>
+        <label><input type="radio" name="q3" value="a"> Causa y efecto.</label><br>
+        <label><input type="radio" name="q3" value="b"> Contraste.</label>
+      </div>
+      <div class="quiz-question">
+        <label>4) ¿Qué tipo de conector es "además"?</label><br>
+        <label><input type="radio" name="q4" value="a"> Adición.</label><br>
+        <label><input type="radio" name="q4" value="b"> Secuencia.</label>
+      </div>
+      <div class="quiz-question">
+        <label>5) ¿Qué tipo de conector es "sin embargo"?</label><br>
+        <label><input type="radio" name="q5" value="a"> Contraste.</label><br>
+        <label><input type="radio" name="q5" value="b"> Causa y efecto.</label>
+      </div>
+      <button class="btn" onclick="revisarQuiz()">Revisar</button>
+      <div id="resultadoQuiz" class="resultado">—</div>
+    </div>
+
+    <!-- Tip -->
+    <div class="subtema">
+      <h3>Tip de memotecnia</h3>
+      <p>Recuerda: "Los conectores son el pegamento que une las ideas en un texto."</p>
+    </div>
+  </main>
+
+  <script>
+    function verificarConectores() {
+      const seleccion = document.getElementById('herramientaConectores').value;
+      const resultado = document.getElementById('resultadoConectores');
+      if (seleccion === "1") {
+        resultado.textContent = "¡Correcto! 'porque' es el conector adecuado.";
+      } else {
+        resultado.textContent = "Incorrecto. La respuesta correcta es 'porque'.";
+      }
+    }
+
+    function revisarQuiz() {
+      const respuestasCorrectas = {
+        q1: "b",
+        q2: "a",
+        q3: "a",
+        q4: "a",
+        q5: "a"
+      };
+
+      let puntos = 0;
+      let totalPreguntas = 5;
+
+      for (let i = 1; i <= totalPreguntas; i++) {
+        const respuesta = document.querySelector(`input[name="q${i}"]:checked`);
+        if (respuesta && respuesta.value === respuestasCorrectas[`q${i}`]) {
+          puntos += 10;
+        }
+      }
+
+      const puntosActuales = parseInt(localStorage.getItem('learnix_points_globales')) || 0;
+      localStorage.setItem('learnix_points_globales', puntosActuales + puntos);
+
+      document.getElementById('resultadoQuiz').textContent = `¡Quiz completado! Obtuviste ${puntos} puntos. Tus puntos globales ahora son ${puntosActuales + puntos}.`;
+    }
+  </script>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Learnix - NeoStudio</p>
+  </footer>
+
+</body>
+</html>

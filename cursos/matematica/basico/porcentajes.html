@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Learnix - Porcentajes y Proporciones</title>
+  <style>
+    /* ======= ESTILO BASE ======= */
+    *{margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+    body{background:#1e1e1e; color:#e0e0e0; display:flex; flex-direction:column; min-height:100vh;}
+    header{background:#1e1e1e; display:flex; justify-content:space-between; align-items:center; padding:15px 30px; position:sticky; top:0; z-index:100; border-bottom:2px solid #2e2e2e;}
+    header .logo{display:flex; align-items:center; gap:10px;}
+    header .logo img{height:40px;}
+    header nav{display:flex; align-items:center; gap:8px;}
+    header nav a{margin-left:20px; font-weight:500; color:#bbb; text-decoration:none; transition:color .3s ease;}
+    header nav a:hover, header nav a.active{color:#00bcd4;}
+    .header-right{display:flex; align-items:center; gap:14px;}
+    .points{background:#2a2a2a; color:#ffd36e; padding:8px 12px; border-radius:999px; display:inline-flex; align-items:center; gap:8px; font-weight:700; border:1px solid #333; transition: transform .3s ease;}
+    .points img{width:20px; height:20px;}
+    .points.pulse{animation:pulse .36s ease-in-out;}
+    @keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.08);}100%{transform:scale(1);}}
+    footer{background:#1e1e1e; text-align:center; padding:15px; border-top:2px solid #2e2e2e; margin-top:auto;}
+    .btn{display:inline-flex; align-items:center; gap:8px; background:#00bcd4; color:#fff; padding:10px 20px; border-radius:8px; margin-top:10px; transition: background .3s ease, transform .2s ease; text-decoration:none; cursor:pointer; border:none;}
+    .btn:hover{background:#008ba3; transform:scale(1.05);}
+    .btn img{width:20px; height:20px;}
+    .contenido{padding:40px 20px; max-width:980px; margin:auto; text-align:center; transition:all .3s ease;}
+    .contenido h2{font-size:2.2rem; color:#00bcd4; margin-bottom:12px;}
+    .lead{font-size:1.05rem; color:#ccc; margin-bottom:20px; line-height:1.6;}
+    .subtema{background:#2a2a2a; padding:20px; border-radius:12px; margin-bottom:18px; box-shadow:0 4px 12px rgba(0,0,0,.3); text-align:left; transition:transform .3s ease;}
+    .subtema:hover{transform:translateY(-3px);}
+    .subtema h3{color:#fff; font-size:1.2rem; margin-bottom:10px;}
+    .subtema p, .subtema ul li{color:#bbb; font-size:1rem; margin-bottom:10px;}
+    pre.code{background:#212121; padding:12px; border-radius:8px; color:#dcdcdc; overflow:auto; font-size:.95rem;}
+    .row{display:flex; gap:18px; flex-wrap:wrap;}
+    .col{flex:1 1 280px;}
+    .ejercicio{margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; align-items:center;}
+    input[type="number"], input[type="text"], select, .quiz button{padding:10px; border-radius:8px; border:1px solid #2e2e2e; background:#222; color:#e0e0e0; outline:none;}
+    label{color:#ccc;}
+    .resultado{margin-top:10px; color:#fff; font-weight:700; background: rgba(0,0,0,0.25); padding:10px; border-radius:8px; transition:all .3s ease;}
+    .quiz-question{margin-bottom:12px; color:#ddd;}
+    .small{font-size:.92rem; color:#9aa0a6; margin-top:6px; display:block;}
+    .acciones{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:14px 0;}
+    .feedback-list{margin-top:12px; color:#e0e0e0; text-align:left;}
+    .feedback-item{padding:10px; border-radius:8px; margin-bottom:8px;}
+    .correct{background: rgba(0,128,0,0.12); border-left:4px solid #20c997; color:#c6ffd9;}
+    .wrong{background: rgba(255,0,0,0.08); border-left:4px solid #ff6b6b; color:#ffd9d9;}
+    @media(max-width:640px){.contenido{padding:20px 12px;} .row{flex-direction:column;} header{padding:12px;}}
+    .chloe-bot{position:fixed; bottom:20px; right:20px; background:#00bcd4; border-radius:50%; width:60px; height:60px; display:flex; justify-content:center; align-items:center; box-shadow:0 4px 8px rgba(0,0,0,.2);}
+  </style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <img src="img/logo/logo.svg" alt="Learnix Logo">
+    <h1>Learnix</h1>
+  </div>
+  <nav>
+    <a href="../../../index.html">Inicio</a>
+    <a href="../../../cursos.html" class="active">Cursos</a>
+    <a href="../../../perfil.html">Perfil</a>
+    <a href="../../../login.html">Login</a>
+    <a href="../../../favoritos.html">Favoritos</a>
+  </nav>
+  <div class="header-right">
+    <div class="points" title="Puntos acumulados">
+      <img src="https://img.icons8.com/fluency/48/star.png" alt="star">
+      <span id="puntos">0</span>
+    </div>
+  </div>
+</header>
+
+<main class="contenido">
+  <h2>Porcentajes y Proporciones — Profundización</h2>
+  <p class="lead">Aprende todo sobre porcentajes y proporciones, con teoría detallada, fórmulas, ejemplos, ejercicios autocorregibles, mini-quiz interactivo y animaciones profesionales.</p>
+
+  <div class="subtema">
+    <h3>Definición</h3>
+    <p><strong>Porcentaje:</strong> Es la manera de expresar una cantidad como fracción de 100. Fórmula: <strong>P = (parte / total) × 100%</strong>.</p>
+    <p><strong>Proporción:</strong> Es una igualdad entre dos razones o fracciones. Por ejemplo: a/b = c/d. Se cumple la propiedad del producto cruzado: a×d = b×c.</p>
+  </div>
+
+  <div class="subtema">
+    <h3>Propiedades y fórmulas</h3>
+    <ul style="color:#ccc; margin-left:18px;">
+      <li>Para porcentajes: Aumento → Valor final = Valor inicial × (1 + p/100)</li>
+      <li>Para porcentajes: Descuento → Valor final = Valor inicial × (1 - p/100)</li>
+      <li>Proporciones: Producto cruzado → a/b = c/d → a×d = b×c</li>
+      <li>Proporciones directas: Si a/b = c/d, al aumentar a, aumenta c proporcionalmente</li>
+      <li>Proporciones inversas: Si a×b = c×d, al aumentar a, disminuye b para mantener constante</li>
+    </ul>
+  </div>
+
+  <div class="subtema">
+    <h3>Ejemplos resueltos</h3>
+    <p>Porcentaje: ¿Qué porcentaje es 25 de 200?</p>
+    <pre class="code">P = (25/200) × 100 = 12.5%</pre>
+    <p>Proporción: Si 3 lápices cuestan 6 soles, ¿cuánto cuestan 5 lápices?</p>
+    <pre class="code">3/6 = 5/x → x = (5×6)/3 = 10 soles</pre>
+  </div>
+
+  <div class="subtema">
+    <h3>Herramientas interactivas</h3>
+    <div class="row">
+      <div class="col">
+        <h4>Calcular porcentaje</h4>
+        <div class="ejercicio">
+          <input id="porcParte" type="number" placeholder="Parte">
+          <input id="porcTotal" type="number" placeholder="Total">
+          <button class="btn" onclick="calcPorcentaje()">Calcular</button>
+        </div>
+        <div id="outPorc" class="resultado">—</div>
+      </div>
+      <div class="col">
+        <h4>Calcular proporción</h4>
+        <div class="ejercicio">
+          <input id="propA" type="number" placeholder="a">
+          <input id="propB" type="number" placeholder="b">
+          <input id="propC" type="number" placeholder="c">
+          <button class="btn" onclick="calcProporcion()">Calcular d</button>
+        </div>
+        <div id="outProp" class="resultado">—</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subtema">
+    <h3>Ejercicios prácticos (autocorregibles)</h3>
+    <ol style="color:#ccc; margin-left:18px;">
+      <li>Calcular el porcentaje de 30 sobre 150:<br><input id="ex1" type="number" placeholder="resultado"></li>
+      <li>Si 4 lápices cuestan 8 soles, ¿cuánto cuestan 10 lápices?<br><input id="ex2" type="number" placeholder="resultado"></li>
+    </ol>
+    <div style="margin-top:12px;">
+      <button class="btn" onclick="chequearEjercicios()"><img src="https://img.icons8.com/color/48/check.png" alt="check"> Chequear respuestas</button>
+      <div id="outEj" class="resultado" style="margin-top:10px">—</div>
+    </div>
+  </div>
+
+  <div class="subtema">
+    <h3>Mini-quiz (5 preguntas)</h3>
+    <div id="quiz">
+      <div class="quiz-question">
+        <label>1) ¿Qué porcentaje es 50 de 200?</label><br>
+        <label><input type="radio" name="q1" value="a"> 20%</label><br>
+        <label><input type="radio" name="q1" value="b"> 25%</label><br>
+        <label><input type="radio" name="q1" value="c"> 15%</label>
+      </div>
+      <div class="quiz-question">
+        <label>2) Si 5/10 = x/20, x = ?</label><br>
+        <label><input type="radio" name="q2" value="a"> 10</label><br>
+        <label><input type="radio" name="q2" value="b"> 15</label><br>
+        <label><input type="radio" name="q2" value="c"> 5</label>
+      </div>
+      <div class="quiz-question">
+        <label>3) Valor final si 200 con 10% de aumento:</label><br>
+        <label><input type="radio" name="q3" value="a"> 210</label><br>
+        <label><input type="radio" name="q3" value="b"> 220</label><br>
+        <label><input type="radio" name="q3" value="c"> 200</label>
+      </div>
+      <div class="quiz-question">
+        <label>4) Valor final si 150 con 20% de descuento:</label><br>
+        <label><input type="radio" name="q4" value="a"> 120</label><br>
+        <label><input type="radio" name="q4" value="b"> 130</label><br>
+        <label><input type="radio" name="q4" value="c"> 140</label>
+      </div>
+      <div class="quiz-question">
+        <label>5) 3/9 = ?/27</label><br>
+        <label><input type="radio" name="q5" value="a"> 9</label><br>
+        <label><input type="radio" name="q5" value="b"> 10</label><br>
+        <label><input type="radio" name="q5" value="c"> 8</label>
+      </div>
+      <div class="acciones">
+        <button class="btn" onclick="chequearQuiz()">Enviar Quiz</button>
+      </div>
+      <div id="outQuiz" class="resultado">—</div>
+      <div class="feedback-list" id="feedbackList"></div>
+    </div>
+  </div>
+
+  <div class="subtema">
+    <h3>Tip memotécnico</h3>
+    <p>Para recordar porcentajes: <strong>"Parte sobre total × 100"</strong>. Para proporciones: <strong>"Producto cruzado siempre iguala"</strong>.</p>
+  </div>
+
+  <div class="acciones">
+<a href="../basico.html" class="btn" title="Volver a operaciones"><img src="https://img.icons8.com/color/48/home.png" alt="home"> Nivel Basico</a>
+<a href="figuras.html" class="btn" title="Siguiente: operaciones"><img src="https://img.icons8.com/color/48/right.png" alt="next"> Siguiente: Figuras Grometricas</a>
+<a href="../../../cursos.html" class="btn" title="Volver a cursos" style="background:#444;"><img src="https://img.icons8.com/color/48/left.png" alt="volver"> Cursos</a>
+</div>
+</main>
+
+<footer>
+  <p>Learnix &copy; 2025 | Todos los derechos reservados</p>
+</footer>
+
+<script>
+  let puntosGlobales = 0;
+  let quizCompletado = false;
+  let ejerciciosCompletados = false;
+
+  function calcPorcentaje(){
+    const parte = parseFloat(document.getElementById("porcParte").value);
+    const total = parseFloat(document.getElementById("porcTotal").value);
+    if(isNaN(parte)||isNaN(total)){alert("Ingresa ambos valores"); return;}
+    const res = (parte/total)*100;
+    document.getElementById("outPorc").innerText = "Porcentaje: "+res.toFixed(2)+"%";
+  }
+
+  function calcProporcion(){
+    const a = parseFloat(document.getElementById("propA").value);
+    const b = parseFloat(document.getElementById("propB").value);
+    const c = parseFloat(document.getElementById("propC").value);
+    if(isNaN(a)||isNaN(b)||isNaN(c)){alert("Ingresa todos los valores"); return;}
+    const d = (b*c)/a;
+    document.getElementById("outProp").innerText = "d = "+d;
+  }
+
+  function chequearEjercicios(){
+    if(ejerciciosCompletados){alert("Ya completaste estos ejercicios."); return;}
+    let r1=parseFloat(document.getElementById("ex1").value);
+    let r2=parseFloat(document.getElementById("ex2").value);
+    let punt=0; let feedback="";
+    if(r1===20){punt+=10; feedback+="Ej1 correcto.\n";}else{feedback+="Ej1 incorrecto. 30/150*100=20%\n";}
+    if(r2===20){punt+=10; feedback+="Ej2 correcto.\n";}else{feedback+="Ej2 incorrecto. 4/8= x/10 → x=20\n";}
+    puntosGlobales+=punt;
+    document.getElementById("puntos").innerText=puntosGlobales;
+    document.getElementById("outEj").innerText=feedback;
+    ejerciciosCompletados=true;
+  }
+
+  function chequearQuiz(){
+    if(quizCompletado){alert("Ya completaste el quiz."); return;}
+    const respuestas={q1:'a',q2:'a',q3:'a',q4:'a',q5:'a'};
+    let total=0; let feedbackHTML="";
+    for(let i=1;i<=5;i++){
+      let radios=document.getElementsByName('q'+i);
+      let sel=Array.from(radios).find(r=>r.checked);
+      if(!sel){feedbackHTML+=`Pregunta ${i}: No seleccionaste.<br>`; continue;}
+      if(sel.value===respuestas['q'+i]){total+=10; feedbackHTML+=`Pregunta ${i}: Correcto!<br>`;}
+      else{feedbackHTML+=`Pregunta ${i}: Incorrecto. Respuesta correcta: ${respuestas['q'+i].toUpperCase()}.<br>`;}
+    }
+    puntosGlobales+=total;
+    document.getElementById("puntos").innerText=puntosGlobales;
+    document.getElementById("outQuiz").innerHTML=`Puntaje del quiz: ${total} puntos`;
+    document.getElementById("feedbackList").innerHTML=feedbackHTML;
+    quizCompletado=true;
+    document.querySelector(".points").classList.add("pulse");
+    setTimeout(()=>document.querySelector(".points").classList.remove("pulse"),360);
+  }
+</script>
+</body>
+</html>

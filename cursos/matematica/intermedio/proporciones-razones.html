@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecuaciones de Primer Grado</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #00c3ff;
+    }
+    .ejercicio, .quiz {
+      background: #1e1e1e;
+      padding: 20px;
+      margin: 20px auto;
+      border-radius: 12px;
+      max-width: 600px;
+      box-shadow: 0 0 10px #00000080;
+    }
+    input[type="text"] {
+      width: 100px;
+      padding: 8px;
+      border: none;
+      border-radius: 8px;
+      background: #00000040;
+      color: #fff;
+      text-align: center;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #00c3ff;
+      color: #000;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #0097cc;
+    }
+    .resultado {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .correcto {
+      color: #4caf50;
+      animation: pop 0.4s ease-in-out;
+    }
+    .incorrecto {
+      color: #f44336;
+      animation: shake 0.4s;
+    }
+    @keyframes pop {
+      0% { transform: scale(0.8); }
+      100% { transform: scale(1); }
+    }
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Ecuaciones de Primer Grado</h1>
+  <p>Una ecuación de primer grado tiene la forma <b>ax + b = 0</b>. Resolverla consiste en despejar <b>x</b>.</p>
+
+  <!-- Ejercicio práctico -->
+  <div class="ejercicio">
+    <h2>Ejercicio</h2>
+    <p>Resuelve: <b>2x + 3 = 7</b></p>
+    <input type="text" id="resp1" placeholder="x = ?">
+    <button onclick="verificar()">Verificar</button>
+    <div id="res1" class="resultado"></div>
+  </div>
+
+  <!-- Quiz -->
+  <div class="quiz">
+    <h2>Quiz rápido</h2>
+    <p>¿Cuál es la solución de la ecuación <b>5x - 10 = 0</b>?</p>
+    <input type="text" id="quizResp" placeholder="x = ?">
+    <button onclick="quiz()">Responder</button>
+    <div id="quizRes" class="resultado"></div>
+  </div>
+
+  <script>
+    function verificar() {
+      const resp = document.getElementById("resp1").value.trim();
+      const res = document.getElementById("res1");
+      if (resp === "2") {
+        res.textContent = "¡Correcto! Al despejar: 2x + 3 = 7 → 2x = 4 → x = 2";
+        res.className = "resultado correcto";
+      } else {
+        res.textContent = "Incorrecto. Pista: pasa el 3 restando y luego divide entre 2.";
+        res.className = "resultado incorrecto";
+      }
+    }
+
+    function quiz() {
+      const resp = document.getElementById("quizResp").value.trim();
+      const res = document.getElementById("quizRes");
+      if (resp === "2") {
+        res.textContent = "✅ Correcto: 5x - 10 = 0 → 5x = 10 → x = 2";
+        res.className = "resultado correcto";
+      } else {
+        res.textContent = "❌ Incorrecto. Explicación: 5x - 10 = 0 → 5x = 10 → x = 2.";
+        res.className = "resultado incorrecto";
+      }
+    }
+  </script>
+</body>
+</html>

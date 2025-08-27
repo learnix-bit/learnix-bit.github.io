@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learnix - Estadística Intermedia</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+body{background-color:#1e1e1e;color:#e0e0e0;display:flex;flex-direction:column;min-height:100vh;}
+header{background-color:#1e1e1e;display:flex;justify-content:space-between;align-items:center;padding:15px 30px;position:sticky;top:0;z-index:100;border-bottom:2px solid #2e2e2e;}
+header .logo{display:flex;align-items:center;gap:10px;}
+header .logo img{height:40px;}
+header nav a{margin-left:20px;font-weight:500;color:#bbb;text-decoration:none;transition:color .3s ease;}
+header nav a:hover, header nav a.active{color:#00bcd4;}
+.header-right{display:flex;align-items:center;gap:14px;}
+.points{background-color:#2a2a2a;color:#ffd36e;padding:8px 12px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;font-weight:700;border:1px solid #333;}
+.contenido{padding:40px 20px;max-width:980px;margin:auto;text-align:center;}
+.contenido h2{font-size:2.2rem;color:#00bcd4;margin-bottom:12px;}
+.subtema{background-color:#2a2a2a;padding:20px;border-radius:12px;margin-bottom:18px;box-shadow:0 4px 12px rgba(0,0,0,.3);text-align:left;}
+.subtema h3{color:#fff;font-size:1.2rem;margin-bottom:10px;}
+.subtema p, .subtema ul, .subtema ol{color:#bbb;font-size:1rem;margin-bottom:10px;}
+input[type="number"], input[type="text"], select, .quiz button{padding:10px;border-radius:8px;border:1px solid #2e2e2e;background:#222;color:#e0e0e0;outline:none;margin:4px 0;}
+.resultado{margin-top:10px;color:#fff;font-weight:700;background: rgba(0,0,0,0.25);padding:10px;border-radius:8px;}
+.quiz-question{margin-bottom:12px;color:#ddd;}
+.feedback-item{padding:10px;border-radius:8px;margin-bottom:8px;}
+.correct{background: rgba(0,128,0,0.12);border-left:4px solid #20c997;color:#c6ffd9;}
+.wrong{background: rgba(255,0,0,0.08);border-left:4px solid #ff6b6b;color:#ffd9d9;}
+.btn{display:inline-flex;align-items:center;gap:8px;background-color:#00bcd4;color:#fff;padding:10px 20px;border-radius:8px;margin-top:10px;transition:background .3s ease;text-decoration:none;cursor:pointer;border:none;}
+.btn:hover{background-color:#008ba3;}
+.acciones{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:14px 0;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="../../../img/logo/logo.svg" alt="Learnix Logo">
+    <h1>Learnix</h1>
+  </div>
+  <nav>
+    <a href="../../../index.html">Inicio</a>
+    <a href="../../../cursos.html" class="active">Cursos</a>
+    <a href="../../../perfil.html">Perfil</a>
+    <a href="../../../login.html">Login</a>
+    <a href="../../../favoritos.html">Favoritos</a>
+  </nav>
+  <div class="header-right">
+    <div class="points" title="Puntos acumulados">
+      <img src="https://img.icons8.com/fluency/48/star.png" alt="star">
+      <span id="puntos">0</span>
+    </div>
+  </div>
+</header>
+
+<main class="contenido">
+<h2>Estadística — Nivel Intermedio</h2>
+<p class="lead">Aprende conceptos intermedios de estadística: media, mediana, moda, rango, desviación estándar y representación gráfica. Incluye ejemplos, ejercicios autocorregibles y mini quiz con puntos globales.</p>
+
+<div class="subtema">
+<h3>1. Definición Detallada</h3>
+<p>La <strong>estadística</strong> estudia la recolección, organización, análisis e interpretación de datos. Los conceptos intermedios incluyen:</p>
+<ul>
+<li><strong>Media aritmética:</strong> Promedio de los valores.</li>
+<li><strong>Mediana:</strong> Valor central cuando los datos están ordenados.</li>
+<li><strong>Moda:</strong> Valor que más se repite.</li>
+<li><strong>Rango:</strong> Diferencia entre valor máximo y mínimo.</li>
+<li><strong>Desviación estándar:</strong> Medida de dispersión respecto a la media.</li>
+</ul>
+<p class="small">Tip memotécnico: "M-M-M-R-D": Media, Mediana, Moda, Rango, Desviación.</p>
+</div>
+
+<div class="subtema">
+<h3>2. Fórmulas</h3>
+<ul>
+<li><strong>Media:</strong>  𝑥̄ = (Σxi)/n</li>
+<li><strong>Mediana:</strong> Ordenar datos y tomar valor central (si par: promedio de dos centrales)</li>
+<li><strong>Moda:</strong> Valor más frecuente</li>
+<li><strong>Rango:</strong> R = xmax - xmin</li>
+<li><strong>Desviación estándar:</strong> σ = sqrt(Σ(xi - x̄)² / n)</li>
+</ul>
+</div>
+
+<div class="subtema">
+<h3>3. Ejemplos Interactivos</h3>
+<label>Ingresa datos separados por coma:</label>
+<input id="datos" type="text" placeholder="ej. 5,7,3,7,9">
+<button class="btn" onclick="calcularEstadistica()">Calcular Estadística</button>
+<div id="resEst" class="resultado">—</div>
+</div>
+
+<div class="subtema">
+<h3>4. Ejercicios Prácticos</h3>
+<ol>
+<li>Datos: 2,4,6,8,10 → Media: <input id="ex1" type="text"></li>
+<li>Datos: 3,3,7,7,7,2 → Moda: <input id="ex2" type="text"></li>
+<li>Datos: 5,9,12,7 → Rango: <input id="ex3" type="text"></li>
+</ol>
+<button class="btn" onclick="chequearEjercicios()"><img src="https://img.icons8.com/color/48/check.png"> Chequear respuestas</button>
+<div id="outEj" class="resultado">—</div>
+</div>
+
+<div class="subtema">
+<h3>5. Mini Quiz (5 preguntas)</h3>
+<div id="quiz"></div>
+<div id="quizResultado" class="resultado">—</div>
+</div>
+
+<div class="acciones">
+<a href="../intermedio.html" class="btn"><img src="https://img.icons8.com/color/48/home.png"> Nivel Intermedio</a>
+<a href="siguiente.html" class="btn"><img src="https://img.icons8.com/color/48/right.png"> Siguiente</a>
+<a href="cursos.html" class="btn" style="background:#444;"><img src="https://img.icons8.com/color/48/left.png"> Cursos</a>
+</div>
+</main>
+
+<script>
+let puntosGlobales = parseInt(localStorage.getItem('puntosGlobales')) || 0;
+document.getElementById('puntos').textContent = puntosGlobales;
+
+// ===== INTERACTIVO =====
+function calcularEstadistica(){
+  const datosStr=document.getElementById('datos').value;
+  const datos = datosStr.split(',').map(Number).filter(n=>!isNaN(n));
+  if(datos.length===0){document.getElementById('resEst').textContent='Ingresa datos válidos'; return;}
+  const n=datos.length;
+  const suma = datos.reduce((a,b)=>a+b,0);
+  const media=(suma/n).toFixed(2);
+  const medianaArr=[...datos].sort((a,b)=>a-b);
+  const mediana = n%2===1 ? medianaArr[(n-1)/2] : ((medianaArr[n/2-1]+medianaArr[n/2])/2).toFixed(2);
+  const freq={}; datos.forEach(d=>freq[d]=(freq[d]||0)+1);
+  const maxF=Math.max(...Object.values(freq));
+  const moda = Object.keys(freq).filter(k=>freq[k]===maxF).join(', ');
+  const rango = Math.max(...datos)-Math.min(...datos);
+  const desv=Math.sqrt(datos.reduce((a,b)=>a+Math.pow(b-media,2),0)/n).toFixed(2);
+  document.getElementById('resEst').innerHTML=`Media: ${media}<br>Mediana: ${mediana}<br>Moda: ${moda}<br>Rango: ${rango}<br>Desviación estándar: ${desv}`;
+}
+
+// ===== EJERCICIOS =====
+function chequearEjercicios(){
+  const out=document.getElementById('outEj');
+  const r1=document.getElementById('ex1').value.trim()==='6';
+  const r2=document.getElementById('ex2').value.trim()==='7';
+  const r3=document.getElementById('ex3').value.trim()==='7';
+  const correct=[r1,r2,r3].filter(v=>v).length;
+  let msg=`${correct}/3 correctas.`;
+  if(correct===3 && !localStorage.getItem('ejPuntosEst')){
+    puntosGlobales+=5;
+    localStorage.setItem('puntosGlobales',puntosGlobales);
+    localStorage.setItem('ejPuntosEst','true');
+    document.getElementById('puntos').textContent=puntosGlobales;
+    msg+=' ¡Puntos acumulados!';
+  }
+  out.textContent=msg;
+}
+
+// ===== MINI QUIZ =====
+const quizData=[
+  {q:'¿Qué es la mediana?',options:['Valor central','Promedio','Moda'],answer:0,explanation:'La mediana es el valor central de los datos ordenados.'},
+  {q:'¿Qué mide la desviación estándar?',options:['Dispersión','Media','Moda'],answer:0,explanation:'Mide cuánto se separan los datos de la media.'},
+  {q:'¿Cuál es la moda de 2,2,3,4?',options:['2','3','4'],answer:0,explanation:'2 se repite más veces.'},
+  {q:'Rango de 5,7,10?',options:['5','10','7'],answer:0,explanation:'Rango = max-min = 10-5=5.'},
+  {q:'Media de 3,5,7?',options:['5','4','6'],answer:0,explanation:'(3+5+7)/3=5'}
+];
+
+function generarQuiz(){
+  const quizDiv=document.getElementById('quiz');
+  quizData.forEach((item,i)=>{
+    const div=document.createElement('div'); div.className='quiz-question';
+    div.innerHTML=`<p>${i+1}. ${item.q}</p>`+
+    item.options.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${o}</label><br>`).join('');
+    quizDiv.appendChild(div);
+  });
+  const btn=document.createElement('button'); btn.className='btn';
+  btn.innerHTML='<img src="https://img.icons8.com/color/48/check.png"> Enviar Quiz';
+  btn.onclick=evaluarQuiz; quizDiv.appendChild(btn);
+}
+
+function evaluarQuiz(){
+  let puntos=0; const feedback=[];
+  quizData.forEach((item,i)=>{
+    const sel=document.querySelector(`input[name="q${i}"]:checked`);
+    if(sel){
+      if(parseInt(sel.value)===item.answer){puntos+=10; feedback.push(`<div class="feedback-item correct">Pregunta ${i+1}: Correcto ✅</div>`);}
+      else{feedback.push(`<div class="feedback-item wrong">Pregunta ${i+1}: ❌ Incorrecto. ${item.explanation}</div>`);}
+    } else {feedback.push(`<div class="feedback-item wrong">Pregunta ${i+1}: ❌ No respondida. ${item.explanation}</div>`);}
+  });
+  if(!localStorage.getItem('quizPuntosEst')){puntosGlobales+=puntos; localStorage.setItem('puntosGlobales',puntosGlobales); document.getElementById('puntos').textContent=puntosGlobales; localStorage.setItem('quizPuntosEst','true');}
+  document.getElementById('quizResultado').innerHTML=`Total: ${puntos} puntos`+feedback.join('');
+}
+
+generarQuiz();
+</script>
+</body>
+</html>

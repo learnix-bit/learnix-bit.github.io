@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learnix - Figuras Geométricas</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+  body{background-color:#1e1e1e;color:#e0e0e0;display:flex;flex-direction:column;min-height:100vh;}
+  header{display:flex;justify-content:space-between;align-items:center;padding:15px 30px;position:sticky;top:0;background:#1e1e1e;border-bottom:2px solid #2e2e2e;z-index:100;}
+  header .logo h1{color:#00bcd4;margin-left:10px;}
+  header nav a{margin-left:20px;color:#bbb;text-decoration:none;transition:color .3s ease;}
+  header nav a:hover, header nav a.active{color:#00bcd4;}
+  .points{background-color:#2a2a2a;color:#ffd36e;padding:8px 12px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;font-weight:700;border:1px solid #333;transition: transform .3s ease;}
+  .points.pulse{animation:pulse .36s ease-in-out;}
+  @keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.08);}100%{transform:scale(1);}}
+  main.contenido{padding:40px 20px;max-width:980px;margin:auto;text-align:center;}
+  .contenido h2{font-size:2.2rem;color:#00bcd4;margin-bottom:12px;}
+  .lead{font-size:1.05rem;color:#ccc;margin-bottom:20px;line-height:1.6;}
+  .subtema{background-color:#2a2a2a;padding:20px;border-radius:12px;margin-bottom:18px;box-shadow:0 4px 12px rgba(0,0,0,.3);text-align:left;transition: all .4s ease;}
+  .subtema:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(0,0,0,.4);}
+  .subtema h3{color:#fff;font-size:1.2rem;margin-bottom:10px;}
+  .subtema p, .subtema ul, .subtema ol{color:#ccc;font-size:1rem;margin-bottom:10px;line-height:1.5;}
+  .row{display:flex;gap:18px;flex-wrap:wrap;}
+  .col{flex:1 1 280px;}
+  pre.code{background:#212121;padding:12px;border-radius:8px;color:#dcdcdc;overflow:auto;font-size:.95rem;}
+  .ejercicio{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+  input[type="number"], input[type="text"], select, .quiz button{padding:10px;border-radius:8px;border:1px solid #2e2e2e;background:#222;color:#e0e0e0;outline:none;transition: all .3s ease;}
+  input[type="number"]:focus, input[type="text"]:focus{border-color:#00bcd4;box-shadow:0 0 8px #00bcd4;}
+.btn{display:inline-flex; align-items:center; gap:8px; background:#00bcd4; color:#fff; padding:10px 20px; border-radius:8px; margin-top:10px; transition: background .3s ease, transform .2s ease; text-decoration:none; cursor:pointer; border:none;}
+    .btn:hover{background:#008ba3; transform:scale(1.05);}
+    .btn img{width:20px; height:20px;}
+  .resultado{margin-top:10px;color:#fff;font-weight:700;background: rgba(0,0,0,0.25);padding:10px;border-radius:8px;transition: all .3s ease;}
+  .quiz-question{margin-bottom:12px;color:#ddd;text-align:left;}
+  .small{font-size:.92rem;color:#9aa0a6;margin-top:6px;display:block;}
+  .acciones{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:14px 0;}
+  .feedback-list{margin-top:12px;color:#e0e0e0;text-align:left;}
+  .feedback-item{padding:10px;border-radius:8px;margin-bottom:8px;}
+  .correct{background: rgba(0,128,0,0.12); border-left:4px solid #20c997; color:#c6ffd9;}
+  .wrong{background: rgba(255,0,0,0.08); border-left:4px solid #ff6b6b; color:#ffd9d9;}
+  footer{background-color:#1e1e1e;text-align:center;padding:15px;border-top:2px solid #2e2e2e;margin-top:auto;}
+      /* Bot flotante Chloe (ajustado para mayor visibilidad y clic completo) */
+    .chloe-bot {
+      position:fixed; bottom:20px; right:20px; background-color:#00bcd4; border-radius:50%;
+      width:70px; height:70px; display:flex; justify-content:center; align-items:center;
+      box-shadow:0 4px 8px rgba(0,0,0,.2); transition:transform .3s ease, box-shadow .3s ease;
+    }
+    .chloe-bot:hover {
+      transform:scale(1.1); box-shadow:0 6px 12px rgba(0,0,0,.3);
+    }
+    .chloe-bot img {
+      width:50%; height:50%; object-fit:contain;
+    }
+  @media(max-width:640px){.contenido{padding:20px 12px;} .row{flex-direction:column;} header{padding:12px;}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><h1>Learnix</h1></div>
+  <nav>
+<a href="/index.html">Inicio</a>
+    <a href="/cursos.html" class="active">Cursos</a>
+    <a href="/perfil.html">Perfil</a>
+    <a href="/login.html">Login</a>
+    <a href="/favoritos.html">Favoritos</a>
+  </nav>
+  <div class="points" title="Puntos acumulados"><span id="puntos">0</span></div>
+</header>
+
+<main class="contenido">
+<h2>Figuras Geométricas — Profundización</h2>
+<p class="lead">Aprende las principales figuras geométricas, con fórmulas, propiedades, ejemplos, ejercicios interactivos y mini-quiz con retroalimentación.</p>
+
+<div class="subtema">
+<h3>Definición y Clasificación</h3>
+<p><strong>Figuras planas:</strong> Triángulo, cuadrado, rectángulo, círculo. Solo tienen longitud y ancho.</p>
+<p><strong>Figuras sólidas:</strong> Cubo, prisma, esfera, cono. Tienen largo, ancho y alto (volumen).</p>
+</div>
+
+<div class="subtema">
+<h3>Fórmulas importantes</h3>
+<ul>
+<li>Triángulo: Área = (base × altura)/2, Perímetro = suma de lados</li>
+<li>Cuadrado: Área = lado², Perímetro = 4 × lado</li>
+<li>Rectángulo: Área = base × altura, Perímetro = 2×(base+altura)</li>
+<li>Círculo: Área = π×radio², Perímetro = 2×π×radio</li>
+<li>Cubo: Volumen = lado³, Área superficial = 6×lado²</li>
+<li>Prisma: Volumen = Área_base × altura</li>
+<li>Esfera: Volumen = 4/3 × π × radio³, Área = 4×π×radio²</li>
+<li>Cono: Volumen = 1/3 × π × radio² × altura</li>
+</ul>
+</div>
+
+<div class="subtema">
+<h3>Ejemplos resueltos</h3>
+<pre class="code">
+Ejemplo 1: Área de un triángulo b=6, h=4 → A=(6×4)/2=12
+Ejemplo 2: Volumen de un cubo lado=3 → V=3³=27
+Ejemplo 3: Área de un círculo r=5 → A=π×5² ≈ 78.54
+</pre>
+</div>
+
+<div class="subtema">
+<h3>Herramientas interactivas</h3>
+<div class="row">
+<div class="col">
+<h4>Área Triángulo</h4>
+<div class="ejercicio">
+<input id="triBase" type="number" placeholder="Base">
+<input id="triAlt" type="number" placeholder="Altura">
+<button class="btn" onclick="areaTriangulo()">Calcular</button>
+</div>
+<div id="outTri" class="resultado">—</div>
+</div>
+
+<div class="col">
+<h4>Área Cuadrado</h4>
+<div class="ejercicio">
+<input id="lado" type="number" placeholder="Lado">
+<button class="btn" onclick="areaCuadrado()">Calcular</button>
+</div>
+<div id="outCuad" class="resultado">—</div>
+</div>
+</div>
+</div>
+
+<div class="subtema">
+<h3>Ejercicios prácticos (autocorregibles)</h3>
+<ol>
+<li>Triángulo b=8, h=5 → Área:<br><input id="ex1" type="number"></li>
+<li>Cuadrado lado=7 → Área:<br><input id="ex2" type="number"></li>
+<li>Círculo r=6 → Área:<br><input id="ex3" type="number"></li>
+</ol>
+<button class="btn" onclick="chequearEjercicios()">Chequear respuestas</button>
+<div id="outEj" class="resultado">—</div>
+</div>
+
+<div class="subtema">
+<h3>Mini-quiz (5 preguntas)</h3>
+<div id="quiz"></div>
+</div>
+
+<div class="subtema">
+<h3>Tip memotécnico</h3>
+<p>Para recordar fórmulas de área: "Base por altura y mitad, en triángulos se ve feliz". Para cuadrados y rectángulos, "lado por lado o base por altura".</p>
+</div>
+<div class="acciones">
+<a href="/cursos/matematica/basico.html" class="btn" title="Volver a operaciones"><img src="https://img.icons8.com/color/48/home.png" alt="home"> Nivel Basico</a>
+<a href="/cursos/matematica/basico/perimetro-area.html" class="btn" title="Siguiente: operaciones"><img src="https://img.icons8.com/color/48/right.png" alt="next"> Siguiente: Perimetro y Área</a>
+<a href="/cursos.html" class="btn" title="Volver a cursos" style="background:#444;"><img src="https://img.icons8.com/color/48/left.png" alt="volver"> Cursos</a>
+</div>
+</main>
+  <a href="https://wa.me/51962153019?text=%23menu" class="chloe-bot">
+    <img src="/img/logo/logo-chloebot.png" alt="Chatbot Chloe">
+
+<footer>
+<p>Learnix &copy; 2025</p>
+</footer>
+
+<script>
+let puntosGlobales = 0;
+let ejerciciosCompletados = false;
+let quizCompletado = false;
+
+// Funciones interactivas
+function areaTriangulo(){
+  const b=parseFloat(document.getElementById("triBase").value);
+  const h=parseFloat(document.getElementById("triAlt").value);
+  if(isNaN(b)||isNaN(h)){alert("Ingrese valores válidos");return;}
+  const A=(b*h/2).toFixed(2);
+  document.getElementById("outTri").innerText=`Área = ${A}`;
+}
+
+function areaCuadrado(){
+  const l=parseFloat(document.getElementById("lado").value);
+  if(isNaN(l)){alert("Ingrese valores válidos");return;}
+  const A=(l*l).toFixed(2);
+  document.getElementById("outCuad").innerText=`Área = ${A}`;
+}
+
+function chequearEjercicios(){
+  if(ejerciciosCompletados){ alert("Ya completaste estos ejercicios."); return; }
+  let punt=0; let feedback="";
+  const r1=parseFloat(document.getElementById("ex1").value);
+  const r2=parseFloat(document.getElementById("ex2").value);
+  const r3=parseFloat(document.getElementById("ex3").value);
+
+  if(r1===20){ punt+=10; feedback+="Ejercicio 1 correcto.\n"; } else { feedback+="Ejercicio 1 incorrecto. Área=20\n"; }
+  if(r2===49){ punt+=10; feedback+="Ejercicio 2 correcto.\n"; } else { feedback+="Ejercicio 2 incorrecto. Área=49\n"; }
+  if(r3===113.1){ punt+=10; feedback+="Ejercicio 3 correcto.\n"; } else { feedback+="Ejercicio 3 incorrecto. Área≈113.1\n"; }
+
+  puntosGlobales+=punt;
+  document.getElementById("puntos").innerText=puntosGlobales;
+  document.getElementById("outEj").innerText=feedback;
+  ejerciciosCompletados=true;
+  document.querySelector(".points").classList.add("pulse");
+  setTimeout(()=>document.querySelector(".points").classList.remove("pulse"),360);
+}
+
+// Mini-quiz
+const preguntas=[
+  {q:"Área de un rectángulo base=5, altura=3", r:"15", explanation:"Área = base × altura = 5×3=15"},
+  {q:"Perímetro de un cuadrado lado=4", r:"16", explanation:"Perímetro = 4×lado = 4×4=16"},
+  {q:"Volumen de un cubo lado=2", r:"8", explanation:"Volumen = lado³ = 2³=8"},
+  {q:"Área círculo radio=3 (π≈3.14)", r:"28.26", explanation:"Área = π×r² ≈ 3.14×3²=28.26"},
+  {q:"Área triángulo b=6, h=4", r:"12", explanation:"Área = (b×h)/2 = (6×4)/2=12"}
+];
+
+function generarQuiz(){
+  if(quizCompletado) return;
+  const quizDiv=document.getElementById("quiz");
+  preguntas.forEach((p,i)=>{
+    const div=document.createElement("div");
+    div.className="quiz-question";
+    div.innerHTML=`<label>${i+1}. ${p.q}</label><br>
+    <input type="text" id="preg${i}" placeholder="Respuesta">
+    <div class="small" id="exp${i}"></div>`;
+    quizDiv.appendChild(div);
+  });
+  const btn=document.createElement("button");
+  btn.className="btn";
+  btn.innerText="Enviar Quiz";
+  btn.onclick=chequearQuiz;
+  quizDiv.appendChild(btn);
+}
+
+function chequearQuiz(){
+  if(quizCompletado){ alert("Ya completaste el quiz."); return; }
+  let total=0;
+  preguntas.forEach((p,i)=>{
+    const val=document.getElementById(`preg${i}`).value.trim();
+    const expDiv=document.getElementById(`exp${i}`);
+    if(val===p.r){ total+=10; expDiv.innerHTML=`✅ Correcto`; expDiv.className="feedback-item correct"; }
+    else{ expDiv.innerHTML=`❌ Incorrecto. ${p.explanation}`; expDiv.className="feedback-item wrong"; }
+  });
+  puntosGlobales+=total;
+  document.getElementById("puntos").innerText=puntosGlobales;
+  quizCompletado=true;
+  document.querySelector(".points").classList.add("pulse");
+  setTimeout(()=>document.querySelector(".points").classList.remove("pulse"),360);
+
+  // Actualizar puntos en localStorage
+  const puntosActuales = parseInt(localStorage.getItem('learnix_points_globales')) || 0;
+  localStorage.setItem('learnix_points_globales', puntosActuales + puntosGlobales);
+}
+
+generarQuiz();
+</script>
+</body>
+</html>

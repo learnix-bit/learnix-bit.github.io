@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prueba Diagnóstica - Comunicación</title>
+  <link rel="stylesheet" href="../../../css/style.css">
+  <style>
+    /* ======= ESTILOS BASE ======= */
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body {
+      background-color:#1e1e1e;
+      background-image: linear-gradient(135deg, #1e1e1e, #252525);
+      color:#e0e0e0; display:flex; flex-direction:column; min-height:100vh;
+    }
+    header {
+      background-color:#1e1e1e; display:flex; justify-content:space-between; align-items:center;
+      padding:15px 30px; position:sticky; top:0; z-index:100; border-bottom:2px solid #2e2e2e;
+    }
+    header .logo { display:flex; align-items:center; gap:10px; }
+    header .logo img { height:40px; }
+    header nav a {
+      margin-left:20px; font-weight:500; color:#bbb; text-decoration:none; transition:color .3s ease;
+    }
+    header nav a:hover, header nav a.active { color:#00bcd4; }
+
+    footer {
+      background-color:#1e1e1e; text-align:center; padding:15px; border-top:2px solid #2e2e2e; margin-top:auto;
+    }
+    .btn {
+      display:inline-block; background-color:#00bcd4; color:#fff; padding:10px 20px; border-radius:8px;
+      margin-top:10px; transition:background .3s ease; text-decoration:none;
+    }
+    .btn:hover { background-color:#008ba3; }
+
+    /* ======= CONTENIDO ======= */
+    .contenido {
+      padding:40px 20px; max-width:1000px; margin:auto; text-align:center;
+    }
+    .contenido h2 {
+      font-size:2.2rem; color:#00bcd4; margin-bottom:20px;
+    }
+    .contenido p {
+      font-size:1.1rem; color:#ccc; margin-bottom:30px;
+    }
+    .subtema {
+      background-color:#2a2a2a; padding:20px; border-radius:12px;
+      margin-bottom:18px; box-shadow:0 4px 12px rgba(0,0,0,.3);
+      text-align:left;
+    }
+    .subtema h3 {
+      color:#fff; font-size:1.2rem; margin-bottom:10px;
+    }
+    .subtema p { color:#bbb; font-size:1rem; margin-bottom:10px; }
+    .resultado {
+      margin-top:10px; color:#fff; font-weight:700;
+      background: rgba(0,0,0,0.25); padding:10px; border-radius:8px;
+    }
+    .quiz-question { margin-bottom:12px; color:#ddd; }
+    .feedback-item { padding:10px; border-radius:8px; margin-bottom:8px; }
+    .correct { background: rgba(0,128,0,0.12); border-left:4px solid #20c997; color:#c6ffd9; }
+    .wrong { background: rgba(255,0,0,0.08); border-left:4px solid #ff6b6b; color:#ffd9d9; }
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado -->
+  <header>
+    <div class="logo">
+      <img src="../..//img/logo/logo.svg" alt="Learnix Logo">
+      <h1>Learnix</h1>
+    </div>
+    <nav>
+      <a href="../../../index.html">Inicio</a>
+      <a href="../../../cursos.html">Cursos</a>
+      <a href="../../../perfil.html">Perfil</a>
+      <a href="../../../login.html">Login</a>
+      <a href="../../../favoritos.html">Favoritos</a>
+    </nav>
+  </header>
+
+  <!-- Contenido -->
+  <main class="contenido">
+    <h2>Prueba Diagnóstica - Comunicación</h2>
+    <p>Responde las siguientes preguntas para identificar los temas que necesitas reforzar. Al finalizar, recibirás recomendaciones personalizadas.</p>
+
+    <!-- Preguntas por nivel -->
+    <form id="diagnosticoForm">
+      <!-- Nivel Básico -->
+      <div class="subtema">
+        <h3>Nivel Básico</h3>
+        <div class="quiz-question">
+          <label>1) ¿Qué es la comprensión lectora?</label><br>
+          <label><input type="radio" name="q1" value="a"> Leer rápidamente un texto.</label><br>
+          <label><input type="radio" name="q1" value="b"> Entender el significado de un texto.</label>
+        </div>
+        <div class="quiz-question">
+          <label>2) ¿Qué es un sinónimo?</label><br>
+          <label><input type="radio" name="q2" value="a"> Una palabra con significado opuesto.</label><br>
+          <label><input type="radio" name="q2" value="b"> Una palabra con significado similar.</label>
+        </div>
+        <div class="quiz-question">
+          <label>3) ¿Qué es la ortografía?</label><br>
+          <label><input type="radio" name="q3" value="a"> El uso correcto de las palabras en un texto.</label><br>
+          <label><input type="radio" name="q3" value="b"> El uso correcto de las reglas de escritura.</label>
+        </div>
+        <div class="quiz-question">
+          <label>4) ¿Qué es un antónimo?</label><br>
+          <label><input type="radio" name="q4" value="a"> Una palabra con significado opuesto.</label><br>
+          <label><input type="radio" name="q4" value="b"> Una palabra con significado similar.</label>
+        </div>
+        <div class="quiz-question">
+          <label>5) ¿Qué son los tipos de texto?</label><br>
+          <label><input type="radio" name="q5" value="a"> Clasificaciones de textos según su propósito.</label><br>
+          <label><input type="radio" name="q5" value="b"> Reglas gramaticales.</label>
+        </div>
+      </div>
+
+      <!-- Nivel Intermedio -->
+      <div class="subtema">
+        <h3>Nivel Intermedio</h3>
+        <div class="quiz-question">
+          <label>6) ¿Qué son los conectores textuales?</label><br>
+          <label><input type="radio" name="q6" value="a"> Palabras que unen ideas en un texto.</label><br>
+          <label><input type="radio" name="q6" value="b"> Palabras que describen objetos.</label>
+        </div>
+        <div class="quiz-question">
+          <label>7) ¿Qué es una figura literaria?</label><br>
+          <label><input type="radio" name="q7" value="a"> Una técnica para embellecer el lenguaje.</label><br>
+          <label><input type="radio" name="q7" value="b"> Una regla gramatical.</label>
+        </div>
+        <div class="quiz-question">
+          <label>8) ¿Qué es la cohesión textual?</label><br>
+          <label><input type="radio" name="q8" value="a"> La relación lógica entre las ideas de un texto.</label><br>
+          <label><input type="radio" name="q8" value="b"> La estructura de un párrafo.</label>
+        </div>
+        <div class="quiz-question">
+          <label>9) ¿Qué es la gramática?</label><br>
+          <label><input type="radio" name="q9" value="a"> El estudio de las reglas del lenguaje.</label><br>
+          <label><input type="radio" name="q9" value="b"> El uso de sinónimos y antónimos.</label>
+        </div>
+        <div class="quiz-question">
+          <label>10) ¿Qué es un texto argumentativo?</label><br>
+          <label><input type="radio" name="q10" value="a"> Un texto que presenta opiniones y argumentos.</label><br>
+          <label><input type="radio" name="q10" value="b"> Un texto que describe objetos.</label>
+        </div>
+      </div>
+
+      <!-- Nivel Avanzado -->
+      <div class="subtema">
+        <h3>Nivel Avanzado</h3>
+        <div class="quiz-question">
+          <label>11) ¿Qué es la retórica?</label><br>
+          <label><input type="radio" name="q11" value="a"> El arte de hablar o escribir de manera persuasiva.</label><br>
+          <label><input type="radio" name="q11" value="b"> Una técnica para contar historias.</label>
+        </div>
+        <div class="quiz-question">
+          <label>12) ¿Qué es un ensayo?</label><br>
+          <label><input type="radio" name="q12" value="a"> Un texto narrativo.</label><br>
+          <label><input type="radio" name="q12" value="b"> Un texto que analiza o evalúa un tema.</label>
+        </div>
+        <div class="quiz-question">
+          <label>13) ¿Qué es la comprensión crítica?</label><br>
+          <label><input type="radio" name="q13" value="a"> Leer textos rápidamente.</label><br>
+          <label><input type="radio" name="q13" value="b"> Analizar y evaluar textos reflexivamente.</label>
+        </div>
+        <div class="quiz-question">
+          <label>14) ¿Qué son los estilos literarios?</label><br>
+          <label><input type="radio" name="q14" value="a"> Características y técnicas de expresión en obras escritas.</label><br>
+          <label><input type="radio" name="q14" value="b"> Reglas gramaticales.</label>
+        </div>
+        <div class="quiz-question">
+          <label>15) ¿Qué es un debate?</label><br>
+          <label><input type="radio" name="q15" value="a"> Una discusión estructurada para presentar argumentos.</label><br>
+          <label><input type="radio" name="q15" value="b"> Una técnica para escribir ensayos.</label>
+        </div>
+      </div>
+
+      <!-- Nivel Básico - Tema 2 -->
+      <div class="subtema">
+        <h3>Nivel Básico - Tema 2</h3>
+        <div class="quiz-question">
+          <label>16) ¿Qué es un texto narrativo?</label><br>
+          <label><input type="radio" name="q16" value="a"> Un texto que cuenta una historia.</label><br>
+          <label><input type="radio" name="q16" value="b"> Un texto que presenta datos y hechos.</label>
+        </div>
+        <div class="quiz-question">
+          <label>17) ¿Qué es el tema de un texto?</label><br>
+          <label><input type="radio" name="q17" value="a"> La idea principal que se desarrolla en el texto.</label><br>
+          <label><input type="radio" name="q17" value="b"> El lugar donde ocurre la acción.</label>
+        </div>
+        <div class="quiz-question">
+          <label>18) ¿Qué es el argumento en un texto?</label><br>
+          <label><input type="radio" name="q18" value="a"> La razón o explicación que se da sobre un tema.</label><br>
+          <label><input type="radio" name="q18" value="b"> La conclusión final del texto.</label>
+        </div>
+        <div class="quiz-question">
+          <label>19) ¿Qué es la estructura de un texto?</label><br>
+          <label><input type="radio" name="q19" value="a"> La organización y disposición de las partes de un texto.</label><br>
+          <label><input type="radio" name="q19" value="b"> El estilo personal del autor.</label>
+        </div>
+        <div class="quiz-question">
+          <label>20) ¿Qué es un párrafo?</label><br>
+          <label><input type="radio" name="q20" value="a"> Un conjunto de oraciones que desarrollan una idea.</label><br>
+          <label><input type="radio" name="q20" value="b"> Una lista de elementos.</label>
+        </div>
+      </div>
+
+      <!-- Nivel Intermedio - Tema 2 -->
+      <div class="subtema">
+        <h3>Nivel Intermedio - Tema 2</h3>
+        <div class="quiz-question">
+          <label>21) ¿Qué es la descripción en un texto?</label><br>
+          <label><input type="radio" name="q21" value="a"> La representación detallada de personas, lugares o cosas.</label><br>
+          <label><input type="radio" name="q21" value="b"> La exposición de argumentos a favor o en contra.</label>
+        </div>
+        <div class="quiz-question">
+          <label>22) ¿Qué es la narración?</label><br>
+          <label><input type="radio" name="q22" value="a"> Contar una historia con un principio, desarrollo y fin.</label><br>
+          <label><input type="radio" name="q22" value="b"> Hacer una lista de características.</label>
+        </div>
+        <div class="quiz-question">
+          <label>23) ¿Qué es la exposición en un texto?</label><br>
+          <label><input type="radio" name="q23" value="a"> Presentar información y explicar un tema.</label><br>
+          <label><input type="radio" name="q23" value="b"> Contar un acontecimiento personal.</label>
+        </div>
+        <div class="quiz-question">
+          <label>24) ¿Qué es un ensayo argumentativo?</label><br>
+          <label><input type="radio" name="q24" value="a"> Un texto que defiende una postura con argumentos.</label><br>
+          <label><input type="radio" name="q24" value="b"> Un texto que narra una historia.</label>
+        </div>
+        <div class="quiz-question">
+          <label>25) ¿Qué es un texto expositivo?</label><br>
+          <label><input type="radio" name="q25" value="a"> Un texto que explica o informa sobre un tema.</label><br>
+          <label><input type="radio" name="q25" value="b"> Un texto que presenta una historia ficticia.</label>
+        </div>
+      </div>
+
+      <!-- Nivel Avanzado - Tema 2 -->
+      <div class="subtema">
+        <h3>Nivel Avanzado - Tema 2</h3>
+        <div class="quiz-question">
+          <label>26) ¿Qué es un análisis crítico?</label><br>
+          <label><input type="radio" name="q26" value="a"> Evaluar y juzgar un texto de manera objetiva.</label><br>
+          <label><input type="radio" name="q26" value="b"> Hacer un resumen de un texto.</label>
+        </div>
+        <div class="quiz-question">
+          <label>27) ¿Qué es la síntesis de un texto?</label><br>
+          <label><input type="radio" name="q27" value="a"> Resumir las ideas principales de un texto.</label><br>
+          <label><input type="radio" name="q27" value="b"> Ampliar la información de un texto.</label>
+        </div>
+        <div class="quiz-question">
+          <label>28) ¿Qué es un texto persuasivo?</label><br>
+          <label><input type="radio" name="q28" value="a"> Un texto que intenta convencer al lector de algo.</label><br>
+          <label><input type="radio" name="q28" value="b"> Un texto que narra un sueño.</label>
+        </div>
+        <div class="quiz-question">
+          <label>29) ¿Qué es un texto informativo?</label><br>
+          <label><input type="radio" name="q29" value="a"> Un texto que proporciona datos y hechos sobre un tema.</label><br>
+          <label><input type="radio" name="q29" value="b"> Un texto que cuenta una historia inventada.</label>
+        </div>
+        <div class="quiz-question">
+          <label>30) ¿Qué es un texto literario?</label><br>
+          <label><input type="radio" name="q30" value="a"> Un texto que expresa la creatividad y la imaginación del autor.</label><br>
+          <label><input type="radio" name="q30" value="b"> Un texto que presenta información científica.</label>
+        </div>
+      </div>
+
+      <button class="btn" type="button" onclick="evaluarDiagnostico()">Evaluar</button>
+    </form>
+
+    <div id="resultadoDiagnostico" class="resultado">—</div>
+  </main>
+
+  <script>
+    function evaluarDiagnostico() {
+      const respuestasCorrectas = {
+        q1: "b", q2: "b", q3: "b", q4: "a", q5: "a",
+        q6: "a", q7: "a", q8: "a", q9: "a", q10: "a",
+        q11: "a", q12: "b", q13: "b", q14: "a", q15: "a",
+        q16: "a", q17: "a", q18: "a", q19: "a", q20: "a",
+        q21: "a", q22: "a", q23: "a", q24: "a", q25: "a",
+        q26: "a", q27: "a", q28: "a", q29: "a", q30: "a"
+      };
+
+      const temas = {
+        q1: { nivel: "Básico", tema: "Comprensión lectora", link: "./basico/comprension-lectora.html" },
+        q2: { nivel: "Básico", tema: "Sinónimos y antónimos", link: "./basico/sinonimos-antonimos.html" },
+        q3: { nivel: "Básico", tema: "Ortografía y puntuación", link: "./basico/ortografia-puntuacion.html" },
+        q4: { nivel: "Básico", tema: "Sinónimos y antónimos", link: "./basico/sinonimos-antonimos.html" },
+        q5: { nivel: "Básico", tema: "Tipos de texto", link: "./basico/tipos-texto.html" },
+        q6: { nivel: "Intermedio", tema: "Conectores textuales", link: "./intermedio/conectores-cohesion.html" },
+        q7: { nivel: "Intermedio", tema: "Figuras literarias", link: "./intermedio/figuras-literarias.html" },
+        q8: { nivel: "Intermedio", tema: "Cohesión textual", link: "./intermedio/conectores-cohesion.html" },
+        q9: { nivel: "Intermedio", tema: "Gramática", link: "./intermedio/reglas-gramaticales.html" },
+        q10: { nivel: "Intermedio", tema: "Textos argumentativos", link: "./intermedio/produccion-textos.html" },
+        q11: { nivel: "Avanzado", tema: "Retórica", link: "./avanzado/retorica-debate.html" },
+        q12: { nivel: "Avanzado", tema: "Ensayos", link: "./avanzado/produccion-ensayos.html" },
+        q13: { nivel: "Avanzado", tema: "Comprensión crítica", link: "./avanzado/comprension-critica.html" },
+        q14: { nivel: "Avanzado", tema: "Estilos literarios", link: "./avanzado/estilos-literarios.html" },
+        q15: { nivel: "Avanzado", tema: "Debate", link: "./avanzado/retorica-debate.html" },
+        q16: { nivel: "Básico", tema: "Textos narrativos", link: "./basico/tipos-texto.html" },
+        q17: { nivel: "Básico", tema: "Tema de un texto", link: "./basico/tipos-texto.html" },
+        q18: { nivel: "Básico", tema: "Argumento en un texto", link: "./basico/tipos-texto.html" },
+        q19: { nivel: "Básico", tema: "Estructura de un texto", link: "./basico/tipos-texto.html" },
+        q20: { nivel: "Básico", tema: "Párrafos", link: "./basico/tipos-texto.html" },
+        q21: { nivel: "Intermedio", tema: "Descripción en textos", link: "./intermedio/produccion-textos.html" },
+        q22: { nivel: "Intermedio", tema: "Narración", link: "./intermedio/produccion-textos.html" },
+        q23: { nivel: "Intermedio", tema: "Exposición en textos", link: "./intermedio/produccion-textos.html" },
+        q24: { nivel: "Intermedio", tema: "Ensayo argumentativo", link: "./intermedio/produccion-textos.html" },
+        q25: { nivel: "Intermedio", tema: "Textos expositivos", link: "./intermedio/produccion-textos.html" },
+        q26: { nivel: "Avanzado", tema: "Análisis crítico", link: "./avanzado/comprension-critica.html" },
+        q27: { nivel: "Avanzado", tema: "Síntesis de textos", link: "./avanzado/comprension-critica.html" },
+        q28: { nivel: "Avanzado", tema: "Textos persuasivos", link: "./avanzado/retorica-debate.html" },
+        q29: { nivel: "Avanzado", tema: "Textos informativos", link: "./avanzado/produccion-ensayos.html" },
+        q30: { nivel: "Avanzado", tema: "Textos literarios", link: "./avanzado/estilos-literarios.html" }
+      };
+
+      let puntaje = 0;
+      let detalles = "";
+
+      for (const [pregunta, respuesta] of Object.entries(respuestasCorrectas)) {
+        const opciones = document.getElementsByName(pregunta);
+        let respuestaUsuario = null;
+
+        for (const opcion of opciones) {
+          if (opcion.checked) {
+            respuestaUsuario = opcion.value;
+            break;
+          }
+        }
+
+        if (respuestaUsuario === respuesta) {
+          puntaje++;
+        } else {
+          const tema = temas[pregunta];
+          if (tema) {
+            detalles += `<div class=\"feedback-item wrong\">Pregunta ${pregunta.replace("q", "")}: Incorrecta. Tema recomendado: <a href=\"${tema.link}\" style=\"color:#00bcd4;\">${tema.tema} (${tema.nivel})</a></div>`;
+          }
+        }
+      }
+
+      const porcentaje = (puntaje / Object.keys(respuestasCorrectas).length) * 100;
+      let mensaje = `Tu puntaje es ${puntaje} de ${Object.keys(respuestasCorrectas).length} preguntas correctas (${porcentaje.toFixed(2)}%).`;
+
+      if (porcentaje === 100) {
+        mensaje += " ¡Excelente trabajo! No necesitas reforzar ningún tema.";
+      } else if (porcentaje >= 70) {
+        mensaje += " Buen trabajo. Tienes una buena comprensión de los temas.";
+      } else if (porcentaje >= 50) {
+        mensaje += " Estás cerca, pero hay algunos temas que necesitas revisar.";
+      } else {
+        mensaje += " Es recomendable que refuerces los siguientes temas:<br>" + detalles;
+      }
+
+      document.getElementById("resultadoDiagnostico").innerHTML = mensaje;
+    }
+  </script>
+</body>
+</html>

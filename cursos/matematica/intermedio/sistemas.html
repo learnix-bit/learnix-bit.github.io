@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Learnix - Sistemas de Ecuaciones</title>
+<style>
+/* ======= MISMO ESTILO QUE APROBASTE ======= */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+body{background-color:#1e1e1e;background-image:linear-gradient(135deg,#1e1e1e,#252525);color:#e0e0e0;display:flex;flex-direction:column;min-height:100vh;}
+header{background-color:#1e1e1e;display:flex;justify-content:space-between;align-items:center;padding:15px 30px;position:sticky;top:0;z-index:100;border-bottom:2px solid #2e2e2e;}
+header .logo{display:flex;align-items:center;gap:10px;}
+header .logo img{height:40px;}
+header nav{display:flex;align-items:center;gap:8px;}
+header nav a{margin-left:20px;font-weight:500;color:#bbb;text-decoration:none;transition:color .3s ease;}
+header nav a:hover, header nav a.active{color:#00bcd4;}
+.header-right{display:flex;align-items:center;gap:14px;}
+.points{background-color:#2a2a2a;color:#ffd36e;padding:8px 12px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;font-weight:700;border:1px solid #333;}
+.points img{width:20px;height:20px;display:block;}
+.points.pulse{animation:pulse .36s ease-in-out;}
+@keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.08);}100%{transform:scale(1);}}
+
+footer{background-color:#1e1e1e;text-align:center;padding:15px;border-top:2px solid #2e2e2e;margin-top:auto;}
+.btn{display:inline-flex;align-items:center;gap:8px;background-color:#00bcd4;color:#fff;padding:10px 20px;border-radius:8px;margin-top:10px;transition:background .3s ease;text-decoration:none;cursor:pointer;border:none;}
+.btn:hover{background-color:#008ba3;}
+.btn img{width:20px;height:20px;}
+
+.contenido{padding:40px 20px;max-width:980px;margin:auto;text-align:center;}
+.contenido h2{font-size:2.2rem;color:#00bcd4;margin-bottom:12px;}
+.lead{font-size:1.05rem;color:#ccc;margin-bottom:20px;line-height:1.6;}
+
+.subtema{background-color:#2a2a2a;padding:20px;border-radius:12px;margin-bottom:18px;box-shadow:0 4px 12px rgba(0,0,0,.3);text-align:left;}
+.subtema h3{color:#fff;font-size:1.2rem;margin-bottom:10px;}
+.subtema p, .subtema li{color:#bbb;font-size:1rem;margin-bottom:8px;line-height:1.55;}
+
+.row{display:flex;gap:18px;flex-wrap:wrap;}
+.col{flex:1 1 280px;min-width:260px}
+
+pre.code{background:#212121;padding:12px;border-radius:8px;color:#dcdcdc;overflow:auto;font-size:.95rem;border:1px solid #2b2b2b;}
+
+.ejercicio{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+/* inputs oscuros translúcidos */
+input[type="number"], input[type="text"], select, textarea, .quiz button{
+  padding:10px;border-radius:8px;border:1px solid #2e2e2e;background:#00000040;color:#e0e0e0;outline:none;
+}
+input::placeholder, textarea::placeholder{color:#9aa0a6;}
+label{color:#ccc;}
+
+.resultado{margin-top:10px;color:#fff;font-weight:700;background: rgba(0,0,0,0.25);padding:10px;border-radius:8px;}
+
+.acciones{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:14px 0;}
+
+.feedback-list{margin-top:12px;color:#e0e0e0;text-align:left;}
+.feedback-item{padding:10px;border-radius:8px;margin-bottom:8px;animation:slideIn .28s ease;}
+.correct{background: rgba(0,128,0,0.12);border-left:4px solid #20c997;color:#c6ffd9;}
+.wrong{background: rgba(255,0,0,0.08);border-left:4px solid #ff6b6b;color:#ffd9d9;}
+@keyframes slideIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* tarjetas y animaciones pro */
+.tool-card{background:#1f1f1f;border:1px solid #2b2b2b;border-radius:12px;padding:14px;margin-bottom:12px;transition:transform .2s ease, box-shadow .2s ease;}
+.tool-card:hover{transform:translateY(-4px);box-shadow:0 10px 22px rgba(0,0,0,.5);}
+.quiz-card{background:#1f1f1f;border-radius:12px;padding:14px;margin-bottom:12px;transition:transform .18s ease;}
+.quiz-title{color:#e5e5e5;font-weight:600;margin-bottom:8px;}
+.badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.78rem;background:#00bcd425;color:#84e7f1;border:1px solid #00bcd4;}
+
+@media(max-width:640px){.contenido{padding:20px 12px;}.row{flex-direction:column;}header{padding:12px;}}
+
+/* Bot flotante Chloe */
+.chloe-bot{position:fixed;bottom:20px;right:20px;background-color:#00bcd4;border-radius:50%;width:60px;height:60px;display:flex;justify-content:center;align-items:center;box-shadow:0 4px 8px rgba(0,0,0,.2);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="../../../img/logo/logo.svg" alt="Learnix Logo">
+    <h1>Learnix</h1>
+  </div>
+  <nav>
+    <a href="../../../index.html">Inicio</a>
+    <a href="../../../cursos.html" class="active">Cursos</a>
+    <a href="../../../perfil.html">Perfil</a>
+    <a href="../../../login.html">Login</a>
+    <a href="../../../favoritos.html">Favoritos</a>
+  </nav>
+  <div class="header-right">
+    <div class="points" title="Puntos acumulados">
+      <img src="https://img.icons8.com/fluency/48/star.png" alt="star">
+      <span id="puntos">0</span>
+    </div>
+  </div>
+</header>
+
+<main class="contenido">
+  <h2>Sistemas de Ecuaciones — Profundización</h2>
+  <p class="lead">Definición, propiedades, métodos (sustitución, eliminación, Cramer), ejemplos paso a paso, herramienta interactiva, ejercicios autocorregibles y mini-quiz con puntos globales y retroalimentación detallada.</p>
+
+  <!-- 1) Definición -->
+  <section class="subtema">
+    <h3>1) Definición</h3>
+    <p>Un <strong>sistema de ecuaciones</strong> es un conjunto de dos o más ecuaciones que comparten incógnitas. Resolver el sistema significa encontrar los valores que satisfacen todas las ecuaciones simultáneamente.</p>
+    <p>Forma general (2×2):</p>
+    <pre class="code">a₁·x + b₁·y = c₁
+a₂·x + b₂·y = c₂</pre>
+    <p>Soluciones: puede haber <strong>una única solución</strong> (sistema compatible determinado), <strong>infinitas soluciones</strong> (compatibilidad indeterminada) o <strong>ninguna</strong> (incompatible).</p>
+  </section>
+
+  <!-- 2) Propiedades y fórmulas -->
+  <section class="subtema">
+    <h3>2) Propiedades y fórmulas</h3>
+    <ul style="color:#ccc;">
+      <li><strong>Determinante (D):</strong> D = a₁·b₂ − a₂·b₁</li>
+      <li><strong>Cramer's rule:</strong> Dx = c₁·b₂ − c₂·b₁, Dy = a₁·c₂ − a₂·c₁ → x = Dx/D, y = Dy/D (si D ≠ 0)</li>
+      <li><strong>Si D = 0:</strong>
+        <ul>
+          <li>Si Dx = Dy = 0 → infinitas soluciones</li>
+          <li>Si Dx ≠ 0 ó Dy ≠ 0 → sin solución</li>
+        </ul>
+      </li>
+      <li><strong>Métodos:</strong> sustitución, eliminación (lineal combination), Cramer (matricial).</li>
+    </ul>
+  </section>
+
+  <!-- 3) Ejemplos resueltos -->
+  <section class="subtema">
+    <h3>3) Ejemplos resueltos paso a paso</h3>
+
+    <div class="row">
+      <div class="col">
+        <h4>Ejemplo A — Sustitución</h4>
+        <pre class="code">
+Sistema:
+x + y = 5
+2x − y = 1
+
+Paso 1: despejar en la 1ª: y = 5 − x
+Paso 2: sustituir en 2ª: 2x − (5 − x) = 1
+2x − 5 + x = 1
+3x = 6
+x = 2
+y = 5 − 2 = 3
+Solución: (x, y) = (2, 3)
+        </pre>
+      </div>
+
+      <div class="col">
+        <h4>Ejemplo B — Cramer</h4>
+        <pre class="code">
+Sistema:
+3x + 2y = 12
+x − y   = 1
+
+D  = 3·(−1) − 1·2 = −3 − 2 = −5
+Dx = 12·(−1) − 1·2 = −12 − 2 = −14
+Dy = 3·1 − 1·12 = 3 − 12 = −9
+
+x = Dx/D = (−14)/(−5) = 14/5 = 2.8
+y = Dy/D = (−9)/(−5) = 9/5 = 1.8
+
+Solución: (x, y) = (2.8, 1.8)
+        </pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4) Herramientas interactivas -->
+  <section class="subtema">
+    <h3>4) Herramientas interactivas</h3>
+    <div class="row">
+      <div class="col">
+        <div class="tool-card">
+          <h4>Calculadora (Cramer)</h4>
+          <p class="small">Introduce a₁, b₁, c₁, a₂, b₂, c₂ y pulsa <strong>Resolver</strong>. Se muestran pasos.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <input id="a1" type="number" step="any" placeholder="a₁" style="width:85px;">
+            <input id="b1" type="number" step="any" placeholder="b₁" style="width:85px;">
+            <input id="c1" type="number" step="any" placeholder="c₁" style="width:85px;">
+            <input id="a2" type="number" step="any" placeholder="a₂" style="width:85px;">
+            <input id="b2" type="number" step="any" placeholder="b₂" style="width:85px;">
+            <input id="c2" type="number" step="any" placeholder="c₂" style="width:85px;">
+          </div>
+          <div style="margin-top:8px;">
+            <button class="btn" onclick="resolverCramer()"><img src="https://img.icons8.com/color/48/calculator.png" alt="calc"> Resolver</button>
+            <button class="btn" onclick="limpiarCramer()" style="background:#666;">Limpiar</button>
+          </div>
+          <div id="outCramer" class="resultado" style="margin-top:10px;">—</div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="tool-card">
+          <h4>Analizador texto (forma: 2x+3y=7; x-y=1)</h4>
+          <p class="small">Pega dos ecuaciones separadas por punto y coma.</p>
+          <input id="sysText" type="text" placeholder="ej. 2x+3y=7; x-y=1" style="min-width:210px;">
+          <div style="margin-top:8px;">
+            <button class="btn" onclick="analizarYSolver()"><img src="https://img.icons8.com/color/48/search.png" alt="parse"> Analizar y resolver</button>
+          </div>
+          <div id="outParse" class="resultado" style="margin-top:10px">—</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5) Ejercicios autocorregibles -->
+  <section class="subtema">
+    <h3>5) Ejercicios prácticos (autocorregibles)</h3>
+    <ol style="color:#ccc; margin-left:18px;">
+      <li>
+        Resuelve: <strong>x + y = 5</strong> ; <strong>2x − y = 1</strong>
+        → x = <input id="ex1x" type="text" placeholder="x" style="width:80px"> y = <input id="ex1y" type="text" placeholder="y" style="width:80px">
+      </li>
+      <li style="margin-top:10px;">
+        Resuelve: <strong>3x + 2y = 12</strong> ; <strong>x − y = 1</strong>
+        → x = <input id="ex2x" type="text" placeholder="x" style="width:80px"> y = <input id="ex2y" type="text" placeholder="y" style="width:80px">
+      </li>
+      <li style="margin-top:10px;">
+        Resuelve: <strong>2x + 4y = 10</strong> ; <strong>x + 2y = 5</strong>
+        → x = <input id="ex3x" type="text" placeholder="x" style="width:80px"> y = <input id="ex3y" type="text" placeholder="y" style="width:80px">
+      </li>
+    </ol>
+    <div style="margin-top:12px;">
+      <button class="btn" onclick="chequearEjercicios()"><img src="https://img.icons8.com/color/48/check.png" alt="check"> Chequear respuestas</button>
+      <div id="outEj" class="resultado" style="margin-top:10px">—</div>
+    </div>
+  </section>
+
+  <!-- 6) Mini-quiz -->
+  <section class="subtema">
+    <h3>6) Mini-Quiz (5 preguntas — 10 pts cada una)</h3>
+    <p class="small">Los puntos del quiz se suman a tus puntos globales (clave <code>puntosGlobales</code>) y solo pueden reclamarse una vez para evitar farmeo. Siempre verás el feedback con explicación.</p>
+    <div id="quiz"></div>
+    <div id="quizResultado" class="resultado" style="margin-top:12px">—</div>
+    <div id="feedback" class="feedback-list" aria-live="polite"></div>
+  </section>
+
+  <!-- 7) Tip mnemotécnico -->
+  <section class="subtema">
+    <h3>7) Tip de Memotecnia</h3>
+    <p><strong>“C.R.E.S.”</strong> — <em>C</em>ramer, <em>R</em>eemplaza (sustitución), <em>E</em>limina (eliminación), <em>S</em>implifica.  
+    Si una técnica no es clara, prueba la siguiente: empieza por sustituir, si hay fracciones pasa a eliminación, si hay coeficientes incómodos usa Cramer.</p>
+  </section>
+
+  <!-- Navegación -->
+  <div class="acciones">
+    <a href="../intermedio.html" class="btn" title="Volver a nivel intermedio"><img src="https://img.icons8.com/color/48/home.png" alt="home"> Nivel Intermedio</a>
+    <a href="ecuaciones-cuadraticas.html" class="btn" title="Siguiente: Ecuaciones cuadráticas"><img src="https://img.icons8.com/color/48/right.png" alt="next"> Siguiente: Ecuaciones cuadráticas</a>
+    <a href="../../../cursos.html" class="btn" title="Volver a cursos" style="background:#444;"><img src="https://img.icons8.com/color/48/left.png" alt="volver"> Cursos</a>
+  </div>
+</main>
+
+<a href="#chatbot-chloe" class="chloe-bot" title="Chloe"><img src="../../../img/chatbot/chloe-icon.svg" alt="Chloe" style="width:38px;height:38px;"></a>
+<footer><p>© 2025 Learnix - NeoStudio</p></footer>
+
+<script>
+/* ===== PUNTOS GLOBALES ===== */
+const POINTS_KEY = 'puntosGlobales';
+const QUIZ_FLAG_KEY = 'learnix_quiz_sistemas_completed';
+const ANSWERS_KEY = 'learnix_quiz_sistemas_answers';
+let puntosGlobales = parseInt(localStorage.getItem(POINTS_KEY)) || 0;
+document.getElementById('puntos').textContent = puntosGlobales;
+
+/* ===== UTIL HELPERS ===== */
+function updatePointsBadge(){ document.getElementById('puntos').textContent = parseInt(localStorage.getItem(POINTS_KEY)) || 0; }
+function saveAnswers(key,obj){ localStorage.setItem(key, JSON.stringify(obj || {})); }
+function loadAnswers(key){ const r=localStorage.getItem(key); return r?JSON.parse(r):null; }
+
+/* Award points only once - same logic as en otras páginas */
+function awardPointsOnceIfNeeded(points, userAnswers){
+  if(localStorage.getItem(QUIZ_FLAG_KEY) === 'true') return {awarded:false,reason:'completed_before'};
+  if(points <= 0){
+    saveAnswers(ANSWERS_KEY, userAnswers || {});
+    return {awarded:false,reason:'no_points'};
+  }
+  const current = parseInt(localStorage.getItem(POINTS_KEY)) || 0;
+  localStorage.setItem(POINTS_KEY, current + points);
+  localStorage.setItem(QUIZ_FLAG_KEY,'true');
+  saveAnswers(ANSWERS_KEY, userAnswers || {});
+  updatePointsBadge();
+  return {awarded:true,newTotal: parseInt(localStorage.getItem(POINTS_KEY))};
+}
+
+/* ===== HERRAMIENTAS ===== */
+function resolverCramer(){
+  const a1 = parseFloat(document.getElementById('a1').value);
+  const b1 = parseFloat(document.getElementById('b1').value);
+  const c1 = parseFloat(document.getElementById('c1').value);
+  const a2 = parseFloat(document.getElementById('a2').value);
+  const b2 = parseFloat(document.getElementById('b2').value);
+  const c2 = parseFloat(document.getElementById('c2').value);
+  const out = document.getElementById('outCramer');
+
+  if([a1,b1,c1,a2,b2,c2].some(v => Number.isNaN(v))){
+    out.innerHTML = 'Introduce los 6 números (a₁,b₁,c₁,a₂,b₂,c₂).';
+    return;
+  }
+  const D = a1*b2 - a2*b1;
+  const Dx = c1*b2 - c2*b1;
+  const Dy = a1*c2 - a2*c1;
+
+  if(D === 0){
+    if(Math.abs(Dx) < 1e-12 && Math.abs(Dy) < 1e-12){
+      out.innerHTML = 'D = 0, Dx = 0 y Dy = 0 → <strong>Infinitas soluciones</strong> (las ecuaciones son dependientes).';
+    } else {
+      out.innerHTML = 'D = 0 pero Dx o Dy ≠ 0 → <strong>Sin solución</strong> (sistema incompatible).';
+    }
+    return;
+  }
+  const x = Dx / D;
+  const y = Dy / D;
+  out.innerHTML = `<strong>Pasos:</strong><br>
+D = a₁·b₂ − a₂·b₁ = ${a1}·${b2} − ${a2}·${b1} = ${D}<br>
+Dx = c₁·b₂ − c₂·b₁ = ${c1}·${b2} − ${c2}·${b1} = ${Dx}<br>
+Dy = a₁·c₂ − a₂·c₁ = ${a1}·${c2} − ${a2}·${c1} = ${Dy}<br>
+x = Dx/D = ${round(x)} , y = Dy/D = ${round(y)}.`;
+  const pEl = document.querySelector('.points'); if(pEl){ pEl.classList.add('pulse'); setTimeout(()=>pEl.classList.remove('pulse'),420); }
+}
+
+function limpiarCramer(){
+  ['a1','b1','c1','a2','b2','c2'].forEach(id => { const e=document.getElementById(id); if(e) e.value=''; });
+  document.getElementById('outCramer').textContent='—';
+}
+
+/* Parseador simple "2x+3y=7; x-y=1" */
+function analizarYSolver(){
+  const raw = (document.getElementById('sysText').value || '').trim();
+  const out = document.getElementById('outParse');
+  if(!raw.includes(';')){ out.textContent='Usa punto y coma para separar ecuaciones.'; return; }
+  const parts = raw.split(';').map(s => s.trim()).slice(0,2);
+  try{
+    const eqs = parts.map(p => parseEquation(p));
+    if(eqs.length !== 2){ out.textContent='No pude leer dos ecuaciones.'; return; }
+    const [e1,e2] = eqs;
+    // usar Cramer
+    const D = e1.a*e2.b - e2.a*e1.b;
+    const Dx = e1.c*e2.b - e2.c*e1.b;
+    const Dy = e1.a*e2.c - e2.a*e1.c;
+    if(D === 0){
+      if(Math.abs(Dx) < 1e-12 && Math.abs(Dy) < 1e-12) out.innerHTML='Infinitas soluciones (ecuaciones dependientes).';
+      else out.innerHTML='Sin solución (incompatibles).';
+      return;
+    }
+    out.innerHTML = `Detectado: ${e1.raw}  |  ${e2.raw} <br> x = ${round(Dx/D)}, y = ${round(Dy/D)}`;
+  }catch(err){
+    out.textContent = 'No se pudo parsear. Formato ejemplo: 2x+3y=7; x-y=1';
+  }
+}
+function parseEquation(text){
+  // normaliza: elimina espacios, convierte − a -
+  const s = text.replace(/\s+/g,'').replace(/−/g,'-');
+  // regex para ax ± by = c (a or b may be omitted => 1)
+  const m = s.match(/^([+\-]?\d*)x([+\-]\d*)y=([+\-]?\d+)$/i);
+  if(!m) throw new Error('Formato inválido');
+  const a = m[1] === '' || m[1] === '+' ? 1 : (m[1] === '-' ? -1 : parseFloat(m[1]));
+  const b = m[2] === '' || m[2] === '+' ? 1 : (m[2] === '-' ? -1 : parseFloat(m[2]));
+  const c = parseFloat(m[3]);
+  return {a,b,c,raw:text};
+}
+
+function round(n){ return Math.round(n*100000)/100000; }
+
+/* ===== EJERCICIOS AUTOCORREGIBLES ===== */
+function chequearEjercicios(){
+  const out = document.getElementById('outEj');
+  // respuestas correctas
+  // Ex1: (2,3)
+  const ex1x = (document.getElementById('ex1x').value||'').trim().replace(',', '.');
+  const ex1y = (document.getElementById('ex1y').value||'').trim().replace(',', '.');
+  // Ex2: (3,? Wait earlier example: 3x+2y=12 ; x - y =1 => x=3 y=2)
+  const ex2x = (document.getElementById('ex2x').value||'').trim().replace(',', '.');
+  const ex2y = (document.getElementById('ex2y').value||'').trim().replace(',', '.');
+  // Ex3: 2x + 4y =10 ; x + 2y = 5 -> second is exactly half of first => infinite solutions (dependent).
+  const ex3x = (document.getElementById('ex3x').value||'').trim().replace(',', '.');
+  const ex3y = (document.getElementById('ex3y').value||'').trim().replace(',', '.');
+
+  const ok1 = numberEqual(parseFloat(ex1x), 2) && numberEqual(parseFloat(ex1y), 3);
+  const ok2 = numberEqual(parseFloat(ex2x), 3) && numberEqual(parseFloat(ex2y), 2);
+  // For ex3 we expect the student to recognize infinite solutions — accept writing 'inf' or leaving blank? We'll check special
+  const infiniteExpected = (ex3x.toLowerCase()==='inf' || ex3y.toLowerCase()==='inf' || ex3x.toLowerCase()==='infinitas' || ex3y.toLowerCase()==='infinitas');
+  // If they give any solution pair that satisfies both equations accept it
+  const ex3numOk = (() => {
+    const xx = parseFloat(ex3x); const yy = parseFloat(ex3y);
+    if(Number.isFinite(xx) && Number.isFinite(yy)){
+      return numberEqual(2*xx + 4*yy, 10) && numberEqual(xx + 2*yy, 5);
+    }
+    return false;
+  })();
+
+  const ok3 = infiniteExpected || ex3numOk;
+
+  const arr = [ok1, ok2, ok3];
+  const correct = arr.filter(v=>v).length;
+
+  let details = [];
+  if(!ok1) details.push('1)  x + y = 5 ; 2x − y = 1  ⇒  x=2, y=3 (sustitución o eliminación).');
+  if(!ok2) details.push('2)  3x + 2y = 12 ; x − y = 1  ⇒  x=3, y=2 (despejar x=y+1 y sustituir).');
+  if(!ok3) details.push('3)  2x+4y=10 ; x+2y=5 → son la misma ecuación multiplicada → infinitas soluciones (es dependiente). Escribe "inf" o "infinitas".');
+
+  let msg = `${correct}/3 correctas.`;
+  if(correct !== 3) msg += ' — ' + details.join(' | ');
+  else msg += ' ¡Perfecto!';
+
+  // Bonus: si completa correctamente, da +5 pts una sola vez (clave específica)
+  const BONUS_KEY = 'sistemas_ej_bonus';
+  if(correct === 3 && !localStorage.getItem(BONUS_KEY)){
+    puntosGlobales = parseInt(localStorage.getItem(POINTS_KEY)) || 0;
+    puntosGlobales += 5;
+    localStorage.setItem(POINTS_KEY, puntosGlobales);
+    localStorage.setItem(BONUS_KEY, 'true');
+    updatePointsBadge();
+    msg += ' (+5 pts por ejercicios completos)';
+    const pEl = document.querySelector('.points'); if(pEl){ pEl.classList.add('pulse'); setTimeout(()=>pEl.classList.remove('pulse'),420); }
+  }
+
+  out.textContent = msg;
+}
+function numberEqual(a,b){ return Math.abs((a||0) - (b||0)) < 1e-6; }
+
+/* ===== MINI QUIZ ===== */
+const QUESTIONS = [
+  {
+    id:'q1',
+    text:'En el sistema x + y =5 ; 2x − y =1, ¿qué valor tiene x?',
+    options:{a:'1', b:'2', c:'3'},
+    correct:'b',
+    explanation:'Sustituye y=5−x en la segunda: 2x − (5−x)=1 → 3x=6 → x=2. Si respondiste otra cosa, probablemente omitiste cambiar signos.'
+  },
+  {
+    id:'q2',
+    text:'Determinante D para a₁x+b₁y=c₁ ; a₂x+b₂y=c₂ se calcula como:',
+    options:{a:'a₁·a₂ − b₁·b₂', b:'a₁·b₂ − a₂·b₁', c:'c₁·c₂ − a₁·b₁'},
+    correct:'b',
+    explanation:'D = a₁·b₂ − a₂·b₁. Las otras fórmulas confunden pares de coeficientes.'
+  },
+  {
+    id:'q3',
+    text:'Si D = 0 y Dx = 0 y Dy = 0, entonces:',
+    options:{a:'Sistema incompatible (sin solución)', b:'Sistema con única solución', c:'Infinitas soluciones'},
+    correct:'c',
+    explanation:'D=0 y Dx=Dy=0 indica dependencia entre ecuaciones → infinitas soluciones (mismas rectas).'
+  },
+  {
+    id:'q4',
+    text:'Si D = 0 pero Dx ≠ 0, entonces el sistema es:',
+    options:{a:'Incompatible (sin solución)', b:'Compatible determinado', c:'Compatible indeterminado'},
+    correct:'a',
+    explanation:'Cuando D=0 pero algún numerador Dx ó Dy ≠0, las ecuaciones son inconsistentes → sin solución.'
+  },
+  {
+    id:'q5',
+    text:'¿Qué método conviene si una ecuación ya está despejada en x = ... ?',
+    options:{a:'Sustitución', b:'Igualación', c:'Cramer'},
+    correct:'a',
+    explanation:'Si tienes x despejada, la sustitución es directa y rápida. Igualación o Cramer también funcionan pero son menos inmediatos.'
+  }
+];
+
+function renderFeedback(userAnswers){
+  const container = document.getElementById('feedback');
+  container.innerHTML = '';
+  QUESTIONS.forEach((q, idx)=>{
+    const userVal = userAnswers && userAnswers[q.id] ? userAnswers[q.id] : null;
+    const correctVal = q.correct;
+    const isCorrect = userVal === correctVal;
+    const div = document.createElement('div');
+    div.className = 'feedback-item ' + (isCorrect ? 'correct' : 'wrong');
+    let html = `<strong>${idx+1}) ${q.text}</strong><br>`;
+    if(userVal){
+      html += `Tu respuesta: <em>${q.options[userVal]}</em> — `;
+      html += isCorrect ? `<span style="color:#bff6d1;">Correcta</span>` : `<span style="color:#ffd6d6;">Incorrecta</span>`;
+    } else {
+      html += `Tu respuesta: <em>Sin responder</em> — <span style="color:#ffd6d6;">Incorrecta</span>`;
+    }
+    html += `<br>Explicación: ${q.explanation}`;
+    div.innerHTML = html;
+    container.appendChild(div);
+  });
+}
+
+function collectUserAnswers(){
+  const user = {};
+  QUESTIONS.forEach(q => {
+    const sel = document.querySelector(`input[name="${q.id}"]:checked`);
+    if(sel) user[q.id] = sel.value;
+  });
+  return user;
+}
+
+function generarQuiz(){
+  const quizDiv = document.getElementById('quiz');
+  QUESTIONS.forEach((item,i) => {
+    const card = document.createElement('div');
+    card.className = 'quiz-card';
+    const title = document.createElement('div');
+    title.className = 'quiz-title';
+    title.innerHTML = `<span class="badge">P${i+1}</span> ${item.text}`;
+    card.appendChild(title);
+    Object.entries(item.options).forEach(([key,opt])=>{
+      const label = document.createElement('label');
+      label.style.display = 'block';
+      label.style.margin = '6px 0';
+      label.innerHTML = `<input type="radio" name="${item.id}" value="${key}"> ${opt}`;
+      card.appendChild(label);
+    });
+    quizDiv.appendChild(card);
+  });
+  const btn = document.createElement('button');
+  btn.className = 'btn';
+  btn.id = 'btnEnviarQuiz';
+  btn.innerHTML = '<img src="https://img.icons8.com/color/48/check.png" alt="check"> Enviar Quiz';
+  btn.onclick = chequearQuiz;
+  quizDiv.appendChild(btn);
+}
+
+/* Main quiz checker */
+function chequearQuiz(){
+  // If quiz already completed, show saved feedback and block awarding
+  if(localStorage.getItem(QUIZ_FLAG_KEY) === 'true'){
+    const out = document.getElementById('quizResultado');
+    out.textContent = 'Ya completaste este quiz anteriormente. No se añaden más puntos.';
+    const saved = loadAnswers(ANSWERS_KEY);
+    if(saved) renderFeedback(saved);
+    const btn = document.getElementById('btnEnviarQuiz'); if(btn){ btn.disabled = true; btn.style.opacity = .6; btn.textContent = 'Quiz completado'; }
+    return;
+  }
+
+  const userAnswers = collectUserAnswers();
+  let scoreCount = 0;
+  QUESTIONS.forEach(q => {
+    if(userAnswers[q.id] === q.correct) scoreCount++;
+  });
+  const puntos = scoreCount * 10;
+
+  const res = awardPointsOnceIfNeeded(puntos, userAnswers);
+  const out = document.getElementById('quizResultado');
+
+  if(res.awarded){
+    out.innerHTML = `Resultado: ${scoreCount} / ${QUESTIONS.length}. +${puntos} puntos añadidos a tu cuenta.`;
+    const pEl = document.querySelector('.points'); if(pEl){ pEl.classList.add('pulse'); setTimeout(()=>pEl.classList.remove('pulse'),420); }
+    const btn = document.getElementById('btnEnviarQuiz'); if(btn){ btn.disabled = true; btn.style.opacity = .6; btn.textContent = 'Quiz completado'; }
+  } else {
+    if(res.reason === 'completed_before'){
+      out.textContent = 'Ya completaste este quiz anteriormente. No se añaden puntos.';
+    } else if(res.reason === 'no_points'){
+      out.textContent = `Resultado: ${scoreCount} / ${QUESTIONS.length}. No obtuviste puntos (necesitas al menos 1 acierto). Intenta de nuevo.`;
+      // save last attempt for review
+      saveAnswers(ANSWERS_KEY, userAnswers);
+    } else {
+      out.textContent = `Resultado: ${scoreCount} / ${QUESTIONS.length}.`;
+    }
+  }
+
+  renderFeedback(userAnswers);
+}
+
+/* Init: show saved attempt / disable if completed */
+window.addEventListener('DOMContentLoaded', ()=>{
+  generarQuiz();
+  updatePointsBadge();
+  // If quiz previously completed
+  if(localStorage.getItem(QUIZ_FLAG_KEY) === 'true'){
+    const btn = document.getElementById('btnEnviarQuiz');
+    if(btn){ btn.disabled = true; btn.style.opacity = .6; btn.textContent = 'Quiz completado'; }
+    const saved = loadAnswers(ANSWERS_KEY);
+    if(saved){
+      document.getElementById('quizResultado').textContent = 'Ya completaste este quiz. Puntos fueron añadidos anteriormente.';
+      renderFeedback(saved);
+    }
+  } else {
+    // if last attempt exists, show it as feedback
+    const last = loadAnswers(ANSWERS_KEY);
+    if(last && Object.keys(last).length){
+      document.getElementById('quizResultado').textContent = 'Último intento guardado (sin reclamar puntos). Revisa errores y vuelve a intentar.';
+      renderFeedback(last);
+    }
+  }
+  // attach Enter behavior for Cramer inputs
+  ['a1','b1','c1','a2','b2','c2','sysText'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.addEventListener('keydown', e=>{ if(e.key==='Enter'){ if(id==='sysText') analizarYSolver(); else resolverCramer(); }});
+  });
+});
+</script>
+</body>
+</html>

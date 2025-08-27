@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learnix - Diagnóstico y Ruta de Aprendizaje</title>
+<style>
+/* ===== ESTILO BASE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: #1e1e1e;
+  background-image: linear-gradient(135deg,#1e1e1e,#252525);
+  color: #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background: #1e1e1e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 2px solid #2e2e2e;
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+header .logo img {
+  height: 40px;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+header nav a {
+  margin-left: 20px;
+  font-weight: 500;
+  color: #bbb;
+  text-decoration: none;
+  transition: color .3s ease;
+}
+
+header nav a:hover, header nav a.active {
+  color: #00bcd4;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.points {
+  background: #2a2a2a;
+  color: #ffd36e;
+  padding: 8px 12px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  border: 1px solid #333;
+}
+
+.contenido {
+  padding: 34px 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* ===== ESTILOS ESPECÍFICOS ===== */
+.title {
+  font-size: 2.2rem;
+  color: #00bcd4;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.lead {
+  text-align: center;
+  color: #ccc;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.card {
+  background: #2a2a2a;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.3);
+}
+
+.progress-bar {
+  background: #252525;
+  border-radius: 999px;
+  height: 24px;
+  width: 100%;
+  margin: 10px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill {
+  background: linear-gradient(90deg, #00bcd4, #008ba3);
+  height: 100%;
+  transition: width 0.5s ease;
+  width: 0%;
+}
+
+.learning-path {
+  border-left: 3px solid #00bcd4;
+  margin: 20px 0;
+  padding-left: 20px;
+}
+
+.path-item {
+  background: #2a2a2a;
+  border-radius: 12px;
+  margin: 10px 0;
+  padding: 15px;
+  transition: transform 0.2s;
+}
+
+.path-item:hover {
+  transform: translateX(5px);
+}
+
+.topic-card {
+  background: #252525;
+  border: 1px solid #333;
+  border-radius: 8px;
+  margin: 8px 0;
+  padding: 12px;
+}
+
+.score-tag {
+  background: #14252a;
+  border-radius: 999px;
+  color: #00bcd4;
+  display: inline-block;
+  font-size: 0.9rem;
+  margin-left: 8px;
+  padding: 3px 10px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #00bcd4;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-top: 10px;
+  transition: transform .2s ease, background .3s ease;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+}
+
+.btn:hover {
+  background: #008ba3;
+  transform: translateY(-1px);
+}
+
+.grid-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 12px 0;
+}
+
+footer {
+  background: #1e1e1e;
+  text-align: center;
+  padding: 15px;
+  border-top: 2px solid #2e2e2e;
+  margin-top: auto;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 640px) {
+  .contenido { padding: 20px 12px; }
+  header { padding: 12px; }
+  .grid-info { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+  <!-- Header from template -->
+  <header>
+    <div class="logo">
+      <img src="../../img/logo/logo.svg" alt="Learnix Logo">
+      <h1>Learnix</h1>
+    </div>
+    <nav>
+      <a href="../../index.html">Inicio</a>
+      <a href="../../cursos.html" class="active">Cursos</a>
+      <a href="../../perfil.html">Perfil</a>
+      <a href="../../login.html">Login</a>
+      <a href="../../favoritos.html">Favoritos</a>
+    </nav>
+    <div class="header-right">
+      <div class="points">
+        <img src="https://img.icons8.com/fluency/48/star.png" alt="star">
+        <span id="puntos">0</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="contenido">
+    <h2 class="title">Diagnóstico Matemático y Ruta de Aprendizaje</h2>
+    <p class="lead">Evalúa tus conocimientos y recibe una ruta personalizada según tus resultados.</p>
+
+    <div id="diagnostic-section">
+      <!-- Sección de diagnóstico generada dinámicamente -->
+    </div>
+
+    <div id="results-section" style="display:none">
+      <h3>Resultados del Diagnóstico</h3>
+      
+      <div class="grid-info">
+        <div class="card">
+          <h4>Nivel Básico</h4>
+          <div class="progress-bar">
+            <div id="basic-progress" class="progress-fill"></div>
+          </div>
+          <span id="basic-score"></span>
+        </div>
+
+        <div class="card">
+          <h4>Nivel Intermedio</h4>
+          <div class="progress-bar">
+            <div id="intermediate-progress" class="progress-fill"></div>
+          </div>
+          <span id="intermediate-score"></span>
+        </div>
+
+        <div class="card">
+          <h4>Nivel Avanzado</h4>
+          <div class="progress-bar">
+            <div id="advanced-progress" class="progress-fill"></div>
+          </div>
+          <span id="advanced-score"></span>
+        </div>
+      </div>
+
+      <div id="learning-path" class="learning-path">
+        <!-- Ruta de aprendizaje generada dinámicamente -->
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Learnix - NeoStudio</p>
+  </footer>
+
+  <script>
+    // Datos del diagnóstico
+    const diagnosticData = {
+  basic: [
+    {
+      question: "¿Cuál es el resultado de -15 + 8?",
+      options: ["-7", "-23", "7"],
+      correct: 0,
+      topic: "Números enteros"
+    },
+    {
+      question: "Resuelve: 156 ÷ 12",
+      options: ["13", "14", "12"],
+      correct: 0,
+      topic: "Operaciones básicas"
+    },
+    {
+      question: "¿Qué fracción representa 0.75?",
+      options: ["3/4", "7/10", "5/8"],
+      correct: 0,
+      topic: "Fracciones y decimales"
+    },
+    {
+      question: "Calcula el MCM de 12 y 18",
+      options: ["36", "24", "48"],
+      correct: 0,
+      topic: "MCM"
+    },
+    {
+      question: "¿Cuál es el MCD de 24 y 36?",
+      options: ["12", "6", "18"],
+      correct: 0,
+      topic: "MCD"
+    },
+    {
+      question: "El 25% de 200 es:",
+      options: ["50", "40", "75"],
+      correct: 0,
+      topic: "Porcentajes"
+    },
+    {
+      question: "Si 3 kg cuestan $15, ¿cuánto cuestan 5 kg?",
+      options: ["$25", "$20", "$30"],
+      correct: 0,
+      topic: "Regla de tres simple"
+    },
+    {
+      question: "El perímetro de un cuadrado de lado 5 cm es:",
+      options: ["20 cm", "25 cm", "15 cm"],
+      correct: 0,
+      topic: "Perímetro"
+    },
+    {
+      question: "¿Cuál es el área de un triángulo de base 6 cm y altura 4 cm?",
+      options: ["12 cm²", "24 cm²", "10 cm²"],
+      correct: 0,
+      topic: "Área"
+    },
+    {
+      question: "Suma: 1/4 + 2/4",
+      options: ["3/4", "3/8", "2/8"],
+      correct: 0,
+      topic: "Fracciones"
+    }
+  ],
+  intermediate: [
+    {
+      question: "Calcula 2³ × 2⁴",
+      options: ["2⁷", "2¹²", "2⁵"],
+      correct: 0,
+      topic: "Potencias"
+    },
+    {
+      question: "¿Cuál es la raíz cuadrada de 169?",
+      options: ["13", "14", "12"],
+      correct: 0,
+      topic: "Raíces"
+    },
+    {
+      question: "Resuelve: 3x + 7 = 22",
+      options: ["5", "6", "7"],
+      correct: 0,
+      topic: "Ecuaciones primer grado"
+    },
+    {
+      question: "Factoriza: x² + 5x + 6",
+      options: ["(x+2)(x+3)", "(x+1)(x+6)", "(x+3)(x+2)"],
+      correct: 0,
+      topic: "Factorización"
+    },
+    {
+      question: "En un triángulo rectángulo, si un cateto mide 3 y la hipotenusa 5, ¿cuánto mide el otro cateto?",
+      options: ["4", "3", "5"],
+      correct: 0,
+      topic: "Teorema de Pitágoras"
+    },
+    {
+      question: "Si 6 obreros hacen una obra en 12 días, ¿cuántos días tardarán 9 obreros?",
+      options: ["8", "10", "6"],
+      correct: 0,
+      topic: "Regla de tres compuesta"
+    },
+    {
+      question: "Un producto cuesta $100, tiene 20% de descuento y luego 10% adicional. ¿Precio final?",
+      options: ["$72", "$70", "$75"],
+      correct: 0,
+      topic: "Porcentajes compuestos"
+    },
+    {
+      question: "La media de [2,4,4,6,9] es:",
+      options: ["5", "4", "6"],
+      correct: 0,
+      topic: "Estadística básica"
+    },
+    {
+      question: "La moda de [1,2,2,3,3,3,4] es:",
+      options: ["3", "2", "4"],
+      correct: 0,
+      topic: "Estadística básica"
+    },
+    {
+      question: "Resuelve el sistema: x+y=5, x-y=1",
+      options: ["x=3,y=2", "x=2,y=3", "x=4,y=1"],
+      correct: 0,
+      topic: "Sistemas de ecuaciones"
+    }
+  ],
+  advanced: [
+    {
+      question: "La función y=2x+1 corta al eje Y en:",
+      options: ["(0,1)", "(1,0)", "(1,1)"],
+      correct: 0,
+      topic: "Funciones lineales"
+    },
+    {
+      question: "El vértice de y=x²-6x+5 es:",
+      options: ["(3,-4)", "(3,4)", "(4,-3)"],
+      correct: 0,
+      topic: "Funciones cuadráticas"
+    },
+    {
+      question: "Resuelve x²-5x+6=0",
+      options: ["x=2,3", "x=1,4", "x=3,2"],
+      correct: 0,
+      topic: "Ecuaciones cuadráticas"
+    },
+    {
+      question: "Solución de x+1>5:",
+      options: ["x>4", "x>6", "x<4"],
+      correct: 0,
+      topic: "Inecuaciones"
+    },
+    {
+      question: "sen(30°) =",
+      options: ["1/2", "√3/2", "√2/2"],
+      correct: 0,
+      topic: "Trigonometría"
+    },
+    {
+      question: "cos(60°) =",
+      options: ["1/2", "√3/2", "0"],
+      correct: 0,
+      topic: "Trigonometría"
+    },
+    {
+      question: "Probabilidad de sacar un as de una baraja de 52 cartas:",
+      options: ["4/52", "1/13", "1/4"],
+      correct: 0,
+      topic: "Probabilidad"
+    },
+    {
+      question: "La varianza de [2,2,3,3,3,4,4] es:",
+      options: ["0.62", "0.5", "0.7"],
+      correct: 0,
+      topic: "Estadística avanzada"
+    },
+    {
+      question: "lim(x→2) (x²-4)/(x-2) =",
+      options: ["4", "2", "0"],
+      correct: 0,
+      topic: "Límites"
+    },
+    {
+      question: "La derivada de f(x)=x² es:",
+      options: ["2x", "x", "2"],
+      correct: 0,
+      topic: "Derivadas"
+    }
+  ]
+};
+
+    // Función para generar el diagnóstico
+    function generateDiagnostic() {
+      const container = document.getElementById('diagnostic-section');
+      
+      ['basic', 'intermediate', 'advanced'].forEach(level => {
+        const section = document.createElement('div');
+        section.className = 'card';
+        section.innerHTML = `
+          <h3>${level.charAt(0).toUpperCase() + level.slice(1)}</h3>
+          ${diagnosticData[level].map((q, i) => `
+            <div class="topic-card">
+              <p><strong>${i + 1}. ${q.question}</strong></p>
+              ${q.options.map((opt, j) => `
+                <label style="display:block;margin:4px 0">
+                  <input type="radio" name="${level}-q${i}" value="${j}">
+                  ${opt}
+                </label>
+              `).join('')}
+            </div>
+          `).join('')}
+        `;
+        container.appendChild(section);
+      });
+
+      const button = document.createElement('button');
+      button.className = 'btn';
+      button.innerHTML = '<img src="https://img.icons8.com/color/48/check.png" alt=""> Evaluar';
+      button.onclick = evaluateDiagnostic;
+      container.appendChild(button);
+    }
+
+    // Función para evaluar y mostrar resultados
+    function evaluateDiagnostic() {
+      const scores = {
+        basic: calculateScore('basic'),
+        intermediate: calculateScore('intermediate'),
+        advanced: calculateScore('advanced')
+      };
+
+      // Actualizar barras de progreso
+      Object.keys(scores).forEach(level => {
+        const progress = document.getElementById(`${level}-progress`);
+        const scoreSpan = document.getElementById(`${level}-score`);
+        progress.style.width = `${scores[level]}%`;
+        scoreSpan.textContent = `${scores[level]}% completado`;
+      });
+
+      // Generar ruta de aprendizaje
+      generateLearningPath(scores);
+
+      // Mostrar resultados
+      document.getElementById('diagnostic-section').style.display = 'none';
+      document.getElementById('results-section').style.display = 'block';
+    }
+
+    // Función para calcular puntaje por nivel
+    function calculateScore(level) {
+      let correct = 0;
+      diagnosticData[level].forEach((q, i) => {
+        const selected = document.querySelector(`input[name="${level}-q${i}"]:checked`);
+        if (selected && parseInt(selected.value) === q.correct) {
+          correct++;
+        }
+      });
+      return Math.round((correct / diagnosticData[level].length) * 100);
+    }
+
+    // Función para generar ruta de aprendizaje
+    function generateLearningPath(scores) {
+      const container = document.getElementById('learning-path');
+      container.innerHTML = '<h3>Tu Ruta de Aprendizaje Personalizada</h3>';
+
+      // Recomendaciones basadas en puntajes
+      const recommendations = [];
+
+      if (scores.basic < 70) {
+        recommendations.push({
+          title: "Fortalecer Fundamentos Básicos",
+          topics: ["Operaciones básicas", "Fracciones", "Decimales", "Geometría básica"],
+          priority: "Alta"
+        });
+      }
+
+      if (scores.intermediate < 70 && scores.basic >= 70) {
+        recommendations.push({
+          title: "Desarrollar Nivel Intermedio",
+          topics: ["Ecuaciones", "Álgebra básica", "Geometría avanzada"],
+          priority: "Media"
+        });
+      }
+
+      if (scores.advanced < 70 && scores.intermediate >= 70) {
+        recommendations.push({
+          title: "Avanzar a Temas Complejos",
+          topics: ["Funciones", "Trigonometría", "Cálculo básico"],
+          priority: "Normal"
+        });
+      }
+
+      // Renderizar recomendaciones
+      recommendations.forEach(rec => {
+        container.innerHTML += `
+          <div class="path-item">
+            <h4>${rec.title} <span class="score-tag">Prioridad: ${rec.priority}</span></h4>
+            <p>Temas sugeridos:</p>
+            <ul>
+              ${rec.topics.map(topic => `<li>${topic}</li>`).join('')}
+            </ul>
+          </div>
+        `;
+      });
+    }
+
+    // Iniciar diagnóstico
+    generateDiagnostic();
+  </script>
+</body>
+</html>

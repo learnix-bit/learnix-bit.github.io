@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learnix - Comprensión de Textos</title>
+  <style>
+    /* ======= ESTILOS BASE ======= */
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body {
+      background-color:#1e1e1e;
+      background-image: linear-gradient(135deg, #1e1e1e, #252525);
+      color:#e0e0e0; display:flex; flex-direction:column; min-height:100vh;
+    }
+    header {
+      background-color:#1e1e1e; display:flex; justify-content:space-between; align-items:center;
+      padding:15px 30px; position:sticky; top:0; z-index:100; border-bottom:2px solid #2e2e2e;
+    }
+    header .logo { display:flex; align-items:center; gap:10px; }
+    header .logo img { height:40px; }
+    header nav a {
+      margin-left:20px; font-weight:500; color:#bbb; text-decoration:none; transition:color .3s ease;
+    }
+    header nav a:hover, header nav a.active { color:#00bcd4; }
+
+    footer {
+      background-color:#1e1e1e; text-align:center; padding:15px; border-top:2px solid #2e2e2e; margin-top:auto;
+    }
+    .btn {
+      display:inline-block; background-color:#00bcd4; color:#fff; padding:10px 20px; border-radius:8px;
+      margin-top:10px; transition:background .3s ease; text-decoration:none;
+    }
+    .btn:hover { background-color:#008ba3; }
+
+    /* ======= CONTENIDO ======= */
+    .contenido {
+      padding:40px 20px; max-width:1000px; margin:auto; text-align:center;
+    }
+    .contenido h2 {
+      font-size:2.2rem; color:#00bcd4; margin-bottom:20px;
+    }
+    .contenido p {
+      font-size:1.1rem; color:#ccc; margin-bottom:30px;
+    }
+    .subtema {
+      background-color:#2a2a2a; padding:20px; border-radius:12px;
+      margin-bottom:18px; box-shadow:0 4px 12px rgba(0,0,0,.3);
+      text-align:left;
+    }
+    .subtema h3 {
+      color:#fff; font-size:1.2rem; margin-bottom:10px;
+    }
+    .subtema p { color:#bbb; font-size:1rem; margin-bottom:10px; }
+    .resultado {
+      margin-top:10px; color:#fff; font-weight:700;
+      background: rgba(0,0,0,0.25); padding:10px; border-radius:8px;
+    }
+    .quiz-question { margin-bottom:12px; color:#ddd; }
+    .feedback-item { padding:10px; border-radius:8px; margin-bottom:8px; }
+    .correct { background: rgba(0,128,0,0.12); border-left:4px solid #20c997; color:#c6ffd9; }
+    .wrong { background: rgba(255,0,0,0.08); border-left:4px solid #ff6b6b; color:#ffd9d9; }
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado -->
+  <header>
+    <div class="logo">
+      <img src="../../../../img/logo/logo.svg" alt="Learnix Logo">
+      <h1>Learnix</h1>
+    </div>
+    <nav>
+      <a href="../../index.html">Inicio</a>
+      <a href="../../cursos.html" class="active">Cursos</a>
+      <a href="../../perfil.html">Perfil</a>
+      <a href="../../login.html">Login</a>
+      <a href="../../favoritos.html">Favoritos</a>
+    </nav>
+  </header>
+
+  <!-- Contenido -->
+  <main class="contenido">
+    <h2>Comprensión de Textos Expositivos y Argumentativos</h2>
+    <p>Explora cómo analizar y comprender textos expositivos y argumentativos, esenciales para desarrollar un pensamiento crítico y habilidades de comunicación avanzada.</p>
+
+    <!-- Definición -->
+    <div class="subtema">
+      <h3>¿Qué es la comprensión de textos?</h3>
+      <p>Es la capacidad de interpretar y analizar textos escritos, identificando su propósito, estructura y mensaje principal. En este nivel, nos enfocamos en textos expositivos y argumentativos.</p>
+    </div>
+
+    <!-- Propiedades -->
+    <div class="subtema">
+      <h3>Características clave</h3>
+      <ul>
+        <li><strong>Expositivo:</strong> Presenta información de manera clara y objetiva.</li>
+        <li><strong>Argumentativo:</strong> Busca persuadir al lector mediante argumentos y evidencias.</li>
+      </ul>
+    </div>
+
+    <!-- Ejemplos -->
+    <div class="subtema">
+      <h3>Ejemplos resueltos</h3>
+      <p><strong>Ejemplo 1:</strong> Texto expositivo: "La fotosíntesis es un proceso esencial para la vida en la Tierra, ya que produce oxígeno y energía química."</p>
+      <p><strong>Ejemplo 2:</strong> Texto argumentativo: "Es crucial adoptar energías renovables para combatir el cambio climático y reducir la dependencia de combustibles fósiles."</p>
+    </div>
+
+    <!-- Herramientas interactivas -->
+    <div class="subtema">
+      <h3>Herramientas interactivas</h3>
+      <p>Selecciona el tipo de texto correspondiente al siguiente ejemplo:</p>
+      <p><strong>Texto:</strong> "El reciclaje es una práctica que ayuda a reducir la contaminación y preservar los recursos naturales."</p>
+      <select id="herramientaTiposTexto">
+        <option value="">-- Selecciona --</option>
+        <option value="1">Expositivo</option>
+        <option value="2">Argumentativo</option>
+      </select>
+      <button class="btn" onclick="verificarTiposTexto()">Verificar</button>
+      <div id="resultadoTiposTexto" class="resultado">—</div>
+    </div>
+
+    <!-- Mini Quiz -->
+    <div class="subtema">
+      <h3>Mini Quiz</h3>
+      <p>Responde las siguientes preguntas para evaluar tu comprensión:</p>
+      <div class="quiz-question">
+        <label>1) ¿Qué es un texto expositivo?</label><br>
+        <label><input type="radio" name="q1" value="a"> Un texto que persuade al lector.</label><br>
+        <label><input type="radio" name="q1" value="b"> Un texto que informa de manera objetiva.</label>
+      </div>
+      <div class="quiz-question">
+        <label>2) ¿Qué es un texto argumentativo?</label><br>
+        <label><input type="radio" name="q2" value="a"> Un texto que presenta información clara.</label><br>
+        <label><input type="radio" name="q2" value="b"> Un texto que busca convencer al lector.</label>
+      </div>
+      <div class="quiz-question">
+        <label>3) ¿Qué tipo de texto es el siguiente?: "El reciclaje es una práctica que ayuda a reducir la contaminación."</label><br>
+        <label><input type="radio" name="q3" value="a"> Expositivo.</label><br>
+        <label><input type="radio" name="q3" value="b"> Argumentativo.</label>
+      </div>
+      <div class="quiz-question">
+        <label>4) ¿Qué tipo de texto es el siguiente?: "Es importante reciclar para preservar el medio ambiente."</label><br>
+        <label><input type="radio" name="q4" value="a"> Expositivo.</label><br>
+        <label><input type="radio" name="q4" value="b"> Argumentativo.</label>
+      </div>
+      <div class="quiz-question">
+        <label>5) ¿Qué tipo de texto es el siguiente?: "La energía solar es una fuente renovable que no contamina."</label><br>
+        <label><input type="radio" name="q5" value="a"> Expositivo.</label><br>
+        <label><input type="radio" name="q5" value="b"> Argumentativo.</label>
+      </div>
+      <button class="btn" onclick="revisarQuiz()">Revisar</button>
+      <div id="resultadoQuiz" class="resultado">—</div>
+    </div>
+
+    <!-- Tip -->
+    <div class="subtema">
+      <h3>Tip de memotecnia</h3>
+      <p>Recuerda: "Exponer es informar, argumentar es persuadir."</p>
+    </div>
+  </main>
+
+  <script>
+    function verificarTiposTexto() {
+      const seleccion = document.getElementById('herramientaTiposTexto').value;
+      const resultado = document.getElementById('resultadoTiposTexto');
+      if (seleccion === "1") {
+        resultado.textContent = "¡Correcto! 'Expositivo' es el tipo de texto adecuado.";
+      } else if (seleccion === "2") {
+        resultado.textContent = "¡Correcto! 'Argumentativo' es el tipo de texto adecuado.";
+      } else {
+        resultado.textContent = "Por favor, selecciona una opción válida.";
+      }
+    }
+
+    function revisarQuiz() {
+      const respuestasCorrectas = {
+        q1: "b",
+        q2: "b",
+        q3: "a",
+        q4: "b",
+        q5: "a"
+      };
+
+      let puntos = 0;
+      let totalPreguntas = 5;
+
+      for (let i = 1; i <= totalPreguntas; i++) {
+        const respuesta = document.querySelector(`input[name="q${i}"]:checked`);
+        if (respuesta && respuesta.value === respuestasCorrectas[`q${i}`]) {
+          puntos += 10;
+        }
+      }
+
+      const puntosActuales = parseInt(localStorage.getItem('learnix_points_globales')) || 0;
+      localStorage.setItem('learnix_points_globales', puntosActuales + puntos);
+
+      document.getElementById('resultadoQuiz').textContent = `¡Quiz completado! Obtuviste ${puntos} puntos. Tus puntos globales ahora son ${puntosActuales + puntos}.`;
+    }
+  </script>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Learnix - NeoStudio</p>
+  </footer>
+
+</body>
+</html>

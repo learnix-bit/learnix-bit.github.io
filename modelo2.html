@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learnix - Cursos</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        /* ================================
+   Cursos
+=================================== */
+.contenedor-cursos {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.titulo-seccion {
+    text-align: center;
+    font-size: 2rem;
+    color: #00bcd4;
+    margin-bottom: 30px;
+}
+
+.grid-cursos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.curso-card {
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.curso-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+
+.curso-card img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+}
+
+.curso-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.curso-card p {
+    font-size: 0.95rem;
+    color: #bbb;
+    margin-bottom: 15px;
+}
+
+.curso-card .btn {
+    margin-right: 10px;
+}
+
+.curso-card .btn-fav {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- Encabezado -->
+    <header>
+        <div class="logo">
+            <img src="./img/logo/logo.svg" alt="Learnix Logo">
+        </div>
+        <nav>
+            <a href="./index.html">Inicio</a>
+            <a href="./cursos.html">Cursos</a>
+            <a href="./perfil.html">Perfil</a>
+            <a href="./login.html">Login</a>
+            <a href="./favoritos.html">Favoritos</a>
+        </nav>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="contenedor-cursos">
+        <h2 class="titulo-seccion">Explora los Cursos</h2>
+        <div class="grid-cursos">
+            <div class="curso-card">
+                <img src="img/cursos/matematica.svg" alt="Curso Matemática">
+                <h3>Matemática</h3>
+                <p>Refuerza tus conocimientos en álgebra, geometría y más.</p>
+                <a href="#" class="btn">Ver curso</a>
+                <button class="btn-fav">★</button>
+            </div>
+
+            <div class="curso-card">
+                <img src="img/cursos/comunicacion.svg" alt="Curso Comunicación">
+                <h3>Comunicación</h3>
+                <p>Mejora tu escritura, comprensión lectora y expresión oral.</p>
+                <a href="#" class="btn">Ver curso</a>
+                <button class="btn-fav">★</button>
+            </div>
+
+            <div class="curso-card">
+                <img src="img/cursos/ingles.svg" alt="Curso Inglés">
+                <h3>Inglés</h3>
+                <p>Aprende vocabulario, gramática y mejora tu fluidez.</p>
+                <a href="#" class="btn">Ver curso</a>
+                <button class="btn-fav">★</button>
+            </div>
+
+            <div class="curso-card">
+                <img src="img/cursos/ciencia.svg" alt="Curso Ciencia y Tecnología">
+                <h3>Ciencia y Tecnología</h3>
+                <p>Descubre el mundo de la física, química y biología.</p>
+                <a href="#" class="btn">Ver curso</a>
+                <button class="btn-fav">★</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Learnix - NeoStudio</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learnix - MCM y MCD</title>
+<style>
+/* ===== ESTILO BASE APROBADO ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+body{background-color:#1e1e1e;background-image:linear-gradient(135deg,#1e1e1e,#252525);color:#e0e0e0;display:flex;flex-direction:column;min-height:100vh;}
+header{background-color:#1e1e1e;display:flex;justify-content:space-between;align-items:center;padding:15px 30px;position:sticky;top:0;z-index:100;border-bottom:2px solid #2e2e2e;}
+header .logo{display:flex;align-items:center;gap:10px;}
+header .logo img{height:40px;}
+header nav{display:flex;align-items:center;gap:8px;}
+header nav a{margin-left:20px;font-weight:500;color:#bbb;text-decoration:none;transition:color .3s ease;}
+header nav a:hover, header nav a.active{color:#00bcd4;}
+.header-right{display:flex;align-items:center;gap:14px;}
+.points{background-color:#2a2a2a;color:#ffd36e;padding:8px 12px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;font-weight:700;border:1px solid #333;}
+.points img{width:20px;height:20px;display:block;}
+.points.pulse{animation:pulse .36s ease-in-out;}
+@keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.08);}100%{transform:scale(1);}}
+footer{background-color:#1e1e1e;text-align:center;padding:15px;border-top:2px solid #2e2e2e;margin-top:auto;}
+.btn{display:inline-flex;align-items:center;gap:8px;background-color:#00bcd4;color:#fff;padding:10px 20px;border-radius:8px;margin-top:10px;transition:background .3s ease;text-decoration:none;cursor:pointer;border:none;}
+.btn:hover{background-color:#008ba3;}
+.btn img{width:20px;height:20px;}
+.contenido{padding:40px 20px;max-width:980px;margin:auto;text-align:center;}
+.contenido h2{font-size:2.2rem;color:#00bcd4;margin-bottom:12px;}
+.lead{font-size:1.05rem;color:#ccc;margin-bottom:20px;line-height:1.6;}
+.subtema{background-color:#2a2a2a;padding:20px;border-radius:12px;margin-bottom:18px;box-shadow:0 4px 12px rgba(0,0,0,.3);text-align:left;}
+.subtema h3{color:#fff;font-size:1.2rem;margin-bottom:10px;}
+.subtema p, .subtema ul{color:#bbb;font-size:1rem;margin-bottom:10px;}
+.row{display:flex;gap:18px;flex-wrap:wrap;}
+.col{flex:1 1 280px;}
+pre.code{background:#212121;padding:12px;border-radius:8px;color:#dcdcdc;overflow:auto;font-size:.95rem;}
+.ejercicio{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+input[type="number"], input[type="text"], select, .quiz button{padding:10px;border-radius:8px;border:1px solid #2e2e2e;background:#222;color:#e0e0e0;outline:none;}
+label{color:#ccc;}
+.resultado{margin-top:10px;color:#fff;font-weight:700;background: rgba(0,0,0,0.25);padding:10px;border-radius:8px;}
+.quiz-question{margin-bottom:12px;color:#ddd;}
+.small{font-size:.92rem;color:#9aa0a6;margin-top:6px;display:block;}
+.acciones{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:14px 0;}
+.feedback-list{margin-top:12px;color:#e0e0e0;text-align:left;}
+.feedback-item{padding:10px;border-radius:8px;margin-bottom:8px;}
+.correct{background: rgba(0,128,0,0.12);border-left:4px solid #20c997;color:#c6ffd9;}
+.wrong{background: rgba(255,0,0,0.08);border-left:4px solid #ff6b6b;color:#ffd9d9;}
+@media(max-width:640px){.contenido{padding:20px 12px;}.row{flex-direction:column;}header{padding:12px;}}
+.chloe-bot{position:fixed;bottom:20px;right:20px;background-color:#00bcd4;border-radius:50%;width:60px;height:60px;display:flex;justify-content:center;align-items:center;box-shadow:0 4px 8px rgba(0,0,0,.2);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="img/logo/logo.svg" alt="Learnix Logo">
+    <h1>Learnix</h1>
+  </div>
+  <nav>
+    <a href="../../../index.html">Inicio</a>
+    <a href="../../../cursos.html" class="active">Cursos</a>
+    <a href="../../../perfil.html">Perfil</a>
+    <a href="../../../login.html">Login</a>
+    <a href="../../../favoritos.html">Favoritos</a>
+  </nav>
+  <div class="header-right">
+    <div class="points" title="Puntos acumulados">
+      <img src="https://img.icons8.com/fluency/48/star.png" alt="star">
+      <span id="puntos">0</span>
+    </div>
+  </div>
+</header>
+
+<main class="contenido">
+<h2>MCM y MCD — Profundización</h2>
+<p class="lead">Definición detallada, propiedades, fórmulas, ejemplos, ejercicios autocorregibles y mini quiz interactivo con puntos globales.</p>
+
+<div class="subtema">
+<h3>1. Definición Detallada</h3>
+<p><strong>Mínimo Común Múltiplo (MCM):</strong> Es el menor número positivo que es múltiplo de dos o más números.</p>
+<p><strong>Máximo Común Divisor (MCD):</strong> Es el mayor número que divide exactamente a dos o más números.</p>
+<p>Ejemplo: para 12 y 18 → MCM=36, MCD=6</p>
+<p class="small">Tip memotécnico: "Mínimo arriba, Máximo abajo". Para MCM multiplicamos múltiplos, para MCD buscamos divisores.</p>
+</div>
+
+<div class="subtema">
+<h3>2. Propiedades y Fórmulas</h3>
+<ul>
+<li>MCM(a,b) × MCD(a,b) = a × b</li>
+<li>MCM(a,b,c) = MCM(MCM(a,b),c)</li>
+<li>MCD(a,b,c) = MCD(MCD(a,b),c)</li>
+<li>MCM siempre ≥ números dados</li>
+<li>MCD siempre ≤ números dados</li>
+</ul>
+</div>
+
+<div class="subtema">
+<h3>3. Ejemplos y Herramientas Interactivas</h3>
+<div class="row">
+<div class="col">
+<h4>Calcular MCD</h4>
+<div class="ejercicio">
+<input id="num1MCD" type="number" placeholder="Número 1">
+<input id="num2MCD" type="number" placeholder="Número 2">
+<button class="btn" onclick="calcularMCD()"><img src="https://img.icons8.com/color/48/calculator.png" alt="calc"> Calcular</button>
+</div>
+<div id="outMCD" class="resultado">—</div>
+</div>
+
+<div class="col">
+<h4>Calcular MCM</h4>
+<div class="ejercicio">
+<input id="num1MCM" type="number" placeholder="Número 1">
+<input id="num2MCM" type="number" placeholder="Número 2">
+<button class="btn" onclick="calcularMCM()"><img src="https://img.icons8.com/color/48/calculator.png" alt="calc"> Calcular</button>
+</div>
+<div id="outMCM" class="resultado">—</div>
+</div>
+</div>
+</div>
+
+<div class="subtema">
+<h3>4. Ejercicios Prácticos</h3>
+<ol style="color:#ccc; margin-left:18px;">
+<li>Calcula MCD de 24 y 36: <input id="ex1" type="text" placeholder="ej. 12"></li>
+<li>Calcula MCM de 6 y 8: <input id="ex2" type="text" placeholder="ej. 24"></li>
+<li>Calcula MCD de 18 y 30: <input id="ex3" type="text" placeholder="ej. 6"></li>
+</ol>
+<button class="btn" onclick="chequearEjercicios()"><img src="https://img.icons8.com/color/48/check.png" alt="check"> Chequear respuestas</button>
+<div id="outEj" class="resultado" style="margin-top:10px">—</div>
+</div>
+
+<div class="subtema">
+<h3>5. Mini Quiz (5 preguntas, 10 puntos cada una)</h3>
+<div id="quiz"></div>
+<div id="quizResultado" class="resultado">—</div>
+</div>
+
+<div class="acciones">
+<a href="../basico.html" class="btn" title="Volver a operaciones"><img src="https://img.icons8.com/color/48/home.png" alt="home"> Nivel Basico</a>
+<a href="porcentajes.html" class="btn" title="Siguiente: operaciones"><img src="https://img.icons8.com/color/48/right.png" alt="next"> Siguiente: Porcentajes y Proporciones</a>
+<a href="../../../cursos.html" class="btn" title="Volver a cursos" style="background:#444;"><img src="https://img.icons8.com/color/48/left.png" alt="volver"> Cursos</a>
+</div>
+</main>
+
+<a href="#chatbot-chloe" class="chloe-bot" title="Chloe">
+<img src="img/chatbot/chloe-icon.svg" alt="Chatbot Chloe" style="width:38px;height:38px;">
+</a>
+
+<footer>
+<p>© 2025 Learnix - NeoStudio</p>
+</footer>
+
+<script>
+let puntosGlobales = parseInt(localStorage.getItem('puntosGlobales')) || 0;
+document.getElementById('puntos').textContent = puntosGlobales;
+
+// ===== CALCULAR MCD Y MCM =====
+function gcd(a,b){while(b!==0){[a,b]=[b,a%b];}return a;}
+function calcularMCD(){
+  const a=parseInt(document.getElementById('num1MCD').value);
+  const b=parseInt(document.getElementById('num2MCD').value);
+  if(isNaN(a)||isNaN(b)){document.getElementById('outMCD').textContent='Número inválido';return;}
+  const res=gcd(a,b);
+  document.getElementById('outMCD').textContent=`MCD(${a},${b}) = ${res}`;
+}
+
+function calcularMCM(){
+  const a=parseInt(document.getElementById('num1MCM').value);
+  const b=parseInt(document.getElementById('num2MCM').value);
+  if(isNaN(a)||isNaN(b)){document.getElementById('outMCM').textContent='Número inválido';return;}
+  const res=(a*b)/gcd(a,b);
+  document.getElementById('outMCM').textContent=`MCM(${a},${b}) = ${res}`;
+}
+
+// ===== EJERCICIOS AUTOCORREGIBLES =====
+function chequearEjercicios(){
+  const out = document.getElementById('outEj');
+  const r1=document.getElementById('ex1').value.trim() === '12';
+  const r2=document.getElementById('ex2').value.trim() === '24';
+  const r3=document.getElementById('ex3').value.trim() === '6';
+  const correct=[r1,r2,r3].filter(v=>v).length;
+  let msg=`${correct}/3 correctas.`;
+  if(correct===3 && !localStorage.getItem('ejPuntosMCM')){puntosGlobales+=5; localStorage.setItem('puntosGlobales',puntosGlobales); localStorage.setItem('ejPuntosMCM','true'); document.getElementById('puntos').textContent=puntosGlobales; msg+=' ¡Puntos acumulados!';}
+  out.textContent=msg;
+}
+
+// ===== MINI QUIZ =====
+const quizData=[
+  {q:'¿Qué significa MCD?','options':['Máximo Común Divisor','Mínimo Común Divisor','Mayor Común Denominador'],answer:0,explanation:'MCD = Máximo Común Divisor.'},
+  {q:'¿Qué significa MCM?','options':['Máximo Común Múltiplo','Mínimo Común Múltiplo','Mínimo Común Denominador'],answer:1,explanation:'MCM = Mínimo Común Múltiplo.'},
+  {q:'MCD de 18 y 24 es:','options':['6','12','18'],answer:0,explanation:'Divisores comunes: 1,2,3,6 → MCD=6.'},
+  {q:'MCM de 4 y 5 es:','options':['20','9','10'],answer:0,explanation:'Múltiplos comunes: 20 → MCM=20.'},
+  {q:'Relación entre MCD y MCM de a y b:','options':['MCM×MCD=a×b','MCM+MCD=a+b','MCM/MCD=a/b'],answer:0,explanation:'Siempre: MCM(a,b)×MCD(a,b)=a×b.'},
+];
+
+function generarQuiz(){
+  const quizDiv=document.getElementById('quiz');
+  quizData.forEach((item,i)=>{
+    const div=document.createElement('div');div.className='quiz-question';
+    div.innerHTML=`<p>${i+1}. ${item.q}</p>`+item.options.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${o}</label><br>`).join('');
+    quizDiv.appendChild(div);
+  });
+  const btn=document.createElement('button');
+  btn.className='btn';
+  btn.innerHTML='<img src="https://img.icons8.com/color/48/check.png" alt="check"> Enviar Quiz';
+  btn.onclick=evaluarQuiz;
+  quizDiv.appendChild(btn);
+}
+
+function evaluarQuiz(){
+  let puntos=0; const feedback=[];
+  quizData.forEach((item,i)=>{
+    const sel=document.querySelector(`input[name="q${i}"]:checked`);
+    if(sel){if(parseInt(sel.value)===item.answer){puntos+=10; feedback.push(`<div class="feedback-item correct">Pregunta ${i+1}: Correcto ✅</div>`);}else{feedback.push(`<div class="feedback-item wrong">Pregunta ${i+1}: ❌ Incorrecto. ${item.explanation}</div>`);}}
+    else{feedback.push(`<div class="feedback-item wrong">Pregunta ${i+1}: ❌ No respondida. ${item.explanation}</div>`);}
+  });
+  if(!localStorage.getItem('quizPuntosMCM')) {
+    const puntosGlobales = parseInt(localStorage.getItem('learnix_points_globales')) || 0;
+    localStorage.setItem('learnix_points_globales', puntosGlobales + puntos);
+    localStorage.setItem('quizPuntosMCM', 'true');
+  }
+
+  document.getElementById('quizResultado').innerHTML = `Total: ${puntos} puntos` + feedback.join('');
+}
+
+generarQuiz();
+</script>
+</body>
+</html>

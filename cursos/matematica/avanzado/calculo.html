@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learnix - Introducción al Cálculo</title>
+    <!-- Same styles as funciones.html -->
+     
+     <style>
+/* ===== RESET & BASE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: #1e1e1e;
+  background-image: linear-gradient(135deg, #1e1e1e, #252525);
+  color: #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* ===== HEADER & NAVIGATION ===== */
+header {
+  background: #1e1e1e;
+  border-bottom: 2px solid #2e2e2e;
+  padding: 15px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+}
+
+nav a {
+  color: #bbb;
+  text-decoration: none;
+  margin-left: 20px;
+  transition: color 0.3s;
+}
+
+nav a:hover, nav a.active {
+  color: #00bcd4;
+}
+
+/* ===== BUSCADOR ===== */
+.buscador { 
+  padding: 16px 30px; 
+  border-bottom: 2px solid #2e2e2e; 
+  background: #1e1e1e; 
+}
+
+.buscador input {
+  width: 100%; 
+  max-width: 520px; 
+  padding: 12px 16px; 
+  border-radius: 10px; 
+  border: 1px solid #2e2e2e;
+  background: #222; 
+  color: #e0e0e0; 
+  outline: none;
+}
+
+.buscador input::placeholder { 
+  color: #999; 
+}
+
+.buscador-center { 
+  max-width: 520px; 
+  margin: 0 auto; 
+}
+
+/* ===== MAIN CONTENT ===== */
+.contenido {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.title {
+  color: #00bcd4;
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.lead {
+  color: #ccc;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+/* ===== SECTIONS & CARDS ===== */
+.section {
+  background: #2a2a2a;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.section h2 {
+  color: #00bcd4;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.section h3 {
+  color: #fff;
+  margin: 1.5rem 0 1rem;
+  font-size: 1.2rem;
+}
+
+/* ===== INTERACTIVE ELEMENTS ===== */
+.input-group {
+  background: #00000040;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 10px 0;
+}
+
+input[type="text"],
+input[type="number"] {
+  background: #1e1e1e;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.btn {
+  background: #00bcd4;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  background: #008ba3;
+  transform: translateY(-2px);
+}
+
+/* ===== QUIZ STYLES ===== */
+.quiz-card {
+  background: #2a2a2a;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  opacity: 0;
+}
+
+.quiz-question {
+  margin-bottom: 15px;
+}
+
+.quiz-question h4 {
+  color: #00bcd4;
+  margin-bottom: 10px;
+}
+
+.quiz-options {
+  display: grid;
+  gap: 10px;
+}
+
+.quiz-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #1e1e1e;
+  padding: 12px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.quiz-option:hover {
+  background: #252525;
+  transform: translateX(5px);
+}
+
+.option-letter {
+  background: #00bcd4;
+  color: #fff;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+.quiz-option.correct {
+  background: #00695c;
+  border: 1px solid #00bcd4;
+}
+
+.quiz-option.incorrect {
+  background: #621b16;
+  border: 1px solid #cf6679;
+}
+
+.quiz-feedback {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.feedback-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.feedback-content.correct {
+  background: rgba(0, 105, 92, 0.2);
+}
+
+.feedback-content.incorrect {
+  background: rgba(98, 27, 22, 0.2);
+}
+
+.feedback-icon {
+  font-size: 1.2rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes correct {
+  0% { background: #004d40; }
+  100% { background: #2a2a2a; }
+}
+
+.correct-answer {
+  animation: correct 1s ease;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .contenido {
+    padding: 20px 15px;
+  }
+  
+  .section {
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+  }
+  
+  nav a {
+    margin-left: 15px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 10px 15px;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  nav a {
+    margin: 0;
+  }
+  
+  .section {
+    padding: 15px;
+  }
+}
+    </style>
+    <style>
+        /* ===== ESTILO BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #1e1e1e;
+            background-image: linear-gradient(135deg, #1e1e1e, #252525);
+            color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #1e1e1e;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid #2e2e2e;
+        }
+        header .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        header .logo img {
+            height: 40px;
+        }
+        header nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        header nav a {
+            margin-left: 20px;
+            font-weight: 500;
+            color: #bbb;
+            text-decoration: none;
+            transition: color .3s ease;
+        }
+        header nav a:hover, header nav a.active {
+            color: #00bcd4;
+        }
+        footer {
+            background-color: #1e1e1e;
+            text-align: center;
+            padding: 15px;
+            border-top: 2px solid #2e2e2e;
+            margin-top: auto;
+        }
+        .contenido {
+            padding: 40px 20px;
+            max-width: 980px;
+            margin: auto;
+            text-align: center;
+        }
+        .contenido h2 {
+            font-size: 2.2rem;
+            color: #00bcd4;
+            margin-bottom: 12px;
+        }
+        .lead {
+            font-size: 1.05rem;
+            color: #ccc;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .subtema {
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,.3);
+            text-align: left;
+        }
+        .acciones {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 14px 0;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #00bcd4;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-top: 10px;
+            transition: background .3s ease;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+        }
+        .btn:hover {
+            background-color: #008ba3;
+        }
+        .chloe-bot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #00bcd4;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,.2);
+        }
+
+        /* Enhanced interactive elements */
+        .formula-container {
+            background: #00000040;
+            border-left: 4px solid #00bcd4;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        .interactive-tool {
+            background: #252525;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .step-by-step {
+            counter-reset: step;
+            margin: 20px 0;
+        }
+
+        .step {
+            background: #2a2a2a;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            position: relative;
+            padding-left: 40px;
+            transition: transform 0.3s;
+        }
+
+        .step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 10px;
+            color: #00bcd4;
+            font-weight: bold;
+        }
+
+        .step:hover {
+            transform: translateX(10px);
+        }
+
+        .input-exercise {
+            background: #00000040;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .input-exercise input {
+            background: #1e1e1e;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 4px;
+            width: 100%;
+            max-width: 300px;
+            margin: 10px 0;
+        }
+
+        .quiz-container {
+            display: grid;
+            gap: 20px;
+        }
+
+        .quiz-option.selected {
+            background: #00bcd440;
+            border: 1px solid #00bcd4;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        /* Additional styles specific to calculus */
+        .math-formula {
+            font-family: 'Courier New', monospace;
+            background: #00000040;
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        .graph-container {
+            background: #252525;
+            border-radius: 8px;
+            padding: 15px;
+            height: 300px;
+            margin: 15px 0;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .contenido { padding: 20px 15px; }
+            .subtema { padding: 15px; }
+            .formula-container {
+                padding: 15px;
+                font-size: 0.9em;
+            }
+
+            .step {
+                padding: 12px;
+                padding-left: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="../../../img/logo/logo.svg" alt="Learnix Logo">
+    <h1>Learnix</h1>
+  </div>
+  <nav>
+    <a href="../../../index.html">Inicio</a>
+    <a href="../../../cursos.html">Cursos</a>
+    <a href="../../../perfil.html">Perfil</a>
+    <a href="../../../login.html">Login</a>
+    <a href="../../../favoritos.html">Favoritos</a>
+  </nav>
+</header>
+
+<section class="buscador">
+  <div class="buscador-center">
+    <input type="text" id="buscarCurso" placeholder="Buscar tema...">
+  </div>
+</section>
+
+<main class="contenido">
+  <h1 class="title">Introducción al Cálculo</h1>
+  <p class="lead">Descubre los fundamentos del cálculo diferencial e integral: límites, derivadas y sus aplicaciones</p>
+
+  <!-- Definición -->
+  <section class="section fade-in">
+    <h2>1. Fundamentos del Cálculo</h2>
+    <p>El cálculo es una rama de las matemáticas que estudia el cambio continuo a través de dos conceptos fundamentales:</p>
+    
+    <div class="subsection">
+      <h3>1.1 Límites</h3>
+      <p>Un límite describe el valor al que se acerca una función cuando la variable independiente tiende a un valor específico.</p>
+      <div class="math-formula">
+        lim(x→a) f(x) = L
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>1.2 Derivadas</h3>
+      <p>La derivada representa la tasa de cambio instantánea de una función en un punto.</p>
+      <div class="math-formula">
+        f'(x) = lim(h→0) [f(x+h) - f(x)]/h
+      </div>
+    </div>
+  </section>
+
+  <!-- Propiedades -->
+  <section class="section fade-in">
+    <h2>2. Propiedades Fundamentales</h2>
+    
+    <h3>2.1 Propiedades de los Límites</h3>
+    <div class="formula-box">
+      <ul>
+        <li>lim(x→a) [f(x) ± g(x)] = lim(x→a)f(x) ± lim(x→a)g(x)</li>
+        <li>lim(x→a) [k·f(x)] = k·lim(x→a)f(x)</li>
+        <li>lim(x→a) [f(x)·g(x)] = lim(x→a)f(x) · lim(x→a)g(x)</li>
+      </ul>
+    </div>
+
+    <h3>2.2 Reglas de Derivación</h3>
+    <div class="formula-box">
+      <ul>
+        <li>d/dx(xⁿ) = n·xⁿ⁻¹</li>
+        <li>d/dx(e^x) = e^x</li>
+        <li>d/dx(ln x) = 1/x</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Ejemplos -->
+  <section class="section fade-in">
+    <h2>3. Ejemplos Paso a Paso</h2>
+    
+    <div class="example-box">
+      <h3>Ejemplo 1: Límite de una Función</h3>
+      <p>Calcular: lim(x→2) (x² - 4)/(x - 2)</p>
+      <ol>
+        <li>Observamos que tenemos una indeterminación 0/0</li>
+        <li>Factorizamos el numerador: (x+2)(x-2)/(x-2)</li>
+        <li>Simplificamos: x+2</li>
+        <li>Evaluamos x=2: 2+2 = 4</li>
+      </ol>
+    </div>
+
+    <div class="example-box">
+      <h3>Ejemplo 2: Derivada de una Función</h3>
+      <p>Derivar: f(x) = x³ - 2x + 1</p>
+      <ol>
+        <li>Aplicamos la regla de la potencia: d/dx(x³) = 3x²</li>
+        <li>Derivada de -2x: -2</li>
+        <li>Derivada de constante: 0</li>
+        <li>Resultado: f'(x) = 3x² - 2</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Ejercicios -->
+  <section class="section fade-in">
+    <h2>4. Ejercicios Prácticos</h2>
+    
+    <div class="input-group">
+      <p>1. Calcula el límite: lim(x→0) (sin x)/x</p>
+      <input type="number" id="ej1" placeholder="Escribe tu respuesta">
+      <button class="btn" onclick="verificarEjercicio(1)">Verificar</button>
+      <p id="resp1" class="feedback"></p>
+    </div>
+
+    <div class="input-group">
+      <p>2. Deriva f(x) = x² + 3x y evalúa en x=2</p>
+      <input type="number" id="ej2" placeholder="f'(2) = ?">
+      <button class="btn" onclick="verificarEjercicio(2)">Verificar</button>
+      <p id="resp2" class="feedback"></p>
+    </div>
+  </section>
+
+  <!-- Quiz -->
+  <section class="section fade-in">
+    <h2>5. Mini Quiz</h2>
+    <div id="quiz-container"></div>
+  </section>
+
+  <!-- Tip -->
+  <div class="tip-box fade-in">
+    <h3>💡 Tips de Memotecnia</h3>
+    <ul>
+      <li>"DUPA": Derivada = Un Punto A la vez (para recordar que es instantánea)</li>
+      <li>"LILI": Límite = Línea Infinitamente cercana (para visualizar el concepto)</li>
+      <li>Para derivadas de potencias: "Baja y resta uno" (xⁿ → n·xⁿ⁻¹)</li>
+    </ul>
+  </div>
+</main>
+
+<footer>
+  <p>© 2025 Learnix - NeoStudio</p>
+</footer>
+
+<script>
+const quizData = [
+  {
+    pregunta: "¿Qué representa el límite de una función?",
+    opciones: [
+      "El valor al que se acerca la función",
+      "El valor exacto de la función",
+      "La pendiente de la función"
+    ],
+    correcta: 0,
+    explicacion: "El límite representa el valor al que se aproxima una función cuando la variable se acerca a cierto punto."
+  },
+  {
+    pregunta: "La derivada de una función constante es:",
+    opciones: ["0", "1", "La misma constante"],
+    correcta: 0,
+    explicacion: "La derivada de una constante siempre es 0 porque no hay cambio en la función."
+  },
+  {
+    pregunta: "¿Qué representa f'(a) geométricamente?",
+    opciones: [
+      "La pendiente de la recta tangente en x=a",
+      "El área bajo la curva",
+      "El punto de corte con el eje Y"
+    ],
+    correcta: 0,
+    explicacion: "f'(a) representa la pendiente de la recta tangente a la función en el punto x=a."
+  },
+  {
+    pregunta: "¿Cuál es una forma indeterminada?",
+    opciones: ["0/0", "1/1", "2/3"],
+    correcta: 0,
+    explicacion: "0/0 es una forma indeterminada que requiere técnicas especiales como L'Hôpital."
+  },
+  {
+    pregunta: "La regla de la cadena se usa para:",
+    opciones: [
+      "Derivar funciones compuestas",
+      "Calcular límites",
+      "Resolver integrales"
+    ],
+    correcta: 0,
+    explicacion: "La regla de la cadena nos permite derivar funciones compuestas como f(g(x))."
+  }
+];
+
+// Exercise verification logic
+function verificarEjercicio(numero) {
+  const input = document.getElementById(`ej${numero}`);
+  const feedback = document.getElementById(`resp${numero}`);
+  
+  if (numero === 1) {
+    const respuesta = parseFloat(input.value);
+    if (respuesta === 1) {
+      feedback.textContent = "¡Correcto! Este es un límite notable importante";
+      feedback.style.color = '#4caf50';
+      actualizarPuntos(15);
+    } else {
+      feedback.textContent = "Incorrecto. El límite de (sin x)/x cuando x→0 es 1";
+      feedback.style.color = '#f44336';
+    }
+  } else if (numero === 2) {
+    const respuesta = parseFloat(input.value);
+    if (respuesta === 7) {
+      feedback.textContent = "¡Correcto! f'(x)=2x+3, entonces f'(2)=4+3=7";
+      feedback.style.color = '#4caf50';
+      actualizarPuntos(15);
+    } else {
+      feedback.textContent = "Incorrecto. Deriva primero: f'(x)=2x+3, luego evalúa en x=2";
+      feedback.style.color = '#f44336';
+    }
+  }
+}
+
+// Points system
+function actualizarPuntos(puntos) {
+    let puntosGlobales = parseInt(localStorage.getItem('puntosGlobales')) || 0;
+    puntosGlobales += puntos;
+    localStorage.setItem('puntosGlobales', puntosGlobales);
+    
+    const pointsDisplay = document.querySelector('.points span');
+    if(pointsDisplay) {
+        pointsDisplay.textContent = puntosGlobales;
+        pointsDisplay.parentElement.classList.add('pulse');
+        setTimeout(() => pointsDisplay.parentElement.classList.remove('pulse'), 500);
+    }
+}
+
+function actualizarPuntosGlobales(puntos) {
+    const puntosGlobales = parseInt(localStorage.getItem('learnix_points_globales')) || 0;
+    localStorage.setItem('learnix_points_globales', puntosGlobales + puntos);
+  }
+
+// Llamar a esta función después de calcular los puntos del quiz
+  actualizarPuntosGlobales(puntos);
+
+function inicializarQuiz() {
+    const container = document.getElementById('quiz-container');
+    container.innerHTML = ''; // Clear container
+    
+    quizData.forEach((pregunta, index) => {
+        const quizCard = document.createElement('div');
+        quizCard.className = 'quiz-card fade-in';
+        quizCard.style.animationDelay = `${index * 0.2}s`;
+        
+        quizCard.innerHTML = `
+            <div class="quiz-question">
+                <h4>Pregunta ${index + 1}</h4>
+                <p>${pregunta.pregunta}</p>
+            </div>
+            <div class="quiz-options">
+                ${pregunta.opciones.map((opcion, i) => `
+                    <div class="quiz-option" onclick="verificarRespuesta(${index}, ${i})">
+                        <span class="option-letter">${['A', 'B', 'C'][i]}</span>
+                        <span class="option-text">${opcion}</span>
+                    </div>
+                `).join('')}
+            </div>
+            <div class="quiz-feedback" id="feedback-${index}"></div>
+        `;
+        
+        container.appendChild(quizCard);
+    });
+}
+
+function verificarRespuesta(preguntaId, respuestaSeleccionada) {
+    const feedbackElement = document.getElementById(`feedback-${preguntaId}`);
+    const opcionesElements = document.querySelectorAll(`#quiz-container .quiz-card:nth-child(${preguntaId + 1}) .quiz-option`);
+    
+    // Remove previous states
+    opcionesElements.forEach(opt => opt.classList.remove('correct', 'incorrect'));
+    
+    if (respuestaSeleccionada === quizData[preguntaId].correcta) {
+        // Correct answer
+        opcionesElements[respuestaSeleccionada].classList.add('correct');
+        feedbackElement.innerHTML = `
+            <div class="feedback-content correct">
+                <span class="feedback-icon">✅</span>
+                <p><strong>¡Correcto!</strong> ${quizData[preguntaId].explicacion}</p>
+            </div>
+        `;
+        actualizarPuntos(10);
+    } else {
+        // Incorrect answer
+        opcionesElements[respuestaSeleccionada].classList.add('incorrect');
+        opcionesElements[quizData[preguntaId].correcta].classList.add('correct');
+        feedbackElement.innerHTML = `
+            <div class="feedback-content incorrect">
+                <span class="feedback-icon">❌</span>
+                <p><strong>Incorrecto.</strong> ${quizData[preguntaId].explicacion}</p>
+            </div>
+        `;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', inicializarQuiz);
+</script>
+</body>
+</html>

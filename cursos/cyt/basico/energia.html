@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Learnix - Energía</title>
+  <link rel="stylesheet" href="../../../css/style.css">
+  <style>
+    /* ======= ESTILOS BASE ======= */
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body {
+      background-color:#1e1e1e;
+      background-image: linear-gradient(135deg, #1e1e1e, #252525);
+      color:#e0e0e0; display:flex; flex-direction:column; min-height:100vh;
+    }
+    header {
+      background-color:#1e1e1e; display:flex; justify-content:space-between; align-items:center;
+      padding:15px 30px; position:sticky; top:0; z-index:100; border-bottom:2px solid #2e2e2e;
+    }
+    header .logo { display:flex; align-items:center; gap:10px; }
+    header .logo img { height:40px; }
+    header nav a {
+      margin-left:20px; font-weight:500; color:#bbb; text-decoration:none; transition:color .3s ease;
+    }
+    header nav a:hover, header nav a.active { color:#00bcd4; }
+
+    footer {
+      background-color:#1e1e1e; text-align:center; padding:15px; border-top:2px solid #2e2e2e; margin-top:auto;
+    }
+    .btn {
+      display:inline-block; background-color:#00bcd4; color:#fff; padding:10px 20px; border-radius:8px;
+      margin-top:10px; transition:background .3s ease; text-decoration:none;
+    }
+    .btn:hover { background-color:#008ba3; }
+
+    /* ======= CONTENIDO ======= */
+    .contenido {
+      padding:40px 20px; max-width:1000px; margin:auto; text-align:center;
+    }
+    .contenido h2 {
+      font-size:2.2rem; color:#00bcd4; margin-bottom:20px;
+    }
+    .contenido p {
+      font-size:1.1rem; color:#ccc; margin-bottom:30px;
+    }
+    .subtema {
+      background-color:#2a2a2a; padding:20px; border-radius:12px;
+      margin-bottom:18px; box-shadow:0 4px 12px rgba(0,0,0,.3);
+      text-align:left;
+    }
+    .subtema h3 {
+      color:#fff; font-size:1.2rem; margin-bottom:10px;
+    }
+    .subtema p { color:#bbb; font-size:1rem; margin-bottom:10px; }
+    .resultado {
+      margin-top:10px; color:#fff; font-weight:700;
+      background: rgba(0,0,0,0.25); padding:10px; border-radius:8px;
+    }
+    .quiz-question { margin-bottom:12px; color:#ddd; }
+    .feedback-item { padding:10px; border-radius:8px; margin-bottom:8px; }
+    .correct { background: rgba(0,128,0,0.12); border-left:4px solid #20c997; color:#c6ffd9; }
+    .wrong { background: rgba(255,0,0,0.08); border-left:4px solid #ff6b6b; color:#ffd9d9; }
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado -->
+  <header>
+    <div class="logo">
+      <img src="../../../img/logo/logo.svg" alt="Learnix Logo">
+      <h1>Learnix</h1>
+    </div>
+    <nav>
+      <a href="../../../index.html">Inicio</a>
+      <a href="../../../cursos.html">Cursos</a>
+      <a href="../../../perfil.html">Perfil</a>
+      <a href="../../../login.html">Login</a>
+      <a href="../../../favoritos.html">Favoritos</a>
+    </nav>
+  </header>
+
+  <!-- Contenido -->
+  <main class="contenido">
+    <h2>Energía</h2>
+    <p>Explora las fuentes, usos y transformaciones de la energía en nuestra vida diaria.</p>
+
+    <!-- Definición -->
+    <div class="subtema">
+      <h3>¿Qué es la energía?</h3>
+      <p>La energía es la capacidad de realizar trabajo o producir cambios. Es esencial para todas las actividades humanas y naturales.</p>
+    </div>
+
+    <!-- Propiedades -->
+    <div class="subtema">
+      <h3>Aspectos clave</h3>
+      <ul>
+        <li>Existen fuentes renovables y no renovables de energía.</li>
+        <li>La energía puede transformarse de una forma a otra.</li>
+        <li>Es fundamental para el desarrollo tecnológico y económico.</li>
+      </ul>
+    </div>
+
+    <!-- Ejemplos -->
+    <div class="subtema">
+      <h3>Ejemplos resueltos</h3>
+      <p><strong>Ejemplo 1:</strong> La energía solar se utiliza para generar electricidad mediante paneles solares.</p>
+      <p><strong>Pregunta:</strong> ¿Es una fuente renovable?</p>
+      <p><strong>Respuesta:</strong> Sí, porque se obtiene del sol, que es inagotable.</p>
+
+      <p><strong>Ejemplo 2:</strong> El petróleo se usa como combustible en vehículos.</p>
+      <p><strong>Pregunta:</strong> ¿Es una fuente renovable?</p>
+      <p><strong>Respuesta:</strong> No, porque es un recurso limitado y no se regenera rápidamente.</p>
+    </div>
+
+    <!-- Herramientas interactivas -->
+    <div class="subtema">
+      <h3>Herramientas interactivas</h3>
+      <p>Selecciona la fuente de energía correcta para cada situación:</p>
+      <p><strong>Situación:</strong> Necesitamos energía para iluminar una casa de manera sostenible.</p>
+      <select id="herramientaEnergia">
+        <option value="">-- Selecciona --</option>
+        <option value="1">Energía solar</option>
+        <option value="2">Carbón</option>
+        <option value="3">Petróleo</option>
+      </select>
+      <button class="btn" onclick="verificarEnergia()">Verificar</button>
+      <div id="resultadoEnergia" class="resultado">—</div>
+    </div>
+
+    <!-- Mini Quiz -->
+    <div class="subtema">
+      <h3>Mini Quiz</h3>
+      <p>Responde las siguientes preguntas para evaluar tu comprensión:</p>
+      <div class="quiz-question">
+        <label>1) ¿Qué es la energía?</label><br>
+        <label><input type="radio" name="q1" value="a"> La capacidad de realizar trabajo.</label><br>
+        <label><input type="radio" name="q1" value="b"> Un tipo de materia.</label><br>
+        <label><input type="radio" name="q1" value="c"> Un objeto físico.</label>
+      </div>
+      <div class="quiz-question">
+        <label>2) ¿Cuál es una fuente renovable de energía?</label><br>
+        <label><input type="radio" name="q2" value="a"> Carbón.</label><br>
+        <label><input type="radio" name="q2" value="b"> Energía solar.</label><br>
+        <label><input type="radio" name="q2" value="c"> Petróleo.</label>
+      </div>
+      <div class="quiz-question">
+        <label>3) ¿Qué tipo de energía se utiliza en paneles solares?</label><br>
+        <label><input type="radio" name="q3" value="a"> Energía térmica.</label><br>
+        <label><input type="radio" name="q3" value="b"> Energía solar.</label><br>
+        <label><input type="radio" name="q3" value="c"> Energía eólica.</label>
+      </div>
+      <div class="quiz-question">
+        <label>4) ¿Qué tipo de energía es el petróleo?</label><br>
+        <label><input type="radio" name="q4" value="a"> Renovable.</label><br>
+        <label><input type="radio" name="q4" value="b"> No renovable.</label><br>
+        <label><input type="radio" name="q4" value="c"> Solar.</label>
+      </div>
+      <div class="quiz-question">
+        <label>5) ¿Qué tipo de energía es más sostenible?</label><br>
+        <label><input type="radio" name="q5" value="a"> Energía solar.</label><br>
+        <label><input type="radio" name="q5" value="b"> Carbón.</label><br>
+        <label><input type="radio" name="q5" value="c"> Petróleo.</label>
+      </div>
+      <button class="btn" onclick="revisarQuizEnergia()">Revisar</button>
+      <div id="resultadoQuizEnergia" class="resultado">—</div>
+    </div>
+
+    <!-- Tip -->
+    <div class="subtema">
+      <h3>Tip de memotecnia</h3>
+      <p>Recuerda: "Energía renovable = Sostenibilidad".</p>
+    </div>
+  </main>
+
+  <script>
+    function verificarEnergia() {
+      const seleccion = document.getElementById('herramientaEnergia').value;
+      const resultado = document.getElementById('resultadoEnergia');
+      if (seleccion === "1") {
+        resultado.textContent = "¡Correcto! La energía solar es sostenible.";
+      } else {
+        resultado.textContent = "Incorrecto. La respuesta correcta es 'Energía solar'.";
+      }
+    }
+
+    function revisarQuizEnergia() {
+      const respuestasCorrectas = {
+        q1: "a",
+        q2: "b",
+        q3: "b",
+        q4: "b",
+        q5: "a"
+      };
+
+      let puntos = 0;
+      let totalPreguntas = 5;
+      let feedback = "";
+
+      for (let i = 1; i <= totalPreguntas; i++) {
+        const respuesta = document.querySelector(`input[name="q${i}"]:checked`);
+        if (respuesta) {
+          if (respuesta.value === respuestasCorrectas[`q${i}`]) {
+            puntos += 10;
+            feedback += `<div class='feedback-item correct'>Pregunta ${i}: ¡Correcto!</div>`;
+          } else {
+            feedback += `<div class='feedback-item wrong'>Pregunta ${i}: Incorrecto. La respuesta correcta es '${respuestasCorrectas[`q${i}`]}'.</div>`;
+          }
+        } else {
+          feedback += `<div class='feedback-item wrong'>Pregunta ${i}: No respondida.</div>`;
+        }
+      }
+
+      const puntosActuales = parseInt(localStorage.getItem('learnix_points_energia')) || 0;
+      localStorage.setItem('learnix_points_energia', puntosActuales + puntos);
+
+      document.getElementById('resultadoQuizEnergia').innerHTML = `
+        <p>¡Quiz completado! Obtuviste ${puntos} puntos.</p>
+        ${feedback}
+      `;
+    }
+  </script>
+</body>
+</html>

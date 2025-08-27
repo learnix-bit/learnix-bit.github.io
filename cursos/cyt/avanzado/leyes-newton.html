@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Learnix - Leyes de Newton</title>
+  <style>
+    /* ======= ESTILOS BASE ======= */
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body {
+      background-color:#1e1e1e;
+      background-image: linear-gradient(135deg, #1e1e1e, #252525);
+      color:#e0e0e0; display:flex; flex-direction:column; min-height:100vh;
+    }
+    header {
+      background-color:#1e1e1e; display:flex; justify-content:space-between; align-items:center;
+      padding:15px 30px; position:sticky; top:0; z-index:100; border-bottom:2px solid #2e2e2e;
+    }
+    header .logo { display:flex; align-items:center; gap:10px; }
+    header .logo img { height:40px; }
+    header nav a {
+      margin-left:20px; font-weight:500; color:#bbb; text-decoration:none; transition:color .3s ease;
+    }
+    header nav a:hover, header nav a.active { color:#00bcd4; }
+
+    footer {
+      background-color:#1e1e1e; text-align:center; padding:15px; border-top:2px solid #2e2e2e; margin-top:auto;
+    }
+    .btn {
+      display:inline-block; background-color:#00bcd4; color:#fff; padding:10px 20px; border-radius:8px;
+      margin-top:10px; transition:background .3s ease; text-decoration:none;
+    }
+    .btn:hover { background-color:#008ba3; }
+
+    /* ======= CONTENIDO ======= */
+    .contenido {
+      padding:40px 20px; max-width:1000px; margin:auto; text-align:center;
+    }
+    .contenido h2 {
+      font-size:2.2rem; color:#00bcd4; margin-bottom:20px;
+    }
+    .contenido p {
+      font-size:1.1rem; color:#ccc; margin-bottom:30px;
+    }
+    .subtema {
+      background-color:#2a2a2a; padding:20px; border-radius:12px;
+      margin-bottom:18px; box-shadow:0 4px 12px rgba(0,0,0,.3);
+      text-align:left;
+    }
+    .subtema h3 {
+      color:#fff; font-size:1.2rem; margin-bottom:10px;
+    }
+    .subtema p { color:#bbb; font-size:1rem; margin-bottom:10px; }
+    .resultado {
+      margin-top:10px; color:#fff; font-weight:700;
+      background: rgba(0,0,0,0.25); padding:10px; border-radius:8px;
+    }
+    .quiz-question { margin-bottom:12px; color:#ddd; }
+    .feedback-item { padding:10px; border-radius:8px; margin-bottom:8px; }
+    .correct { background: rgba(0,128,0,0.12); border-left:4px solid #20c997; color:#c6ffd9; }
+    .wrong { background: rgba(255,0,0,0.08); border-left:4px solid #ff6b6b; color:#ffd9d9; }
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado -->
+  <header>
+    <div class="logo">
+      <img src="../../../img/logo/logo.svg" alt="Learnix Logo">
+      <h1>Learnix</h1>
+    </div>
+    <nav>
+      <a href="../../../index.html">Inicio</a>
+      <a href="../../../cursos.html" class="active">Cursos</a>
+      <a href="../../../perfil.html">Perfil</a>
+      <a href="../../../login.html">Login</a>
+      <a href="../../../favoritos.html">Favoritos</a>
+    </nav>
+  </header>
+
+  <!-- Contenido -->
+  <main class="contenido">
+    <h2>Leyes de Newton</h2>
+    <p>Explora las tres leyes fundamentales del movimiento formuladas por Isaac Newton.</p>
+
+    <!-- Definición -->
+    <div class="subtema">
+      <h3>¿Qué son las Leyes de Newton?</h3>
+      <p>Las Leyes de Newton son principios fundamentales que describen la relación entre el movimiento de un objeto y las fuerzas que actúan sobre él.</p>
+    </div>
+
+    <!-- Propiedades -->
+    <div class="subtema">
+      <h3>Aspectos clave</h3>
+      <ul>
+        <li><strong>Primera Ley:</strong> Un objeto permanece en reposo o en movimiento uniforme a menos que actúe una fuerza externa.</li>
+        <li><strong>Segunda Ley:</strong> La aceleración de un objeto es directamente proporcional a la fuerza neta aplicada e inversamente proporcional a su masa (F = ma).</li>
+        <li><strong>Tercera Ley:</strong> Por cada acción, hay una reacción igual y opuesta.</li>
+      </ul>
+    </div>
+
+    <!-- Ejemplos -->
+    <div class="subtema">
+      <h3>Ejemplos resueltos</h3>
+      <p><strong>Ejemplo 1:</strong> Un coche en reposo comienza a moverse cuando se aplica una fuerza.</p>
+      <p><strong>Pregunta:</strong> ¿Qué ley explica este fenómeno?</p>
+      <p><strong>Respuesta:</strong> Primera Ley de Newton.</p>
+
+      <p><strong>Ejemplo 2:</strong> Empujar un carrito de supermercado vacío requiere menos fuerza que empujar uno lleno.</p>
+      <p><strong>Pregunta:</strong> ¿Qué ley explica este fenómeno?</p>
+      <p><strong>Respuesta:</strong> Segunda Ley de Newton.</p>
+    </div>
+
+    <!-- Herramientas interactivas -->
+    <div class="subtema">
+      <h3>Herramientas interactivas</h3>
+      <p>Selecciona la ley que corresponde a la siguiente afirmación: "Por cada acción, hay una reacción igual y opuesta."</p>
+      <select id="herramientaLeyesNewton">
+        <option value="">-- Selecciona --</option>
+        <option value="1">Primera Ley</option>
+        <option value="2">Segunda Ley</option>
+        <option value="3">Tercera Ley</option>
+      </select>
+      <button class="btn" onclick="verificarLeyesNewton()">Verificar</button>
+      <div id="resultadoLeyesNewton" class="resultado">—</div>
+    </div>
+
+    <!-- Mini Quiz -->
+    <div class="subtema">
+      <h3>Mini Quiz</h3>
+      <p>Responde las siguientes preguntas para evaluar tu comprensión:</p>
+      <div class="quiz-question">
+        <label>1) ¿Qué describe la Primera Ley de Newton?</label><br>
+        <label><input type="radio" name="q1" value="a"> La relación entre fuerza y aceleración.</label><br>
+        <label><input type="radio" name="q1" value="b"> El movimiento uniforme o reposo de un objeto sin fuerzas externas.</label><br>
+        <label><input type="radio" name="q1" value="c"> La acción y reacción de fuerzas.</label>
+      </div>
+      <div class="quiz-question">
+        <label>2) ¿Qué fórmula representa la Segunda Ley de Newton?</label><br>
+        <label><input type="radio" name="q2" value="a"> F = ma.</label><br>
+        <label><input type="radio" name="q2" value="b"> F = mv.</label><br>
+        <label><input type="radio" name="q2" value="c"> F = mg.</label>
+      </div>
+      <div class="quiz-question">
+        <label>3) ¿Qué describe la Tercera Ley de Newton?</label><br>
+        <label><input type="radio" name="q3" value="a"> La relación entre fuerza y aceleración.</label><br>
+        <label><input type="radio" name="q3" value="b"> El movimiento uniforme o reposo de un objeto sin fuerzas externas.</label><br>
+        <label><input type="radio" name="q3" value="c"> La acción y reacción de fuerzas.</label>
+      </div>
+      <div class="quiz-question">
+        <label>4) ¿Qué ocurre si se aplica una fuerza neta a un objeto?</label><br>
+        <label><input type="radio" name="q4" value="a"> El objeto permanece en reposo.</label><br>
+        <label><input type="radio" name="q4" value="b"> El objeto acelera en la dirección de la fuerza.</label><br>
+        <label><input type="radio" name="q4" value="c"> El objeto se detiene.</label>
+      </div>
+      <div class="quiz-question">
+        <label>5) ¿Qué ley explica el retroceso de un arma al disparar?</label><br>
+        <label><input type="radio" name="q5" value="a"> Primera Ley.</label><br>
+        <label><input type="radio" name="q5" value="b"> Segunda Ley.</label><br>
+        <label><input type="radio" name="q5" value="c"> Tercera Ley.</label>
+      </div>
+      <button class="btn" onclick="revisarQuizLeyesNewton()">Revisar</button>
+      <div id="resultadoQuizLeyesNewton" class="resultado">—</div>
+    </div>
+
+    <!-- Tip -->
+    <div class="subtema">
+      <h3>Tip de memotecnia</h3>
+      <p>Recuerda: "1ª Ley = Inercia, 2ª Ley = Fuerza, 3ª Ley = Acción-Reacción".</p>
+    </div>
+  </main>
+
+  <script>
+    function verificarLeyesNewton() {
+      const seleccion = document.getElementById('herramientaLeyesNewton').value;
+      const resultado = document.getElementById('resultadoLeyesNewton');
+      if (seleccion === "3") {
+        resultado.textContent = "¡Correcto! La Tercera Ley describe la acción y reacción de fuerzas.";
+      } else {
+        resultado.textContent = "Incorrecto. La respuesta correcta es 'Tercera Ley'.";
+      }
+    }
+
+    function revisarQuizLeyesNewton() {
+      const respuestasCorrectas = {
+        q1: "b",
+        q2: "a",
+        q3: "c",
+        q4: "b",
+        q5: "c"
+      };
+
+      let puntos = 0;
+      let totalPreguntas = 5;
+      let feedback = "";
+
+      for (let i = 1; i <= totalPreguntas; i++) {
+        const respuesta = document.querySelector(`input[name="q${i}"]:checked`);
+        if (respuesta) {
+          if (respuesta.value === respuestasCorrectas[`q${i}`]) {
+            puntos += 10;
+            feedback += `<div class='feedback-item correct'>Pregunta ${i}: ¡Correcto!</div>`;
+          } else {
+            feedback += `<div class='feedback-item wrong'>Pregunta ${i}: Incorrecto. La respuesta correcta es '${respuestasCorrectas[`q${i}`]}'.</div>`;
+          }
+        } else {
+          feedback += `<div class='feedback-item wrong'>Pregunta ${i}: No respondida.</div>`;
+        }
+      }
+
+      const puntosActuales = parseInt(localStorage.getItem('learnix_points_leyes_newton')) || 0;
+      localStorage.setItem('learnix_points_leyes_newton', puntosActuales + puntos);
+
+      document.getElementById('resultadoQuizLeyesNewton').innerHTML = `
+        <p>¡Quiz completado! Obtuviste ${puntos} puntos.</p>
+        ${feedback}
+      `;
+    }
+  </script>
+</body>
+</html>

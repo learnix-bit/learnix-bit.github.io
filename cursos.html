@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learnix - Cursos</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background-color: #1e1e1e;
+      background-image: linear-gradient(135deg, #1e1e1e, #252525);
+      color: #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background-color: #1e1e1e;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid #2e2e2e;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    header .logo img {
+      height: 40px;
+    }
+    header nav a {
+      margin-left: 20px;
+      font-weight: 500;
+      color: #bbb;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    header nav a:hover,
+    header nav a.active {
+      color: #00bcd4;
+    }
+    footer {
+      background-color: #1e1e1e;
+      text-align: center;
+      padding: 15px;
+      border-top: 2px solid #2e2e2e;
+      margin-top: auto;
+    }
+    .btn {
+      display: inline-block;
+      background-color: #00bcd4;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      margin-top: 10px;
+      transition: background 0.3s ease;
+      text-decoration: none;
+    }
+    .btn:hover {
+      background-color: #008ba3;
+    }
+    .btn-fav {
+      background-color: #ff9800;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-fav:hover {
+      background-color: #cc7a00;
+    }
+    .btn-drive {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #34a853;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      margin-top: 10px;
+      transition: background 0.3s ease;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .btn-drive:hover {
+      background-color: #2c8c46;
+    }
+    .btn-drive img {
+      width: 20px;
+      height: 20px;
+    }
+    .contenedor-cursos {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .titulo-seccion {
+      text-align: center;
+      font-size: 2rem;
+      color: #00bcd4;
+      margin-bottom: 30px;
+    }
+    .grid-cursos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+    .curso-card {
+      background-color: #2a2a2a;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .curso-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+    }
+    .curso-card img {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 15px;
+    }
+    .curso-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+    .curso-card p {
+      font-size: 0.95rem;
+      color: #bbb;
+      margin-bottom: 15px;
+    }
+    .curso-card .btn {
+      margin-right: 10px;
+    }
+    .curso-card .btn-fav {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+    }
+    .btn-drive-floating {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #1e1e1e, #252525);
+      color: white;
+      padding: 18px;
+      border-radius: 50px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      text-decoration: none;
+      font-weight: bold;
+      transition: width 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+      white-space: nowrap;
+      width: 70px;
+      z-index: 1000;
+    }
+    .btn-drive-floating:hover {
+      width: 250px;
+      padding: 18px 30px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+    }
+    .btn-drive-floating img {
+      width: 28px;
+      height: 28px;
+    }
+    .btn-drive-floating span {
+      opacity: 0;
+      margin-left: 12px;
+      transition: opacity 0.3s ease;
+    }
+    .btn-drive-floating:hover span {
+      opacity: 1;
+    }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="./img/logo/logo.svg" alt="Learnix Logo">
+            <h1>Learnix</h1>
+        </div>
+        <nav>
+            <a href="./index.html">Inicio</a>
+            <a href="./cursos.html" class="active">Cursos</a>
+            <a href="./perfil.html">Perfil</a>
+            <a href="./login.html">Login</a>
+            <a href="./favoritos.html">Favoritos</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="buscador">
+            <input type="text" id="buscarCurso" placeholder="Buscar curso...">
+            <div id="search-results" style="margin-top: 10px; color: #e0e0e0;"></div>
+        </section>
+
+        <!-- Sección de cursos -->
+        <main class="contenedor-cursos">
+            <h2 class="titulo-seccion">Explora los Cursos</h2>
+            <div class="grid-cursos">
+
+              <!-- Matemática -->
+              <div class="curso-card">
+                <img src="https://img.icons8.com/color/96/calculator.png" alt="Matemática">
+                <h3>Matemática</h3>
+                <p>Refuerza tus conocimientos en álgebra, geometría y más.</p>
+                <a href="cursos/matematica/index.html" class="btn">Ver curso</a>
+                <button class="btn-fav">★</button>
+              </div>
+
+              <!-- Comunicación -->
+              <div class="curso-card">
+                <img src="https://img.icons8.com/color/96/book.png" alt="Comunicación">
+                <h3>Comunicación</h3>
+                <p>Mejora tu escritura, comprensión lectora y expresión oral.</p>
+                <a href="cursos/comunicacion/index.html" class="btn">Ver curso</a>
+                <button class="btn-fav">★</button>
+              </div>
+
+              <!-- Ciencia y Tecnología -->
+              <div class="curso-card">
+                <img src="https://img.icons8.com/color/96/microscope.png" alt="Ciencia y Tecnología">
+                <h3>Ciencia y Tecnología</h3>
+                <p>Descubre el mundo de la física, química y biología.</p>
+                <a href="cursos/cyt/index.html" class="btn">Ver curso</a>
+                <button class="btn-fav">★</button>
+              </div>
+
+              <!-- Inglés -->
+              <div class="curso-card">
+                <img src="https://img.icons8.com/color/96/usa.png" alt="Inglés">
+                <h3>Inglés</h3>
+                <p>Aprende vocabulario, gramática y mejora tu fluidez.</p>
+                <a href="cursos/ingles/index.html" class="btn">Ver curso</a>
+                <button class="btn-fav">★</button>
+              </div>
+
+              <!-- Desarrollo Personal -->
+              <div class="curso-card">
+                <img src="https://img.icons8.com/fluency/96/personal-growth.png" alt="Desarrollo Personal" />
+                <h3>Desarrollo Personal</h3>
+                <p>Potencia tus habilidades blandas y autoestima.</p>
+                <a href="cursos/dp/index.html" class="btn">Ver curso</a>
+                <button class="btn-fav">★</button>
+              </div>
+
+              <!-- Cívico y Ciudadano -->
+              <div class="curso-card">
+                <img src="https://img.icons8.com/color/96/handshake.png" alt="Cívico y Ciudadano">
+                <h3>Cívico y Ciudadano</h3>
+                <p>Aprende sobre deberes, derechos y valores cívicos.</p>
+                <a href="cursos/cc/index.html" class="btn">Ver curso</a>
+                <button class="btn-fav">★</button>
+              </div>
+
+              <!-- Ciencias Sociales -->
+              <div class="curso-card">
+                <img src="https://img.icons8.com/color/96/globe.png" alt="Ciencias Sociales">
+                <h3>Ciencias Sociales</h3>
+                <p>Conoce historia, geografía y sociedad.</p>
+                <a href="cursos/ccss/index.html" class="btn">Ver curso</a>
+                <button class="btn-fav">★</button>
+              </div>
+
+              <!-- Quechua -->
+              <div class="curso-card">
+                <img src="https://img.icons8.com/color/96/conference.png" alt="Quechua">
+                <h3>Quechua</h3>
+                <p>Aprende y preserva la lengua ancestral andina.</p>
+                <a href="cursos/quechua/index.html" class="btn">Ver curso</a>
+                <button class="btn-fav">★</button>
+              </div>
+
+              <!-- Arte -->
+              <div class="curso-card">
+                <img src="https://img.icons8.com/color/96/paint-palette.png" alt="Arte">
+                <h3>Arte</h3>
+                <p>Expresa tu creatividad a través del arte.</p>
+                <a href="cursos/arte/index.html" class="btn">Ver curso</a>
+                <button class="btn-fav">★</button>
+              </div>
+
+              <!-- Educación para el Trabajo -->
+              <div class="curso-card">
+                <img src="https://img.icons8.com/color/96/toolbox.png" alt="Educación para el Trabajo">
+                <h3>Educación para el Trabajo</h3>
+                <p>Desarrolla competencias útiles para tu futuro laboral.</p>
+                <a href="cursos/ept/index.html" class="btn">Ver curso</a>
+                <button class="btn-fav">★</button>
+              </div>
+
+              <!-- Religión -->
+              <div class="curso-card">
+                <img src="https://img.icons8.com/color/96/cross.png" alt="Religión">
+                <h3>Religión</h3>
+                <p>Reflexiona sobre valores espirituales y éticos.</p>
+                <a href="cursos/religion/index.html" class="btn">Ver curso</a>
+                <button class="btn-fav">★</button>
+              </div>
+
+            </div>
+
+            <div class="acciones">
+              <a href="https://drive.google.com/drive/folders/1f_MlJBR4tm985ybUiu8uADbAm1XFpSqh?usp=drive_link" class="btn-drive-floating">
+                <img src="https://img.icons8.com/color/48/google-drive--v1.png" alt="Drive Icon">
+                <span>Material Drive para todos</span>
+              </a>
+            </div>
+        </main>
+    </main>
+
+    <a href="#chatbot-chloe" class="chloe-bot">
+        <img src="img/chatbot/chloe-icon.svg" alt="Chatbot Chloe">
+    </a>
+    
+    <footer>
+        <p>© 2025 Learnix - NeoStudio</p>
+    </footer>
+
+    <script src="js/cursos.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('buscarCurso');
+        const resultsContainer = document.getElementById('search-results');
+        const suggestionsContainer = document.createElement('div');
+        suggestionsContainer.style.marginTop = '10px';
+        suggestionsContainer.style.color = '#e0e0e0';
+        searchInput.parentNode.insertBefore(suggestionsContainer, resultsContainer);
+
+        const courseTopics = {
+          'Matemática': [
+            { name: 'Figuras', link: 'cursos/matematica/basico/figuras.html' },
+            { name: 'Fracciones', link: 'cursos/matematica/basico/fracciones.html' },
+            { name: 'MCM-MCD', link: 'cursos/matematica/basico/mcm-mcd.html' },
+            { name: 'Números', link: 'cursos/matematica/basico/numeros.html' },
+            { name: 'Operaciones', link: 'cursos/matematica/basico/operaciones.html' },
+            { name: 'Perímetro y Área', link: 'cursos/matematica/basico/perimetro-area.html' },
+            { name: 'Porcentajes', link: 'cursos/matematica/basico/porcentajes.html' },
+            { name: 'Álgebra', link: 'cursos/matematica/intermedio/algebra.html' },
+            { name: 'Ecuaciones', link: 'cursos/matematica/intermedio/ecuaciones.html' },
+            { name: 'Estadística', link: 'cursos/matematica/intermedio/estadistica.html' },
+            { name: 'Factorización', link: 'cursos/matematica/intermedio/factorizacion.html' },
+            { name: 'Geometría', link: 'cursos/matematica/intermedio/geometria.html' },
+            { name: 'Potencias y Raíces', link: 'cursos/matematica/intermedio/potencias-raices.html' },
+            { name: 'Proporciones y Razones', link: 'cursos/matematica/intermedio/proporciones-razones.html' },
+            { name: 'Razones', link: 'cursos/matematica/intermedio/razones.html' },
+            { name: 'Regla Compuesta', link: 'cursos/matematica/intermedio/regla-compuesta.html' },
+            { name: 'Cálculo', link: 'cursos/matematica/avanzado/calculo.html' },
+            { name: 'Ecuaciones Cuadráticas', link: 'cursos/matematica/avanzado/ecuaciones-cuadraticas.html' },
+            { name: 'Funciones', link: 'cursos/matematica/avanzado/funciones.html' },
+            { name: 'Probabilidad', link: 'cursos/matematica/avanzado/probabilidad.html' }
+          ],
+          'Comunicación': [
+            { name: 'Comprensión Lectora', link: 'cursos/comunicacion/basico/comprension-lectora.html' },
+            { name: 'Ortografía y Puntuación', link: 'cursos/comunicacion/basico/ortografia-puntuacion.html' },
+            { name: 'Redacción Básica', link: 'cursos/comunicacion/basico/redaccion-basica.html' },
+            { name: 'Sinónimos y Antónimos', link: 'cursos/comunicacion/basico/sinonimos-antonimos.html' },
+            { name: 'Tipos de Texto', link: 'cursos/comunicacion/basico/tipos-texto.html' },
+            { name: 'Comprensión de Textos', link: 'cursos/comunicacion/intermedio/comprension-textos.html' },
+            { name: 'Conectores y Cohesión', link: 'cursos/comunicacion/intermedio/conectores-cohesion.html' },
+            { name: 'Figuras Literarias', link: 'cursos/comunicacion/intermedio/figuras-literarias.html' },
+            { name: 'Producción de Textos', link: 'cursos/comunicacion/intermedio/produccion-textos.html' },
+            { name: 'Reglas Gramaticales', link: 'cursos/comunicacion/intermedio/reglas-gramaticales.html' },
+            { name: 'Análisis de Textos', link: 'cursos/comunicacion/avanzado/analisis-textos.html' },
+            { name: 'Comprensión Crítica', link: 'cursos/comunicacion/avanzado/comprension-critica.html' },
+            { name: 'Estilos Literarios', link: 'cursos/comunicacion/avanzado/estilos-literarios.html' },
+            { name: 'Producción de Ensayos', link: 'cursos/comunicacion/avanzado/produccion-ensayos.html' },
+            { name: 'Retórica y Debate', link: 'cursos/comunicacion/avanzado/retorica-debate.html' }
+          ],
+          'Ciencia y Tecnología': [
+            { name: 'Cuerpo Humano', link: 'cursos/cyt/basico/cuerpo-humano.html' },
+            { name: 'Energía', link: 'cursos/cyt/basico/energia.html' },
+            { name: 'Estados de la Materia', link: 'cursos/cyt/basico/estados-materia.html' },
+            { name: 'Seres Vivos', link: 'cursos/cyt/basico/seres-vivos.html' },
+            { name: 'Tierra y Sistema Solar', link: 'cursos/cyt/basico/tierra-sistema-solar.html' },
+            { name: 'Cambios de Estado', link: 'cursos/cyt/intermedio/cambios-estado.html' },
+            { name: 'Célula', link: 'cursos/cyt/intermedio/celula.html' },
+            { name: 'Ecosistemas', link: 'cursos/cyt/intermedio/ecosistemas.html' },
+            { name: 'Energías Renovables', link: 'cursos/cyt/intermedio/energias-renovables.html' },
+            { name: 'Propiedades de la Materia', link: 'cursos/cyt/intermedio/propiedades-materia.html' },
+            { name: 'Salud y Nutrición', link: 'cursos/cyt/intermedio/salud-nutricion.html' },
+            { name: 'Electricidad y Magnetismo', link: 'cursos/cyt/avanzado/electricidad-magnetismo.html' },
+            { name: 'Evolución y Biodiversidad', link: 'cursos/cyt/avanzado/evolucion-biodiversidad.html' },
+            { name: 'Genética', link: 'cursos/cyt/avanzado/genetica.html' },
+            { name: 'Leyes de Newton', link: 'cursos/cyt/avanzado/leyes-newton.html' },
+            { name: 'Reacciones Químicas', link: 'cursos/cyt/avanzado/reacciones-quimicas.html' },
+            { name: 'Tecnología Aplicada', link: 'cursos/cyt/avanzado/tecnologia-aplicada.html' }
+          ]
+        };
+
+        const synonyms = {
+          'Matemática': ['Aritmética', 'Cálculo'],
+          'Comunicación': ['Lenguaje', 'Literatura'],
+          'Ciencia y Tecnología': ['Física', 'Química', 'Biología']
+        };
+
+        const searchHistory = [];
+
+        function normalizeText(text) {
+          return text.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
+        }
+
+        function getSuggestions(term) {
+          const suggestions = new Set();
+          Object.keys(courseTopics).forEach(course => {
+            if (normalizeText(course).includes(term)) {
+              suggestions.add(course);
+            }
+            courseTopics[course].forEach(topic => {
+              if (normalizeText(topic.name).includes(term)) {
+                suggestions.add(topic.name);
+              }
+            });
+          });
+          return Array.from(suggestions);
+        }
+
+        function getResults(term) {
+          const results = [];
+          Object.keys(courseTopics).forEach(course => {
+            const courseSynonyms = synonyms[course] || [];
+            const isCourseMatch = normalizeText(course).includes(term) || courseSynonyms.some(syn => normalizeText(syn).includes(term));
+
+            if (isCourseMatch) {
+              results.push({ name: course, link: `cursos/${normalizeText(course)}/index.html`, relevance: 1 });
+            }
+
+            courseTopics[course].forEach(topic => {
+              const normalizedTopicName = normalizeText(topic.name);
+              if (normalizedTopicName.includes(term)) {
+                results.push({ name: `${course} - ${topic.name}`, link: topic.link, relevance: 2 });
+              }
+            });
+          });
+
+          return results.sort((a, b) => b.relevance - a.relevance);
+        }
+
+        function updateSuggestions(term) {
+          suggestionsContainer.innerHTML = '';
+          const suggestions = getSuggestions(term);
+          suggestions.forEach(suggestion => {
+            const suggestionItem = document.createElement('div');
+            suggestionItem.textContent = suggestion;
+            suggestionItem.style.cursor = 'pointer';
+            suggestionItem.style.color = '#00bcd4';
+            suggestionItem.addEventListener('click', () => {
+              searchInput.value = suggestion;
+              searchInput.dispatchEvent(new Event('input'));
+            });
+            suggestionsContainer.appendChild(suggestionItem);
+          });
+        }
+
+        function updateSearchHistory(term) {
+          if (!searchHistory.includes(term)) {
+            searchHistory.push(term);
+          }
+        }
+
+        searchInput.addEventListener('input', () => {
+          const searchTerm = normalizeText(searchInput.value);
+          resultsContainer.innerHTML = '';
+          updateSuggestions(searchTerm);
+
+          const results = getResults(searchTerm);
+          results.forEach(result => {
+            const resultItem = document.createElement('a');
+            resultItem.href = result.link;
+            resultItem.textContent = result.name;
+            resultItem.style.display = 'block';
+            resultItem.style.color = '#00bcd4';
+            resultItem.style.margin = '5px 0';
+            resultsContainer.appendChild(resultItem);
+          });
+
+          updateSearchHistory(searchInput.value);
+        });
+
+        // Display search history
+        const historyContainer = document.createElement('div');
+        historyContainer.style.marginTop = '20px';
+        historyContainer.style.color = '#e0e0e0';
+        resultsContainer.parentNode.appendChild(historyContainer);
+
+        const historyTitle = document.createElement('h4');
+        historyTitle.textContent = 'Historial de Búsqueda';
+        historyTitle.style.color = '#00bcd4';
+        historyContainer.appendChild(historyTitle);
+
+        const historyList = document.createElement('ul');
+        historyContainer.appendChild(historyList);
+
+        searchInput.addEventListener('blur', () => {
+          historyList.innerHTML = '';
+          searchHistory.forEach(term => {
+            const historyItem = document.createElement('li');
+            historyItem.textContent = term;
+            historyItem.style.color = '#bbb';
+            historyList.appendChild(historyItem);
+          });
+        });
+      });
+    </script>
+</body>
+</html>

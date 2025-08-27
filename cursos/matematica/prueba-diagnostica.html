@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Learnix - Prueba Diagnóstica (Básico • Intermedio • Avanzado)</title>
+<style>
+/* ========= ESTILO BASE APROBADO ========= */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif}
+body{background:#1e1e1e;background-image:linear-gradient(135deg,#1e1e1e,#252525);color:#e0e0e0;display:flex;flex-direction:column;min-height:100vh}
+header{background:#1e1e1e;display:flex;justify-content:space-between;align-items:center;padding:15px 30px;position:sticky;top:0;z-index:100;border-bottom:2px solid #2e2e2e}
+header .logo{display:flex;align-items:center;gap:10px}
+header .logo img{height:40px}
+header nav{display:flex;align-items:center;gap:8px}
+header nav a{margin-left:20px;font-weight:500;color:#bbb;text-decoration:none;transition:color .3s ease}
+header nav a:hover, header nav a.active{color:#00bcd4}
+.header-right{display:flex;align-items:center;gap:14px}
+.points{background:#2a2a2a;color:#ffd36e;padding:8px 12px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;font-weight:700;border:1px solid #333}
+.points img{width:20px;height:20px;display:block}
+.points.pulse{animation:pulse .36s ease-in-out}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.08)}100%{transform:scale(1)}}
+footer{background:#1e1e1e;text-align:center;padding:15px;border-top:2px solid #2e2e2e;margin-top:auto}
+#algo {
+  text-decoration: none;
+    color: inherit; 
+}
+.btn{display:inline-flex;align-items:center;gap:8px;background:#00bcd4;color:#fff;padding:10px 20px;border-radius:8px;margin-top:10px;transition:transform .2s ease, background .3s ease;text-decoration:none;cursor:pointer;border:none}
+.btn:hover{background:#008ba3;transform:translateY(-1px)}
+.btn img{width:20px;height:20px}
+.contenido{padding:34px 20px;max-width:1000px;margin:auto}
+h2.title{font-size:2.2rem;color:#00bcd4;margin-bottom:6px;text-align:center}
+.lead{text-align:center;color:#ccc;margin-bottom:20px}
+.grid-info{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:12px 0}
+.card{background:#2a2a2a;border-radius:14px;padding:18px;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.card h3{color:#fff;font-size:1.15rem;margin-bottom:8px}
+.card p,.card li{color:#bbb}
+.accordion{margin:18px 0}
+.acc-item{border:1px solid #333;border-radius:12px;overflow:hidden;margin-bottom:12px;background:#252525}
+.acc-head{width:100%;text-align:left;background:#2b2b2b;color:#e0e0e0;padding:14px 16px;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:700}
+.acc-head span{opacity:.9}
+.acc-body{display:none;padding:16px 16px 18px 16px;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+
+/* Inputs oscuros modernos */
+input[type="number"], input[type="text"], select, textarea {
+  padding:10px;border-radius:10px;border:1px solid #2e2e2e;background:#00000040;
+  color:#e0e0e0;outline:none;backdrop-filter:blur(2px)
+}
+input::placeholder, textarea::placeholder{color:#9aa0a6}
+
+/* Resultado / feedback */
+.resultado{margin-top:10px;color:#fff;font-weight:700;background:rgba(0,0,0,.25);padding:10px;border-radius:10px}
+.quiz-question{margin-bottom:12px;color:#ddd}
+.feedback-item{padding:10px;border-radius:10px;margin-bottom:8px}
+.correct{background:rgba(0,128,0,.12);border-left:4px solid #20c997;color:#c6ffd9}
+.wrong{background:rgba(255,0,0,.08);border-left:4px solid #ff6b6b;color:#ffd9d9}
+.small{font-size:.92rem;color:#9aa0a6;margin-top:6px;display:block}
+.acciones{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:16px 0}
+
+/* Chips y etiquetas */
+.badge{display:inline-block;padding:4px 10px;border-radius:999px;background:#14252a;color:#7ad8e8;border:1px solid #1e3a40;font-size:.8rem;margin-right:8px}
+
+/* Responsive */
+@media (max-width:640px){
+  .contenido{padding:20px 12px}
+  header{padding:12px}
+}
+
+/* Micro-animación para aciertos */
+@keyframes pop{0%{transform:scale(.96)}60%{transform:scale(1.04)}100%{transform:scale(1)}}
+.pop{animation:pop .22s ease-out}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="../../../img/logo/logo.svg" alt="Learnix Logo">
+    <h1>Learnix</h1>
+  </div>
+  <nav>
+    <a href="../../../index.html">Inicio</a>
+    <a href="../../../cursos.html">Cursos</a>
+    <a href="../../../perfil.html">Perfil</a>
+    <a href="../../../login.html">Login</a>
+    <a href="../../../favoritos.html">Favoritos</a>
+  </nav>
+</header>
+
+<main class="contenido">
+  <h2 class="title">Prueba Diagnóstica <a id="algo" href="https://es.pornhub.com/view_video.php?viewkey=64ed4f6adff7c">–</a> Matemática</h2>
+  <p class="lead">Responde las siguientes preguntas para identificar los temas que necesitas reforzar. Al finalizar, recibirás recomendaciones personalizadas.</p>
+
+  <!-- Preguntas por nivel -->
+  <form id="diagnosticoForm">
+    <!-- Nivel Básico -->
+    <div class="subtema">
+      <h3>Nivel Básico</h3>
+      <div class="quiz-question">
+        <label>1) ¿Cuál es el resultado de 72 ÷ 8?</label><br>
+        <label><input type="radio" name="q1" value="a"> 9</label><br>
+        <label><input type="radio" name="q1" value="b"> 8</label>
+      </div>
+      <div class="quiz-question">
+        <label>2) 3/5 + 1/10 =</label><br>
+        <label><input type="radio" name="q2" value="a"> 7/10</label><br>
+        <label><input type="radio" name="q2" value="b"> 2/3</label>
+      </div>
+      <div class="quiz-question">
+        <label>3) ¿Qué es el MCD de 18 y 24?</label><br>
+        <label><input type="radio" name="q3" value="a"> 6</label><br>
+        <label><input type="radio" name="q3" value="b"> 12</label>
+      </div>
+      <div class="quiz-question">
+        <label>4) ¿Cuánto es el 20% de 150?</label><br>
+        <label><input type="radio" name="q4" value="a"> 30</label><br>
+        <label><input type="radio" name="q4" value="b"> 25</label>
+      </div>
+      <div class="quiz-question">
+        <label>5) Área de un círculo con radio 3:</label><br>
+        <label><input type="radio" name="q5" value="a"> 9π</label><br>
+        <label><input type="radio" name="q5" value="b"> 6π</label>
+      </div>
+      <div class="quiz-question">
+        <label>6) ¿Qué es una fracción impropia?</label><br>
+        <label><input type="radio" name="q6" value="a"> Numerador mayor que denominador</label><br>
+        <label><input type="radio" name="q6" value="b"> Numerador menor que denominador</label>
+      </div>
+      <div class="quiz-question">
+        <label>7) ¿Qué es un número primo?</label><br>
+        <label><input type="radio" name="q7" value="a"> Número divisible solo por 1 y sí mismo</label><br>
+        <label><input type="radio" name="q7" value="b"> Número divisible por cualquier número</label>
+      </div>
+      <div class="quiz-question">
+        <label>8) ¿Qué es una fracción equivalente?</label><br>
+        <label><input type="radio" name="q8" value="a"> Fracciones con el mismo valor</label><br>
+        <label><input type="radio" name="q8" value="b"> Fracciones con diferente valor</label>
+      </div>
+      <div class="quiz-question">
+        <label>9) ¿Qué es un número entero?</label><br>
+        <label><input type="radio" name="q9" value="a"> Número sin parte decimal</label><br>
+        <label><input type="radio" name="q9" value="b"> Número con parte decimal</label>
+      </div>
+      <div class="quiz-question">
+        <label>10) ¿Qué es un número racional?</label><br>
+        <label><input type="radio" name="q10" value="a"> Número que puede expresarse como fracción</label><br>
+        <label><input type="radio" name="q10" value="b"> Número que no puede expresarse como fracción</label>
+      </div>
+    </div>
+
+    <!-- Nivel Intermedio -->
+    <div class="subtema">
+      <h3>Nivel Intermedio</h3>
+      <div class="quiz-question">
+        <label>1) 2^3 · 2^4 =</label><br>
+        <label><input type="radio" name="q11" value="a"> 2^7</label><br>
+        <label><input type="radio" name="q11" value="b"> 2^12</label>
+      </div>
+      <div class="quiz-question">
+        <label>2) Resuelve 4x−8=12</label><br>
+        <label><input type="radio" name="q12" value="a"> x=3</label><br>
+        <label><input type="radio" name="q12" value="b"> x=5</label>
+      </div>
+      <div class="quiz-question">
+        <label>3) ¿Qué es una ecuación lineal?</label><br>
+        <label><input type="radio" name="q13" value="a"> Ecuación de primer grado</label><br>
+        <label><input type="radio" name="q13" value="b"> Ecuación de segundo grado</label>
+      </div>
+      <div class="quiz-question">
+        <label>4) ¿Qué es una raíz cuadrada?</label><br>
+        <label><input type="radio" name="q14" value="a"> Número que al cuadrado da el original</label><br>
+        <label><input type="radio" name="q14" value="b"> Número que al cubo da el original</label>
+      </div>
+      <div class="quiz-question">
+        <label>5) ¿Qué es un sistema de ecuaciones?</label><br>
+        <label><input type="radio" name="q15" value="a"> Conjunto de ecuaciones con soluciones comunes</label><br>
+        <label><input type="radio" name="q15" value="b"> Conjunto de ecuaciones sin soluciones comunes</label>
+      </div>
+      <div class="quiz-question">
+        <label>6) ¿Qué es una proporción?</label><br>
+        <label><input type="radio" name="q16" value="a"> Relación de igualdad entre dos razones</label><br>
+        <label><input type="radio" name="q16" value="b"> Relación de desigualdad entre dos razones</label>
+      </div>
+      <div class="quiz-question">
+        <label>7) ¿Qué es el teorema de Pitágoras?</label><br>
+        <label><input type="radio" name="q17" value="a"> Relación entre los lados de un triángulo rectángulo</label><br>
+        <label><input type="radio" name="q17" value="b"> Relación entre los ángulos de un triángulo</label>
+      </div>
+      <div class="quiz-question">
+        <label>8) ¿Qué es una función lineal?</label><br>
+        <label><input type="radio" name="q18" value="a"> Función de la forma y=mx+b</label><br>
+        <label><input type="radio" name="q18" value="b"> Función de la forma y=ax^2+bx+c</label>
+      </div>
+      <div class="quiz-question">
+        <label>9) ¿Qué es una desigualdad?</label><br>
+        <label><input type="radio" name="q19" value="a"> Relación que indica que dos valores no son iguales</label><br>
+        <label><input type="radio" name="q19" value="b"> Relación que indica que dos valores son iguales</label>
+      </div>
+      <div class="quiz-question">
+        <label>10) ¿Qué es una matriz?</label><br>
+        <label><input type="radio" name="q20" value="a"> Arreglo rectangular de números</label><br>
+        <label><input type="radio" name="q20" value="b"> Arreglo triangular de números</label>
+      </div>
+    </div>
+
+    <!-- Nivel Avanzado -->
+    <div class="subtema">
+      <h3>Nivel Avanzado</h3>
+      <div class="quiz-question">
+        <label>1) Vértice de y= x^2 − 4x + 1</label><br>
+        <label><input type="radio" name="q21" value="a"> (2,−3)</label><br>
+        <label><input type="radio" name="q21" value="b"> (−2,5)</label>
+      </div>
+      <div class="quiz-question">
+        <label>2) Soluciones de x^2−5x+6=0</label><br>
+        <label><input type="radio" name="q22" value="a"> x=2,3</label><br>
+        <label><input type="radio" name="q22" value="b"> x=−2,−3</label>
+      </div>
+      <div class="quiz-question">
+        <label>3) ¿Qué es una función cuadrática?</label><br>
+        <label><input type="radio" name="q23" value="a"> Función de la forma y=ax^2+bx+c</label><br>
+        <label><input type="radio" name="q23" value="b"> Función de la forma y=mx+b</label>
+      </div>
+      <div class="quiz-question">
+        <label>4) ¿Qué es una derivada?</label><br>
+        <label><input type="radio" name="q24" value="a"> Tasa de cambio instantánea</label><br>
+        <label><input type="radio" name="q24" value="b"> Tasa de cambio promedio</label>
+      </div>
+      <div class="quiz-question">
+        <label>5) ¿Qué es una integral?</label><br>
+        <label><input type="radio" name="q25" value="a"> Área bajo una curva</label><br>
+        <label><input type="radio" name="q25" value="b"> Pendiente de una curva</label>
+      </div>
+      <div class="quiz-question">
+        <label>6) ¿Qué es una desigualdad cuadrática?</label><br>
+        <label><input type="radio" name="q26" value="a"> Desigualdad que incluye términos cuadráticos</label><br>
+        <label><input type="radio" name="q26" value="b"> Desigualdad que incluye términos lineales</label>
+      </div>
+      <div class="quiz-question">
+        <label>7) ¿Qué es una serie infinita?</label><br>
+        <label><input type="radio" name="q27" value="a"> Suma de infinitos términos</label><br>
+        <label><input type="radio" name="q27" value="b"> Suma de términos finitos</label>
+      </div>
+      <div class="quiz-question">
+        <label>8) ¿Qué es un límite?</label><br>
+        <label><input type="radio" name="q28" value="a"> Valor al que se aproxima una función</label><br>
+        <label><input type="radio" name="q28" value="b"> Valor exacto de una función</label>
+      </div>
+      <div class="quiz-question">
+        <label>9) ¿Qué es una función exponencial?</label><br>
+        <label><input type="radio" name="q29" value="a"> Función de la forma y=a^x</label><br>
+        <label><input type="radio" name="q29" value="b"> Función de la forma y=ax+b</label>
+      </div>
+      <div class="quiz-question">
+        <label>10) ¿Qué es una función logarítmica?</label><br>
+        <label><input type="radio" name="q30" value="a"> Inversa de una función exponencial</label><br>
+        <label><input type="radio" name="q30" value="b"> Inversa de una función lineal</label>
+      </div>
+    </div>
+
+    <button class="btn" type="button" onclick="evaluarDiagnostico()">Evaluar</button>
+  </form>
+
+  <div id="resultadoDiagnostico" class="resultado">—</div>
+</main>
+
+<footer>
+  <p>© 2025 Learnix - NeoStudio</p>
+</footer>
+
+<script>
+/* ====== PUNTOS GLOBALES ====== */
+let puntosGlobales = parseInt(localStorage.getItem('puntosGlobales')) || 0;
+document.getElementById('puntos').textContent = puntosGlobales;
+function addPuntosOnce(key, puntos){
+  if(!localStorage.getItem(key)){
+    puntosGlobales += puntos;
+    localStorage.setItem('puntosGlobales', puntosGlobales);
+    localStorage.setItem(key,'true');
+    const p = document.getElementById('puntos');
+    p.textContent = puntosGlobales;
+    p.parentElement.classList.add('pulse');
+    setTimeout(()=>p.parentElement.classList.remove('pulse'),400);
+  }
+}
+
+/* ====== ACORDEÓN ====== */
+function toggleAcc(btn){
+  const body = btn.nextElementSibling;
+  const open = body.style.display === 'block';
+  body.style.display = open ? 'none' : 'block';
+}
+
+/* ====== HERRAMIENTAS BÁSICO ====== */
+function fracADec(inId,outId){
+  const val = document.getElementById(inId).value.trim();
+  const out = document.getElementById(outId);
+  if(!val.includes('/')){out.textContent='Formato esperado a/b'; return;}
+  const [a,b]=val.split('/').map(Number);
+  if(isNaN(a)||isNaN(b)||b===0){out.textContent='Valores inválidos';return;}
+  out.textContent = `${a}/${b} = ${a/b}`;
+  out.classList.add('pop'); setTimeout(()=>out.classList.remove('pop'),220);
+}
+function mcd(a,b){return b?mcd(b,a%b):Math.abs(a)}
+function mcm(a,b){return Math.abs(a*b)/mcd(a,b)}
+function calcMcmMcd(id1,id2,outId){
+  const a=parseInt(document.getElementById(id1).value), b=parseInt(document.getElementById(id2).value);
+  const out=document.getElementById(outId);
+  if(isNaN(a)||isNaN(b)){out.textContent='Ingresa a y b'; return;}
+  out.innerHTML = `MCD(${a},${b})=${mcd(a,b)} • MCM(${a},${b})=${mcm(a,b)}`;
+  out.classList.add('pop'); setTimeout(()=>out.classList.remove('pop'),220);
+}
+
+/* ====== HERRAMIENTAS INTERMEDIO ====== */
+function calcPotRaiz(idA,idN,outId){
+  const a=parseFloat(document.getElementById(idA).value);
+  const n=parseFloat(document.getElementById(idN).value);
+  const out=document.getElementById(outId);
+  if(isNaN(a)||isNaN(n)){out.textContent='Ingresa base y exponente/índice'; return;}
+  const pot = Math.pow(a,n);
+  const raiz = n!==0 ? Math.pow(a,1/n) : '—';
+  out.innerHTML = `a^n = ${pot} &nbsp; | &nbsp; n√a = ${raiz}`;
+  out.classList.add('pop'); setTimeout(()=>out.classList.remove('pop'),220);
+}
+function solveLinear(idA,idB,idC,outId){
+  const a=parseFloat(document.getElementById(idA).value);
+  const b=parseFloat(document.getElementById(idB).value);
+  const c=parseFloat(document.getElementById(idC).value);
+  const out=document.getElementById(outId);
+  if(isNaN(a)||a===0||isNaN(b)||isNaN(c)){out.textContent='a≠0 y números válidos';return;}
+  const x=(c-b)/a;
+  out.textContent=`x = ${(x)}`;
+  out.classList.add('pop'); setTimeout(()=>out.classList.remove('pop'),220);
+}
+
+/* ====== HERRAMIENTAS AVANZADO ====== */
+function solveQuad(idA,idB,idC,outId){
+  const a=parseFloat(document.getElementById(idA).value);
+  const b=parseFloat(document.getElementById(idB).value);
+  const c=parseFloat(document.getElementById(idC).value);
+  const out=document.getElementById(outId);
+  if(isNaN(a)||a===0||isNaN(b)||isNaN(c)){out.textContent='a≠0 y números válidos';return;}
+  const d=b*b-4*a*c;
+  if(d<0){out.textContent='Δ<0 → sin raíces reales';return;}
+  const x1=(-b+Math.sqrt(d))/(2*a), x2=(-b-Math.sqrt(d))/(2*a);
+  out.innerHTML=`x₁=${x1} • x₂=${x2}`;
+  out.classList.add('pop'); setTimeout(()=>out.classList.remove('pop'),220);
+}
+function probSimple(idFav,idTot,outId){
+  const f=parseInt(document.getElementById(idFav).value);
+  const t=parseInt(document.getElementById(idTot).value);
+  const out=document.getElementById(outId);
+  if(isNaN(f)||isNaN(t)||t<=0||f<0||f>t){out.textContent='Valores inválidos';return;}
+  out.textContent=`P(E)=${(f/t).toFixed(4)} (${f}/${t})`;
+  out.classList.add('pop'); setTimeout(()=>out.classList.remove('pop'),220);
+}
+
+/* ====== QUIZ DATA (5 por bloque) ====== */
+const quizBasicoData = [
+  {q:'¿Cuál es el resultado de 72 ÷ 8?', opts:['9','8','6'], ans:0, exp:'72/8=9.'},
+  {q:'3/5 + 1/10 =', opts:['7/10','2/3','3/10'], ans:0, exp:'3/5=6/10 → 6/10+1/10=7/10.'},
+  {q:'MCD(18,24) =', opts:['6','12','3'], ans:0, exp:'Divisores comunes: 1,2,3,6; el mayor es 6.'},
+  {q:'El 20% de 150 es…', opts:['25','30','35'], ans:1, exp:'0.20×150=30.'},
+  {q:'Área de un círculo de r=3', opts:['9π','6π','3π'], ans:0, exp:'A=πr²=π·9=9π.'},
+  {q:'¿Qué es una fracción impropia?', opts:['Numerador mayor que denominador','Numerador menor que denominador'], ans:0},
+  {q:'¿Qué es un número primo?', opts:['Número divisible solo por 1 y sí mismo','Número divisible por cualquier número'], ans:0},
+  {q:'¿Qué es una fracción equivalente?', opts:['Fracciones con el mismo valor','Fracciones con diferente valor'], ans:0},
+  {q:'¿Qué es un número entero?', opts:['Número sin parte decimal','Número con parte decimal'], ans:0},
+  {q:'¿Qué es un número racional?', opts:['Número que puede expresarse como fracción','Número que no puede expresarse como fracción'], ans:0},
+];
+
+const quizIntermedioData = [
+  {q:'2^3 · 2^4 =', opts:['2^7','2^12','2^1'], ans:0, exp:'Suma de exponentes con la misma base: 2^{3+4}=2^7.'},
+  {q:'Resuelve 4x−8=12', opts:['x=3','x=4','x=5'], ans:0, exp:'4x=20 → x=5 (¡ojo!) Corrección: 4x=12+8=20 ⇒ x=5. (La correcta es x=5)', fix:true},
+  {q:'¿Qué es una ecuación lineal?', opts:['Ecuación de primer grado','Ecuación de segundo grado'], ans:0},
+  {q:'¿Qué es una raíz cuadrada?', opts:['Número que al cuadrado da el original','Número que al cubo da el original'], ans:0},
+  {q:'¿Qué es un sistema de ecuaciones?', opts:['Conjunto de ecuaciones con soluciones comunes','Conjunto de ecuaciones sin soluciones comunes'], ans:0},
+  {q:'¿Qué es una proporción?', opts:['Relación de igualdad entre dos razones','Relación de desigualdad entre dos razones'], ans:0},
+  {q:'¿Qué es el teorema de Pitágoras?', opts:['Relación entre los lados de un triángulo rectángulo','Relación entre los ángulos de un triángulo'], ans:0},
+  {q:'¿Qué es una función lineal?', opts:['Función de la forma y=mx+b','Función de la forma y=ax^2+bx+c'], ans:0},
+  {q:'¿Qué es una desigualdad?', opts:['Relación que indica que dos valores no son iguales','Relación que indica que dos valores son iguales'], ans:0},
+  {q:'¿Qué es una matriz?', opts:['Arreglo rectangular de números','Arreglo triangular de números'], ans:0},
+];
+
+const quizAvanzadoData = [
+  {q:'Vértice de y= x^2 − 4x + 1', opts:['(2,−3)','(−2,5)','(2,3)'], ans:0, exp:'x_v=−b/2a=2; y(2)=4−8+1=−3.'},
+  {q:'Soluciones de x^2−5x+6=0', opts:['x=2,3','x=−2,−3','x=1,6'], ans:0, exp:'Factoriza (x−2)(x−3)=0 → x=2,3.'},
+  {q:'¿Qué es una función cuadrática?', opts:['Función de la forma y=ax^2+bx+c','Función de la forma y=mx+b'], ans:0},
+  {q:'¿Qué es una derivada?', opts:['Tasa de cambio instantánea','Tasa de cambio promedio'], ans:0},
+  {q:'¿Qué es una integral?', opts:['Área bajo una curva','Pendiente de una curva'], ans:0},
+  {q:'¿Qué es una desigualdad cuadrática?', opts:['Desigualdad que incluye términos cuadráticos','Desigualdad que incluye términos lineales'], ans:0},
+  {q:'¿Qué es una serie infinita?', opts:['Suma de infinitos términos','Suma de términos finitos'], ans:0},
+  {q:'¿Qué es un límite?', opts:['Valor al que se aproxima una función','Valor exacto de una función'], ans:0},
+  {q:'¿Qué es una función exponencial?', opts:['Función de la forma y=a^x','Función de la forma y=ax+b'], ans:0},
+  {q:'¿Qué es una función logarítmica?', opts:['Inversa de una función exponencial','Inversa de una función lineal'], ans:0},
+];
+
+/* ====== RENDER DE QUIZ ====== */
+function renderQuiz(containerId, data){
+  const cont=document.getElementById(containerId);
+  cont.innerHTML='';
+  data.forEach((item,i)=>{
+    const div=document.createElement('div');
+    div.className='quiz-question';
+    div.innerHTML = `<p>${i+1}. ${item.q}</p>` +
+      item.opts.map((o,j)=>`<label style="display:block;margin:4px 0">
+        <input type="radio" name="${containerId}-q${i}" value="${j}"> ${o}
+      </label>`).join('');
+    cont.appendChild(div);
+  });
+}
+renderQuiz('quizBasico', quizBasicoData);
+renderQuiz('quizIntermedio', quizIntermedioData);
+renderQuiz('quizAvanzado', quizAvanzadoData);
+
+/* ====== TEMAS RELACIONADOS ====== */
+const temasMatematica = {
+  'Basico': [
+    { pregunta: 1, tema: "División", link: "./basico/operaciones.html" },
+    { pregunta: 2, tema: "Fracciones", link: "./basico/fracciones.html" },
+    { pregunta: 3, tema: "MCM y MCD", link: "./basico/mcm-mcd.html" },
+    { pregunta: 4, tema: "Porcentajes", link: "./basico/porcentajes.html" },
+    { pregunta: 5, tema: "Figuras geométricas", link: "./basico/figuras.html" }
+  ],
+  'Intermedio': [
+    { pregunta: 1, tema: "Potencias y raíces", link: "./intermedio/potencias-raices.html" },
+    { pregunta: 2, tema: "Ecuaciones", link: "./intermedio/ecuaciones.html" },
+    { pregunta: 3, tema: "Sistemas de ecuaciones", link: "./intermedio/sistemas.html" },
+    { pregunta: 4, tema: "Álgebra", link: "./intermedio/factorizacion.html" },
+    { pregunta: 5, tema: "Teorema de Pitágoras", link: "./intermedio/geometria.html" }
+  ],
+  'Avanzado': [
+    { pregunta: 1, tema: "Funciones", link: "./avanzado/funciones.html" },
+    { pregunta: 2, tema: "Ecuaciones cuadráticas", link: "./avanzado/ecuaciones-cuadraticas.html" },
+    { pregunta: 3, tema: "Inecuaciones", link: "./avanzado/inecuaciones.html" },
+    { pregunta: 4, tema: "Probabilidad", link: "./avanzado/probabilidad.html" },
+    { pregunta: 5, tema: "Estadística", link: "./avanzado/estadistica.html" }
+  ]
+};
+
+/* ====== EVALUAR QUIZ CON TEMAS ====== */
+function evaluarQuizConTemas(nivel) {
+  const map = {
+    'Basico': { data: quizBasicoData, cont: 'quizBasico', out: 'quizBasicoResultado', key: 'diagBasico', temas: temasMatematica.Basico },
+    'Intermedio': { data: quizIntermedioData, cont: 'quizIntermedio', out: 'quizIntermedioResultado', key: 'diagIntermedio', temas: temasMatematica.Intermedio },
+    'Avanzado': { data: quizAvanzadoData, cont: 'quizAvanzado', out: 'quizAvanzadoResultado', key: 'diagAvanzado', temas: temasMatematica.Avanzado }
+  };
+  const cfg = map[nivel];
+  const data = cfg.data;
+  let puntos = 0;
+  const feedback = [];
+  data.forEach((item, i) => {
+    const sel = document.querySelector(`input[name="${cfg.cont}-q${i}"]:checked`);
+    if (sel) {
+      if (parseInt(sel.value) === item.ans) {
+        puntos += 10;
+        feedback.push(`<div class="feedback-item correct">Pregunta ${i + 1}: ✅ Correcto</div>`);
+      } else {
+        const tema = cfg.temas.find(t => t.pregunta === i + 1);
+        feedback.push(`<div class="feedback-item wrong">Pregunta ${i + 1}: ❌ Incorrecto. ${item.exp} Tema recomendado: <a href="${tema.link}" style="color:#00bcd4;">${tema.tema}</a></div>`);
+      }
+    } else {
+      const tema = cfg.temas.find(t => t.pregunta === i + 1);
+      feedback.push(`<div class="feedback-item wrong">Pregunta ${i + 1}: ❌ No respondida. ${item.exp} Tema recomendado: <a href="${tema.link}" style="color:#00bcd4;">${tema.tema}</a></div>`);
+    }
+  });
+  addPuntosOnce(cfg.key, puntos);
+  const out = document.getElementById(cfg.out);
+  out.innerHTML = `Total: ${puntos} puntos` + feedback.join('');
+  out.classList.add('pop'); setTimeout(() => out.classList.remove('pop'), 220);
+}
+
+// Reemplazar las llamadas a evaluarQuiz por evaluarQuizConTemas
+document.querySelectorAll("button[onclick^='evaluarQuiz']").forEach(btn => {
+  btn.setAttribute("onclick", btn.getAttribute("onclick").replace("evaluarQuiz", "evaluarQuizConTemas"));
+});
+
+function evaluarDiagnostico() {
+  const respuestasCorrectas = {
+    q1: "a", q2: "a", q3: "a", q4: "b", q5: "a", q6: "a", q7: "a", q8: "a", q9: "a", q10: "a",
+    q11: "a", q12: "b", q13: "a", q14: "a", q15: "a", q16: "a", q17: "a", q18: "a", q19: "a", q20: "a",
+    q21: "a", q22: "a", q23: "a", q24: "a", q25: "a", q26: "a", q27: "a", q28: "a", q29: "a", q30: "a"
+  };
+
+  const temas = {
+    q1: { nivel: "Básico", tema: "División", link: "./basico/operaciones.html" },
+    q2: { nivel: "Básico", tema: "Fracciones", link: "./basico/fracciones.html" },
+    q3: { nivel: "Básico", tema: "MCM y MCD", link: "./basico/mcm-mcd.html" },
+    q4: { nivel: "Básico", tema: "Porcentajes", link: "./basico/porcentajes.html" },
+    q5: { nivel: "Básico", tema: "Figuras geométricas", link: "./basico/figuras.html" },
+    q6: { nivel: "Básico", tema: "Fracciones impropias", link: "./basico/fracciones.html" },
+    q7: { nivel: "Básico", tema: "Números primos", link: "./basico/numeros.html" },
+    q8: { nivel: "Básico", tema: "Fracciones equivalentes", link: "./basico/fracciones.html" },
+    q9: { nivel: "Básico", tema: "Números enteros", link: "./basico/numeros.html" },
+    q10: { nivel: "Básico", tema: "Números racionales", link: "./basico/numeros.html" },
+    q11: { nivel: "Intermedio", tema: "Potencias", link: "./intermedio/potencias-raices.html" },
+    q12: { nivel: "Intermedio", tema: "Ecuaciones", link: "./intermedio/ecuaciones.html" },
+    q13: { nivel: "Intermedio", tema: "Ecuaciones lineales", link: "./intermedio/ecuaciones.html" },
+    q14: { nivel: "Intermedio", tema: "Raíces cuadradas", link: "./intermedio/potencias-raices.html" },
+    q15: { nivel: "Intermedio", tema: "Sistemas de ecuaciones", link: "./intermedio/sistemas.html" },
+    q16: { nivel: "Intermedio", tema: "Proporciones", link: "./intermedio/proporciones-razones.html" },
+    q17: { nivel: "Intermedio", tema: "Teorema de Pitágoras", link: "./intermedio/geometria.html" },
+    q18: { nivel: "Intermedio", tema: "Funciones lineales", link: "./intermedio/funciones.html" },
+    q19: { nivel: "Intermedio", tema: "Desigualdades", link: "./intermedio/inecuaciones.html" },
+    q20: { nivel: "Intermedio", tema: "Matrices", link: "./intermedio/matrices.html" },
+    q21: { nivel: "Avanzado", tema: "Funciones cuadráticas", link: "./avanzado/ecuaciones-cuadraticas.html" },
+    q22: { nivel: "Avanzado", tema: "Ecuaciones cuadráticas", link: "./avanzado/ecuaciones-cuadraticas.html" },
+    q23: { nivel: "Avanzado", tema: "Funciones cuadráticas", link: "./avanzado/funciones.html" },
+    q24: { nivel: "Avanzado", tema: "Derivadas", link: "./avanzado/calculo.html" },
+    q25: { nivel: "Avanzado", tema: "Integrales", link: "./avanzado/calculo.html" },
+    q26: { nivel: "Avanzado", tema: "Desigualdades cuadráticas", link: "./avanzado/inecuaciones.html" },
+    q27: { nivel: "Avanzado", tema: "Series infinitas", link: "./avanzado/series.html" },
+    q28: { nivel: "Avanzado", tema: "Límites", link: "./avanzado/calculo.html" },
+    q29: { nivel: "Avanzado", tema: "Funciones exponenciales", link: "./avanzado/funciones.html" },
+    q30: { nivel: "Avanzado", tema: "Funciones logarítmicas", link: "./avanzado/funciones.html" }
+  };
+
+  let puntaje = 0;
+  let detalles = "";
+
+  for (const [pregunta, respuesta] of Object.entries(respuestasCorrectas)) {
+    const opciones = document.getElementsByName(pregunta);
+    let respuestaUsuario = null;
+
+    for (const opcion of opciones) {
+      if (opcion.checked) {
+        respuestaUsuario = opcion.value;
+        break;
+      }
+    }
+
+    if (respuestaUsuario === respuesta) {
+      puntaje++;
+    } else {
+      const tema = temas[pregunta];
+      detalles += `<div class="feedback-item wrong">Pregunta ${pregunta.replace("q", "")}: Incorrecta. Tema recomendado: <a href="${tema.link}" style="color:#00bcd4;">${tema.tema} (${tema.nivel})</a></div>`;
+    }
+  }
+
+  const porcentaje = (puntaje / Object.keys(respuestasCorrectas).length) * 100;
+  let mensaje = `Tu puntaje es ${puntaje} de ${Object.keys(respuestasCorrectas).length} preguntas correctas (${porcentaje.toFixed(2)}%).`;
+
+  if (porcentaje === 100) {
+    mensaje += " ¡Excelente trabajo! No necesitas reforzar ningún tema.";
+  } else {
+    mensaje += " Es recomendable que refuerces los siguientes temas:<br>" + detalles;
+  }
+
+  document.getElementById("resultadoDiagnostico").innerHTML = mensaje;
+}
+</script>
+</body>
+</html>

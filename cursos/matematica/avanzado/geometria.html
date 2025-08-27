@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learnix - Geometría Analítica</title>
+<style>
+/* ===== RESET & BASE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: #1e1e1e;
+  background-image: linear-gradient(135deg, #1e1e1e, #252525);
+  color: #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* ===== HEADER & NAVIGATION ===== */
+header {
+  background: #1e1e1e;
+  border-bottom: 2px solid #2e2e2e;
+  padding: 15px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+}
+
+nav a {
+  color: #bbb;
+  text-decoration: none;
+  margin-left: 20px;
+  transition: color 0.3s;
+}
+
+nav a:hover, nav a.active {
+  color: #00bcd4;
+}
+
+/* ===== BUSCADOR ===== */
+.buscador { 
+  padding: 16px 30px; 
+  border-bottom: 2px solid #2e2e2e; 
+  background: #1e1e1e; 
+}
+
+.buscador input {
+  width: 100%; 
+  max-width: 520px; 
+  padding: 12px 16px; 
+  border-radius: 10px; 
+  border: 1px solid #2e2e2e;
+  background: #222; 
+  color: #e0e0e0; 
+  outline: none;
+}
+
+.buscador input::placeholder { 
+  color: #999; 
+}
+
+.buscador-center { 
+  max-width: 520px; 
+  margin: 0 auto; 
+}
+
+/* ===== MAIN CONTENT ===== */
+.contenido {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.title {
+  color: #00bcd4;
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.lead {
+  color: #ccc;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+/* ===== SECTIONS & CARDS ===== */
+.section {
+  background: #2a2a2a;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.section h2 {
+  color: #00bcd4;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.section h3 {
+  color: #fff;
+  margin: 1.5rem 0 1rem;
+  font-size: 1.2rem;
+}
+
+/* ===== FORMULA BOX ===== */
+.formula-box {
+  background: #00000040;
+  border-left: 4px solid #00bcd4;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+}
+
+/* ===== INTERACTIVE ELEMENTS ===== */
+.input-group {
+  background: #00000040;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 10px 0;
+}
+
+input[type="text"],
+input[type="number"] {
+  background: #1e1e1e;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.btn {
+  background: #00bcd4;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  background: #008ba3;
+  transform: translateY(-2px);
+}
+
+/* ===== QUIZ STYLES ===== */
+.quiz-card {
+  background: #252525;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px 0;
+  border: 1px solid #333;
+}
+
+.quiz-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  margin: 5px 0;
+  background: #2e2e2e;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.quiz-option:hover {
+  background: #363636;
+}
+
+/* ===== TIPS & MEMOTECNIA ===== */
+.tip-box {
+  background: linear-gradient(45deg, #00695c, #004d40);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.tip-box::before {
+  content: "💡";
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 2rem;
+  opacity: 0.5;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes correct {
+  0% { background: #004d40; }
+  100% { background: #2a2a2a; }
+}
+
+.correct-answer {
+  animation: correct 1s ease;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .contenido { padding: 20px 15px; }
+  .section { padding: 20px; }
+  .title { font-size: 1.8rem; }
+  nav a { margin-left: 15px; font-size: 0.9rem; }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 10px 15px;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  nav a { margin: 0; }
+  .section { padding: 15px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="../../../img/logo/logo.svg" alt="Learnix Logo">
+    <h1>Learnix</h1>
+  </div>
+  <nav>
+    <a href="../../../index.html">Inicio</a>
+    <a href="../../../cursos.html">Cursos</a>
+    <a href="../../../perfil.html">Perfil</a>
+    <a href="../../../login.html">Login</a>
+    <a href="../../../favoritos.html">Favoritos</a>
+  </nav>
+</header>
+
+<section class="buscador">
+  <div class="buscador-center">
+    <input type="text" id="buscarCurso" placeholder="Buscar tema...">
+  </div>
+</section>
+
+<main class="contenido">
+  <h1 class="title">Geometría Analítica</h1>
+  <p class="lead">Explora la conexión entre álgebra y geometría a través del plano cartesiano</p>
+
+  <!-- Definición -->
+  <section class="section fade-in">
+    <h2>1. Fundamentos del Plano Cartesiano</h2>
+    <p>El plano cartesiano nos permite representar figuras geométricas mediante ecuaciones algebraicas.</p>
+
+    <h3>1.1 La Recta</h3>
+    <div class="formula-box">
+      <h4>Formas de la Ecuación de la Recta:</h4>
+      <ul>
+        <li>Punto-Pendiente: y - y₁ = m(x - x₁)</li>
+        <li>Pendiente-Intercepto: y = mx + b</li>
+        <li>General: Ax + By + C = 0</li>
+      </ul>
+    </div>
+
+    <h3>1.2 La Circunferencia</h3>
+    <div class="formula-box">
+      <h4>Ecuación de la Circunferencia:</h4>
+      <p>(x - h)² + (y - k)² = r²</p>
+      <ul>
+        <li>(h,k) = centro</li>
+        <li>r = radio</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Propiedades -->
+  <section class="section fade-in">
+    <h2>2. Propiedades y Fórmulas</h2>
+    
+    <h3>2.1 Distancia entre Puntos</h3>
+    <div class="formula-box">
+      <p>d = √[(x₂-x₁)² + (y₂-y₁)²]</p>
+    </div>
+
+    <h3>2.2 Punto Medio</h3>
+    <div class="formula-box">
+      <p>M = ((x₁+x₂)/2, (y₁+y₂)/2)</p>
+    </div>
+  </section>
+
+  <!-- Ejemplos -->
+  <section class="section fade-in">
+    <h2>3. Ejemplos Paso a Paso</h2>
+    
+    <div class="example-box">
+      <h3>Ejemplo 1: Ecuación de la Recta</h3>
+      <p>Encontrar la ecuación de la recta que pasa por A(1,2) y B(3,6)</p>
+      <ol>
+        <li>Calcular pendiente: m = (6-2)/(3-1) = 4/2 = 2</li>
+        <li>Usar punto-pendiente: y - 2 = 2(x - 1)</li>
+        <li>Simplificar: y = 2x</li>
+      </ol>
+    </div>
+
+    <div class="example-box">
+      <h3>Ejemplo 2: Ecuación de la Circunferencia</h3>
+      <p>Hallar la ecuación de la circunferencia con centro (2,-1) y radio 3</p>
+      <ol>
+        <li>Usar la fórmula: (x - h)² + (y - k)² = r²</li>
+        <li>Sustituir valores: (x - 2)² + (y + 1)² = 9</li>
+        <li>Esta es la ecuación buscada</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Ejercicios -->
+  <section class="section fade-in">
+    <h2>4. Ejercicios Prácticos</h2>
+    
+    <div class="input-group">
+      <p>1. Calcula la pendiente de la recta que pasa por (0,1) y (2,5)</p>
+      <input type="number" id="ej1" placeholder="Escribe tu respuesta">
+      <button class="btn" onclick="verificarEjercicio(1)">Verificar</button>
+      <p id="resp1" class="feedback"></p>
+    </div>
+
+    <div class="input-group">
+      <p>2. ¿Cuál es el radio de la circunferencia (x-1)² + (y+2)² = 16?</p>
+      <input type="number" id="ej2" placeholder="Escribe tu respuesta">
+      <button class="btn" onclick="verificarEjercicio(2)">Verificar</button>
+      <p id="resp2" class="feedback"></p>
+    </div>
+  </section>
+
+  <!-- Quiz -->
+  <section class="section fade-in">
+    <h2>5. Mini Quiz</h2>
+    <div id="quiz-container"></div>
+  </section>
+
+  <!-- Tip -->
+  <div class="tip-box fade-in">
+    <h3>💡 Tips de Memotecnia</h3>
+    <ul>
+      <li>"PMD": Punto Medio = División entre 2</li>
+      <li>"CRH": Circunferencia = Radio al cuadrado y H,K son el centro</li>
+      <li>"La D de Distancia": La fórmula forma una D cuando la escribes</li>
+    </ul>
+  </div>
+</main>
+
+<script>
+const quizData = [
+  {
+    pregunta: "¿Qué representa m en la ecuación y = mx + b?",
+    opciones: [
+      "La pendiente de la recta",
+      "El punto de corte con Y",
+      "El radio de la circunferencia"
+    ],
+    correcta: 0,
+    explicacion: "m representa la pendiente, que indica la inclinación de la recta."
+  },
+  {
+    pregunta: "En la ecuación (x-h)² + (y-k)² = r², ¿qué representa (h,k)?",
+    opciones: [
+      "El centro de la circunferencia",
+      "Un punto cualquiera de la curva",
+      "El radio"
+    ],
+    correcta: 0,
+    explicacion: "(h,k) son las coordenadas del centro de la circunferencia."
+  },
+  {
+    pregunta: "La distancia entre dos puntos siempre es:",
+    opciones: [
+      "Positiva o cero",
+      "Negativa",
+      "Puede ser positiva o negativa"
+    ],
+    correcta: 0,
+    explicacion: "La distancia es una magnitud que no puede ser negativa."
+  },
+  {
+    pregunta: "El punto medio de un segmento está:",
+    opciones: [
+      "A igual distancia de los extremos",
+      "Más cerca del origen",
+      "En cualquier punto del segmento"
+    ],
+    correcta: 0,
+    explicacion: "El punto medio divide al segmento en dos partes exactamente iguales."
+  },
+  {
+    pregunta: "Una recta vertical tiene:",
+    opciones: [
+      "Pendiente indefinida",
+      "Pendiente cero",
+      "Pendiente uno"
+    ],
+    correcta: 0,
+    explicacion: "La pendiente de una recta vertical es indefinida pues implica división por cero."
+  }
+];
+
+function inicializarQuiz() {
+  const container = document.getElementById('quiz-container');
+  quizData.forEach((pregunta, index) => {
+    const quizCard = document.createElement('div');
+    quizCard.className = 'quiz-card fade-in';
+    quizCard.style.animationDelay = `${index * 0.2}s`;
+    
+    quizCard.innerHTML = `
+      <div class="quiz-question">
+        <h4>Pregunta ${index + 1}</h4>
+        <p>${pregunta.pregunta}</p>
+      </div>
+      <div class="quiz-options">
+        ${pregunta.opciones.map((opcion, i) => `
+          <div class="quiz-option" onclick="verificarRespuesta(${index}, ${i})">
+            <span class="option-letter">${['A', 'B', 'C'][i]}</span>
+            <span class="option-text">${opcion}</span>
+          </div>
+        `).join('')}
+      </div>
+      <div class="quiz-feedback" id="feedback-${index}"></div>
+    `;
+    
+    container.appendChild(quizCard);
+  });
+}
+
+function verificarRespuesta(preguntaId, respuestaSeleccionada) {
+  const feedback = document.getElementById(`feedback-${preguntaId}`);
+  const opcionesElements = document.querySelectorAll(`#quiz-container .quiz-card:nth-child(${preguntaId + 1}) .quiz-option`);
+  
+  // Remove previous states
+  opcionesElements.forEach(opt => opt.classList.remove('correct', 'incorrect'));
+  
+  if (respuestaSeleccionada === quizData[preguntaId].correcta) {
+    // Correct answer
+    opcionesElements[respuestaSeleccionada].classList.add('correct');
+    feedback.innerHTML = `
+      <div class="feedback-content correct">
+        <span class="feedback-icon">✅</span>
+        <p><strong>¡Correcto!</strong> ${quizData[preguntaId].explicacion}</p>
+      </div>
+    `;
+    actualizarPuntos(10);
+  } else {
+    // Incorrect answer
+    opcionesElements[respuestaSeleccionada].classList.add('incorrect');
+    opcionesElements[quizData[preguntaId].correcta].classList.add('correct');
+    feedback.innerHTML = `
+      <div class="feedback-content incorrect">
+        <span class="feedback-icon">❌</span>
+        <p><strong>Incorrecto.</strong> ${quizData[preguntaId].explicacion}</p>
+      </div>
+    `;
+  }
+}
+
+function actualizarPuntos(puntos) {
+  let puntosGlobales = parseInt(localStorage.getItem('puntosGlobales')) || 0;
+  puntosGlobales += puntos;
+  localStorage.setItem('puntosGlobales', puntosGlobales);
+}
+
+document.addEventListener('DOMContentLoaded', inicializarQuiz);
+</script>
+
+</body>
+</html>

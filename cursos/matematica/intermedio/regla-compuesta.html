@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learnix - Regla de Tres Simple y Compuesta</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+body{background-color:#1e1e1e;color:#e0e0e0;display:flex;flex-direction:column;min-height:100vh;}
+header{background-color:#1e1e1e;display:flex;justify-content:space-between;align-items:center;padding:15px 30px;position:sticky;top:0;z-index:100;border-bottom:2px solid #2e2e2e;}
+header .logo{display:flex;align-items:center;gap:10px;}
+header .logo img{height:40px;}
+header nav a{margin-left:20px;font-weight:500;color:#bbb;text-decoration:none;transition:color .3s ease;}
+header nav a:hover, header nav a.active{color:#00bcd4;}
+.header-right{display:flex;align-items:center;gap:14px;}
+.points{background-color:#2a2a2a;color:#ffd36e;padding:8px 12px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;font-weight:700;border:1px solid #333;}
+.contenido{padding:40px 20px;max-width:980px;margin:auto;text-align:center;}
+.contenido h2{font-size:2.2rem;color:#00bcd4;margin-bottom:12px;}
+.subtema{background-color:#2a2a2a;padding:20px;border-radius:12px;margin-bottom:18px;box-shadow:0 4px 12px rgba(0,0,0,.3);text-align:left;}
+.subtema h3{color:#fff;font-size:1.2rem;margin-bottom:10px;}
+.subtema p, .subtema ul, .subtema ol{color:#bbb;font-size:1rem;margin-bottom:10px;}
+input[type="number"], input[type="text"], select, .quiz button{padding:10px;border-radius:8px;border:1px solid #2e2e2e;background:#222;color:#e0e0e0;outline:none;margin:4px 0;}
+.resultado{margin-top:10px;color:#fff;font-weight:700;background: rgba(0,0,0,0.25);padding:10px;border-radius:8px;}
+.quiz-question{margin-bottom:12px;color:#ddd;}
+.feedback-item{padding:10px;border-radius:8px;margin-bottom:8px;}
+.correct{background: rgba(0,128,0,0.12);border-left:4px solid #20c997;color:#c6ffd9;}
+.wrong{background: rgba(255,0,0,0.08);border-left:4px solid #ff6b6b;color:#ffd9d9;}
+.btn{display:inline-flex;align-items:center;gap:8px;background-color:#00bcd4;color:#fff;padding:10px 20px;border-radius:8px;margin-top:10px;transition:background .3s ease;text-decoration:none;cursor:pointer;border:none;}
+.btn:hover{background-color:#008ba3;}
+.acciones{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:14px 0;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="../../../img/logo/logo.svg" alt="Learnix Logo">
+    <h1>Learnix</h1>
+  </div>
+  <nav>
+    <a href="../../../index.html">Inicio</a>
+    <a href="../../../cursos.html" class="active">Cursos</a>
+    <a href="../../../perfil.html">Perfil</a>
+    <a href="../../../login.html">Login</a>
+    <a href="../../../favoritos.html">Favoritos</a>
+  </nav>
+  <div class="header-right">
+    <div class="points" title="Puntos acumulados">
+      <img src="https://img.icons8.com/fluency/48/star.png" alt="star">
+      <span id="puntos">0</span>
+    </div>
+  </div>
+</header>
+
+<main class="contenido">
+<h2>Regla de Tres Simple y Compuesta — Avanzado</h2>
+<p class="lead">Aprende a resolver problemas avanzados de regla de tres simple y compuesta con ejemplos paso a paso, ejercicios autocorregibles y mini quiz interactivo.</p>
+
+<div class="subtema">
+<h3>1. Definición</h3>
+<p><strong>Regla de tres simple:</strong> Permite calcular un valor desconocido de cuatro términos relacionados de forma proporcional directa o inversa. <br>
+<strong>Regla de tres compuesta:</strong> Involucra más de dos razones combinadas. Se usan multiplicaciones y divisiones secuenciales para encontrar la incógnita.</p>
+</div>
+
+<div class="subtema">
+<h3>2. Fórmulas y Propiedades</h3>
+<ul>
+<li><strong>Regla de tres simple directa:</strong> a:b = c:x → x = (b·c)/a</li>
+<li><strong>Regla de tres simple inversa:</strong> a:b = x:c → x = (a·c)/b</li>
+<li><strong>Regla de tres compuesta:</strong> Se multiplican las cantidades relacionadas de forma directa y se dividen por las inversas: x = (a·b·c)/(d·e)</li>
+<li><strong>Producto cruzado:</strong> a·d = b·c (fundamental en todos los casos)</li>
+</ul>
+<p class="small">Tip memotécnico: "Cruza y multiplica, divide lo que sobra, y nunca falla la proporción."</p>
+</div>
+
+<div class="subtema">
+<h3>3. Ejemplos Interactivos</h3>
+<div>
+<h4>Regla de Tres Simple Directa</h4>
+<label>A es a B:</label><input id="rtsA" type="number" placeholder="ej. 5">
+<label>C es a X:</label><input id="rtsB" type="number" placeholder="ej. 8">
+<label>C:</label><input id="rtsC" type="number" placeholder="ej. 20">
+<button class="btn" onclick="calcRts()"><img src="https://img.icons8.com/color/48/calculator.png"> Calcular X</button>
+<div id="rtsRes" class="resultado">—</div>
+</div>
+
+<div style="margin-top:20px;">
+<h4>Regla de Tres Compuesta</h4>
+<label>A1:</label><input id="rtcA1" type="number" placeholder="ej. 3">
+<label>B1:</label><input id="rtcB1" type="number" placeholder="ej. 4">
+<label>A2:</label><input id="rtcA2" type="number" placeholder="ej. 5">
+<label>B2:</label><input id="rtcB2" type="number" placeholder="ej. 6">
+<button class="btn" onclick="calcRtc()"><img src="https://img.icons8.com/color/48/calculator.png"> Calcular</button>
+<div id="rtcRes" class="resultado">—</div>
+</div>
+</div>
+
+<div class="subtema">
+<h3>4. Ejercicios Prácticos</h3>
+<ol>
+<li>Si 5 lápices cuestan 20 soles, ¿cuánto cuestan 8 lápices? <input id="ex1" type="text" placeholder="ej. 32"></li>
+<li>Regla de tres inversa: 3 trabajadores hacen 12 tareas en un día, ¿cuántos días necesitan 6 trabajadores? <input id="ex2" type="text" placeholder="ej. 6"></li>
+<li>Regla de tres compuesta: 2 máquinas hacen 8 piezas en 5 horas. ¿Cuántas piezas harán 3 máquinas en 10 horas? <input id="ex3" type="text" placeholder="ej. 48"></li>
+</ol>
+<button class="btn" onclick="chequearEjercicios()"><img src="https://img.icons8.com/color/48/check.png"> Chequear respuestas</button>
+<div id="outEj" class="resultado">—</div>
+</div>
+
+<div class="subtema">
+<h3>5. Mini Quiz (5 preguntas, 10 puntos cada una)</h3>
+<div id="quiz"></div>
+<div id="quizResultado" class="resultado">—</div>
+</div>
+
+<div class="acciones">
+<a href="../intermedio.html" class="btn"><img src="https://img.icons8.com/color/48/home.png"> Nivel Intermedio</a>
+<a href="siguiente.html" class="btn"><img src="https://img.icons8.com/color/48/right.png"> Siguiente</a>
+<a href="cursos.html" class="btn" style="background:#444;"><img src="https://img.icons8.com/color/48/left.png"> Cursos</a>
+</div>
+</main>
+
+<script>
+let puntosGlobales = parseInt(localStorage.getItem('puntosGlobales')) || 0;
+document.getElementById('puntos').textContent = puntosGlobales;
+
+// ===== INTERACTIVOS =====
+function calcRts(){
+  const a=parseFloat(document.getElementById('rtsA').value);
+  const b=parseFloat(document.getElementById('rtsB').value);
+  const c=parseFloat(document.getElementById('rtsC').value);
+  const out = document.getElementById('rtsRes');
+  if([a,b,c].every(v=>!isNaN(v))){ out.textContent = `X = ${(b*c/a).toFixed(2)}`;}
+  else{out.textContent='Ingresa valores válidos';}
+}
+
+function calcRtc(){
+  const a1=parseFloat(document.getElementById('rtcA1').value);
+  const b1=parseFloat(document.getElementById('rtcB1').value);
+  const a2=parseFloat(document.getElementById('rtcA2').value);
+  const b2=parseFloat(document.getElementById('rtcB2').value);
+  const out = document.getElementById('rtcRes');
+  if([a1,b1,a2,b2].every(v=>!isNaN(v))){ out.textContent = `Resultado: ${(b1*b2*a2)/a1}`;}
+  else{out.textContent='Ingresa valores válidos';}
+}
+
+// ===== EJERCICIOS =====
+function chequearEjercicios(){
+  const out = document.getElementById('outEj');
+  const r1 = document.getElementById('ex1').value.trim() === '32';
+  const r2 = document.getElementById('ex2').value.trim() === '6';
+  const r3 = document.getElementById('ex3').value.trim() === '48';
+  const correct = [r1,r2,r3].filter(v=>v).length;
+  let msg = `${correct}/3 correctas.`;
+  if(correct===3 && !localStorage.getItem('ejPuntosRT')){
+    puntosGlobales += 5;
+    localStorage.setItem('puntosGlobales', puntosGlobales);
+    localStorage.setItem('ejPuntosRT','true');
+    document.getElementById('puntos').textContent = puntosGlobales;
+    msg+=' ¡Puntos acumulados!';
+  }
+  out.textContent = msg;
+}
+
+// ===== MINI QUIZ =====
+const quizData = [
+  {q:'¿Qué indica la regla de tres simple?',options:['Proporción directa','Valor absoluto','Suma total'],answer:0,explanation:'La regla de tres simple indica proporción directa o inversa entre valores.'},
+  {q:'Regla de tres simple: 5→20, 8→X, X=?',options:['30','32','28'],answer:1,explanation:'X=(8*20)/5=32'},
+  {q:'Regla de tres inversa: 3 trabajadores 12 tareas, 6 trabajadores=?',options:['6','9','8'],answer:0,explanation:'3·1=6·? → ?=6'},
+  {q:'Regla de tres compuesta, calcula X',options:['40','48','50'],answer:1,explanation:'Aplicando producto cruzado y multiplicando las proporciones correctamente.'},
+  {q:'Producto cruzado se usa en:',options:['Regla de tres simple','Suma','Multiplicación directa'],answer:0,explanation:'Siempre se usa en regla de tres simple o compuesta para hallar X.'}
+];
+
+function generarQuiz(){
+  const quizDiv = document.getElementById('quiz');
+  quizData.forEach((item,i)=>{
+    const div = document.createElement('div'); div.className='quiz-question';
+    div.innerHTML = `<p>${i+1}. ${item.q}</p>`+
+    item.options.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${o}</label><br>`).join('');
+    quizDiv.appendChild(div);
+  });
+  const btn = document.createElement('button');
+  btn.className='btn';
+  btn.innerHTML='<img src="https://img.icons8.com/color/48/check.png"> Enviar Quiz';
+  btn.onclick=evaluarQuiz;
+  quizDiv.appendChild(btn);
+}
+
+function evaluarQuiz(){
+  let puntos = 0; const feedback=[];
+  quizData.forEach((item,i)=>{
+    const sel = document.querySelector(`input[name="q${i}"]:checked`);
+    if(sel){
+      if(parseInt(sel.value)===item.answer){puntos+=10; feedback.push(`<div class="feedback-item correct">Pregunta ${i+1}: Correcto ✅</div>`);}
+      else{feedback.push(`<div class="feedback-item wrong">Pregunta ${i+1}: ❌ Incorrecto. ${item.explanation}</div>`);}
+    } else {feedback.push(`<div class="feedback-item wrong">Pregunta ${i+1}: ❌ No respondida. ${item.explanation}</div>`);}
+  });
+  if(!localStorage.getItem('quizPuntosRT')){puntosGlobales+=puntos; localStorage.setItem('puntosGlobales',puntosGlobales); document.getElementById('puntos').textContent=puntosGlobales; localStorage.setItem('quizPuntosRT','true');}
+  document.getElementById('quizResultado').innerHTML=`Total: ${puntos} puntos`+feedback.join('');
+}
+
+generarQuiz();
+</script>
+</body>
+</html>

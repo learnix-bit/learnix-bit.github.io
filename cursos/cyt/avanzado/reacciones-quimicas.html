@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Learnix - Reacciones Químicas</title>
+  <style>
+    /* ======= ESTILOS BASE ======= */
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body {
+      background-color:#1e1e1e;
+      background-image: linear-gradient(135deg, #1e1e1e, #252525);
+      color:#e0e0e0; display:flex; flex-direction:column; min-height:100vh;
+    }
+    header {
+      background-color:#1e1e1e; display:flex; justify-content:space-between; align-items:center;
+      padding:15px 30px; position:sticky; top:0; z-index:100; border-bottom:2px solid #2e2e2e;
+    }
+    header .logo { display:flex; align-items:center; gap:10px; }
+    header .logo img { height:40px; }
+    header nav a {
+      margin-left:20px; font-weight:500; color:#bbb; text-decoration:none; transition:color .3s ease;
+    }
+    header nav a:hover, header nav a.active { color:#00bcd4; }
+
+    footer {
+      background-color:#1e1e1e; text-align:center; padding:15px; border-top:2px solid #2e2e2e; margin-top:auto;
+    }
+    .btn {
+      display:inline-block; background-color:#00bcd4; color:#fff; padding:10px 20px; border-radius:8px;
+      margin-top:10px; transition:background .3s ease; text-decoration:none;
+    }
+    .btn:hover { background-color:#008ba3; }
+
+    /* ======= CONTENIDO ======= */
+    .contenido {
+      padding:40px 20px; max-width:1000px; margin:auto; text-align:center;
+    }
+    .contenido h2 {
+      font-size:2.2rem; color:#00bcd4; margin-bottom:20px;
+    }
+    .contenido p {
+      font-size:1.1rem; color:#ccc; margin-bottom:30px;
+    }
+    .subtema {
+      background-color:#2a2a2a; padding:20px; border-radius:12px;
+      margin-bottom:18px; box-shadow:0 4px 12px rgba(0,0,0,.3);
+      text-align:left;
+    }
+    .subtema h3 {
+      color:#fff; font-size:1.2rem; margin-bottom:10px;
+    }
+    .subtema p { color:#bbb; font-size:1rem; margin-bottom:10px; }
+    .resultado {
+      margin-top:10px; color:#fff; font-weight:700;
+      background: rgba(0,0,0,0.25); padding:10px; border-radius:8px;
+    }
+    .quiz-question { margin-bottom:12px; color:#ddd; }
+    .feedback-item { padding:10px; border-radius:8px; margin-bottom:8px; }
+    .correct { background: rgba(0,128,0,0.12); border-left:4px solid #20c997; color:#c6ffd9; }
+    .wrong { background: rgba(255,0,0,0.08); border-left:4px solid #ff6b6b; color:#ffd9d9; }
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado -->
+  <header>
+    <div class="logo">
+      <img src="../../../img/logo/logo.svg" alt="Learnix Logo">
+      <h1>Learnix</h1>
+    </div>
+    <nav>
+      <a href="../../../index.html">Inicio</a>
+      <a href="../../../cursos.html" class="active">Cursos</a>
+      <a href="../../../perfil.html">Perfil</a>
+      <a href="../../../login.html">Login</a>
+      <a href="../../../favoritos.html">Favoritos</a>
+    </nav>
+  </header>
+
+  <!-- Contenido -->
+  <main class="contenido">
+    <h2>Reacciones Químicas</h2>
+    <p>Explora los procesos químicos que transforman sustancias y su importancia en la vida cotidiana.</p>
+
+    <!-- Definición -->
+    <div class="subtema">
+      <h3>¿Qué son las reacciones químicas?</h3>
+      <p>Las reacciones químicas son procesos en los que una o más sustancias se transforman en otras diferentes mediante cambios en sus enlaces químicos.</p>
+    </div>
+
+    <!-- Propiedades -->
+    <div class="subtema">
+      <h3>Aspectos clave</h3>
+      <ul>
+        <li>Las reacciones químicas implican reactivos y productos.</li>
+        <li>Se clasifican en síntesis, descomposición, desplazamiento y combustión, entre otras.</li>
+        <li>La conservación de la masa es un principio fundamental en las reacciones químicas.</li>
+      </ul>
+    </div>
+
+    <!-- Ejemplos -->
+    <div class="subtema">
+      <h3>Ejemplos resueltos</h3>
+      <p><strong>Ejemplo 1:</strong> La combustión de la madera produce dióxido de carbono y agua.</p>
+      <p><strong>Pregunta:</strong> ¿Qué tipo de reacción es esta?</p>
+      <p><strong>Respuesta:</strong> Reacción de combustión.</p>
+
+      <p><strong>Ejemplo 2:</strong> La descomposición del agua en hidrógeno y oxígeno mediante electrólisis.</p>
+      <p><strong>Pregunta:</strong> ¿Qué tipo de reacción es esta?</p>
+      <p><strong>Respuesta:</strong> Reacción de descomposición.</p>
+    </div>
+
+    <!-- Herramientas interactivas -->
+    <div class="subtema">
+      <h3>Herramientas interactivas</h3>
+      <p>Selecciona el principio que describe la conservación de la masa en una reacción química:</p>
+      <select id="herramientaReaccionesQuimicas">
+        <option value="">-- Selecciona --</option>
+        <option value="1">Ley de la conservación de la energía</option>
+        <option value="2">Ley de la conservación de la masa</option>
+        <option value="3">Ley de los gases ideales</option>
+      </select>
+      <button class="btn" onclick="verificarReaccionesQuimicas()">Verificar</button>
+      <div id="resultadoReaccionesQuimicas" class="resultado">—</div>
+    </div>
+
+    <!-- Mini Quiz -->
+    <div class="subtema">
+      <h3>Mini Quiz</h3>
+      <p>Responde las siguientes preguntas para evaluar tu comprensión:</p>
+      <div class="quiz-question">
+        <label>1) ¿Qué describe una reacción química?</label><br>
+        <label><input type="radio" name="q1" value="a"> La transformación de sustancias mediante cambios en enlaces químicos.</label><br>
+        <label><input type="radio" name="q1" value="b"> La mezcla de sustancias sin cambios químicos.</label><br>
+        <label><input type="radio" name="q1" value="c"> La formación de enlaces físicos entre sustancias.</label>
+      </div>
+      <div class="quiz-question">
+        <label>2) ¿Qué principio se cumple en todas las reacciones químicas?</label><br>
+        <label><input type="radio" name="q2" value="a"> Ley de la conservación de la masa.</label><br>
+        <label><input type="radio" name="q2" value="b"> Ley de los gases ideales.</label><br>
+        <label><input type="radio" name="q2" value="c"> Ley de la conservación de la energía.</label>
+      </div>
+      <div class="quiz-question">
+        <label>3) ¿Qué tipo de reacción es la combustión?</label><br>
+        <label><input type="radio" name="q3" value="a"> Reacción de síntesis.</label><br>
+        <label><input type="radio" name="q3" value="b"> Reacción de combustión.</label><br>
+        <label><input type="radio" name="q3" value="c"> Reacción de descomposición.</label>
+      </div>
+      <div class="quiz-question">
+        <label>4) ¿Qué ocurre en una reacción de descomposición?</label><br>
+        <label><input type="radio" name="q4" value="a"> Dos sustancias se combinan para formar una nueva.</label><br>
+        <label><input type="radio" name="q4" value="b"> Una sustancia se descompone en dos o más productos.</label><br>
+        <label><input type="radio" name="q4" value="c"> Una sustancia reacciona con oxígeno para liberar energía.</label>
+      </div>
+      <div class="quiz-question">
+        <label>5) ¿Qué tipo de reacción ocurre cuando se forma agua a partir de hidrógeno y oxígeno?</label><br>
+        <label><input type="radio" name="q5" value="a"> Reacción de síntesis.</label><br>
+        <label><input type="radio" name="q5" value="b"> Reacción de combustión.</label><br>
+        <label><input type="radio" name="q5" value="c"> Reacción de descomposición.</label>
+      </div>
+      <button class="btn" onclick="revisarQuizReaccionesQuimicas()">Revisar</button>
+      <div id="resultadoQuizReaccionesQuimicas" class="resultado">—</div>
+    </div>
+
+    <!-- Tip -->
+    <div class="subtema">
+      <h3>Tip de memotecnia</h3>
+      <p>Recuerda: "Reactivos → Productos, Masa Conservada".</p>
+    </div>
+  </main>
+
+  <script>
+    function verificarReaccionesQuimicas() {
+      const seleccion = document.getElementById('herramientaReaccionesQuimicas').value;
+      const resultado = document.getElementById('resultadoReaccionesQuimicas');
+      if (seleccion === "2") {
+        resultado.textContent = "¡Correcto! La Ley de la conservación de la masa se cumple en todas las reacciones químicas.";
+      } else {
+        resultado.textContent = "Incorrecto. La respuesta correcta es 'Ley de la conservación de la masa'.";
+      }
+    }
+
+    function revisarQuizReaccionesQuimicas() {
+      const respuestasCorrectas = {
+        q1: "a",
+        q2: "a",
+        q3: "b",
+        q4: "b",
+        q5: "a"
+      };
+
+      let puntos = 0;
+      let totalPreguntas = 5;
+      let feedback = "";
+
+      for (let i = 1; i <= totalPreguntas; i++) {
+        const respuesta = document.querySelector(`input[name="q${i}"]:checked`);
+        if (respuesta) {
+          if (respuesta.value === respuestasCorrectas[`q${i}`]) {
+            puntos += 10;
+            feedback += `<div class='feedback-item correct'>Pregunta ${i}: ¡Correcto!</div>`;
+          } else {
+            feedback += `<div class='feedback-item wrong'>Pregunta ${i}: Incorrecto. La respuesta correcta es '${respuestasCorrectas[`q${i}`]}'.</div>`;
+          }
+        } else {
+          feedback += `<div class='feedback-item wrong'>Pregunta ${i}: No respondida.</div>`;
+        }
+      }
+
+      const puntosActuales = parseInt(localStorage.getItem('learnix_points_reacciones_quimicas')) || 0;
+      localStorage.setItem('learnix_points_reacciones_quimicas', puntosActuales + puntos);
+
+      document.getElementById('resultadoQuizReaccionesQuimicas').innerHTML = `
+        <p>¡Quiz completado! Obtuviste ${puntos} puntos.</p>
+        ${feedback}
+      `;
+    }
+  </script>
+</body>
+</html>
