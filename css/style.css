@@ -1,0 +1,385 @@
+/* ================================
+   Estilos globales
+=================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #1e1e1e;
+    background-repeat: repeat;
+    background-size: cover;
+    background-position: center;
+    background-image: url("../img/fondos/fondo-degradado.svg");
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+}
+
+/* ================================
+   Encabezado
+=================================== */
+header {
+    background-color: #1e1e1e;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid #2e2e2e;
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+header .logo img {
+    height: 40px;
+}
+
+header nav a {
+    margin-left: 20px;
+    font-weight: 500;
+    color: #bbb;
+    transition: color 0.3s ease;
+}
+
+header nav a:hover,
+header nav a.active {
+    color: #00bcd4;
+}
+
+/* ================================
+   Footer
+=================================== */
+footer {
+    background-color: #1e1e1e;
+    text-align: center;
+    padding: 15px;
+    border-top: 2px solid #2e2e2e;
+    margin-top: auto;
+}
+
+/* ================================
+   Botones
+=================================== */
+.btn {
+    display: inline-block;
+    background-color: #00bcd4;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #008ba3;
+}
+
+.btn-fav {
+    display: inline-block;
+    background-color: #ff9800;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+}
+
+.btn-fav:hover {
+    background-color: #cc7a00;
+}
+.chloe-bot {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #00bcd4;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+/* ================================
+   Página Inicio
+=================================== */
+.bienvenida {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.bienvenida h2 {
+    font-size: 2.5rem;
+    color: #00bcd4;
+    margin-bottom: 15px;
+}
+
+.bienvenida p {
+    font-size: 1.1rem;
+    color: #ccc;
+}
+
+/* ================================
+   Página Cursos
+=================================== */
+.buscador {
+    text-align: center;
+    padding: 20px;
+}
+
+.buscador input {
+    width: 80%;
+    max-width: 400px;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: #1e1e1e;
+    color: white;
+    font-size: 1rem;
+    border: 2px solid #2e2e2e;
+}
+
+.lista-cursos {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    padding: 20px;
+}
+
+.curso {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    border: 2px solid #2e2e2e;
+    transition: transform 0.2s ease, border-color 0.3s ease;
+}
+
+.curso:hover {
+    transform: translateY(-5px);
+    border-color: #00bcd4;
+}
+
+.curso h3 {
+    color: #00bcd4;
+    margin-bottom: 10px;
+}
+
+.curso p {
+    font-size: 0.95rem;
+    color: #ccc;
+}
+
+/* ================================
+   Login
+=================================== */
+.login-form {
+    max-width: 350px;
+    margin: 40px auto;
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid #2e2e2e;
+}
+
+.login-form h2 {
+    text-align: center;
+    color: #00bcd4;
+    margin-bottom: 20px;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border: none;
+    background-color: #2a2a2a;
+    color: white;
+    font-size: 1rem;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #00bcd4;
+    color: white;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.login-form button:hover {
+    background-color: #008ba3;
+}
+
+/* ================================
+   Perfil
+=================================== */
+.perfil {
+    max-width: 500px;
+    margin: 40px auto;
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid #2e2e2e;
+}
+
+.perfil h2 {
+    color: #00bcd4;
+    margin-bottom: 20px;
+}
+/* ================================
+   Matematica
+=================================== */
+body {
+    text-align: center;
+}
+.curso-niveles h2 {
+    text-align: center;
+    color: #00bcd4;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.curso-niveles p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.curso-niveles a {
+    display: inline-block;
+    background-color: #1e1e1e;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-top: 10px;
+    height: 7rem;
+    width: 15rem;
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 4.5rem;
+}
+
+.btn-niv{
+    display: flex;
+    justify-content: center;
+}
+/* ================================
+   Matematica Nivel Basico
+=================================== */
+
+.contenido-curso {
+    max-width: 800px;
+    margin: 10px auto;
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid #2e2e2e;
+}
+.contenido-curso h2 {
+    color: #00bcd4;
+    margin-bottom: 20px;
+}
+.contenido-curso p {
+    color: #ccc;
+    line-height: 1.6;
+}
+.contenido-curso ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    color: #ccc;
+}
+.contenido-curso li {
+    margin-bottom: 10px;
+    list-style: none;
+}
+.contenido-curso a {
+    display: inline-block;
+    background-color: #00bcd4;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    transition: background 0.3s ease;
+}
+.contenido-curso a:hover {
+    background-color: #008ba3;
+}
+.descripcion-curso {
+    max-width: 800px;
+    margin: 10px auto;
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid #2e2e2e;
+    text-align:start;
+}
+.descripcion-curso h2 {
+    color: #00bcd4;
+    margin-bottom: 10px;
+}
+.descripcion-curso p {
+    color: #ccc;
+    line-height: 1.6;
+}
+
+.prueba-diagnostica {
+    max-width: 800px;
+    margin: 10px auto;
+    background-color: #1e1e1e;
+    padding: 10px;
+    border-radius: 12px;
+    border: 2px solid #2e2e2e;
+}
+.prueba-diagnostica h2 {
+    color: #00bcd4;
+    margin-bottom: 1px;
+}
+.prueba-diagnostica p {
+    color: #ccc;
+    line-height: 1.6;
+}
+.prueba-diagnostica a img {
+    height: 100px;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+/* ================================
+   Responsive
+=================================== */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+    header nav {
+        margin-top: 10px;
+    }
+}
